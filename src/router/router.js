@@ -1,5 +1,4 @@
-import appLayout from '../views/pages/layout/index'
-import test from '../views/pages/test/index'
+import Test from '../views/pages/test/index'
 import App from '../App'
 export default [{
 	path: '/',
@@ -7,14 +6,9 @@ export default [{
 	component: App,
 	childRoutes: [
 		{
-			path: '/test',
+			path: 'test',
 			name: 'test',
-			component: test
-		},
-		{
-			path: '/layout',
-			name: 'layout',
-			component: appLayout
+			component: Test
 		}
 	]
 }]

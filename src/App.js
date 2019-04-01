@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import routes from './router/router'
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter} from "react-router-dom";
 import './App.css';
 import AppHeader from './views/compoents/header/index'
-import { Layout } from 'antd'
+import { Layout, Row, Col } from 'antd'
 const {
-	Header, Footer, Sider, Content,
+	Header, Sider
 } = Layout;
-
-
+const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 };
+const contentLayout = { xxl: 20, xl: 19, lg: 19, sm: 24, xs: 24 };
+@withRouter
 class App extends Component {
 	renderRoutes(routes, contextPath) {
 		const children = [];
@@ -38,15 +39,16 @@ class App extends Component {
 	}
 	render() {
 		const children = this.renderRoutes(routes, '/');
-		return <Layout>
-			<Header><AppHeader/></Header>
-			<Layout>
-				<Sider>Sider</Sider>
-				<Content>
-					<BrowserRouter>{children}</BrowserRouter>
-				</Content>
+		return <Layout className="app-container">
+			<Header className="app-header"><AppHeader/></Header>
+			<Layout  className="app-content">
+				<Row>
+					<Col {...siderLayout}><Sider>Sider</Sider></Col>
+					<Col {...contentLayout}>
+						<div className="app-content-wrapper">{children}</div>
+					</Col>
+				</Row>
 			</Layout>
-			<Footer>Footer</Footer>
 		</Layout>
 	}
 }
