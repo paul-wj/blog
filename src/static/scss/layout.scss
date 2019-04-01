@@ -1,4 +1,22 @@
-.ant-layout-header{
-  padding: 0;
+.ant-layout, .ant-layout *{
+  box-sizing: border-box;
+}
+.app-container{
   background-color: #fff;
+  .app-header{
+    padding: 0;
+    background: #fff;
+    box-shadow: 0 2px 8px #f0f1f2;
+    position: relative;
+    z-index: 10;
+    max-width: 100%;
+  }
+  .app-content{
+    background-color: #fff;
+    padding: 40px 0 0;
+    position: relative;
+    .app-content-wrapper{
+      background-color: #fff;
+    }
+  }
 }
