@@ -10,6 +10,7 @@
   .app-header{
     padding: 0;
     background: #fff;
+    border-bottom: 1px solid #e8e8e8;
     box-shadow: 0 2px 8px #f0f1f2;
     position: relative;
     z-index: 10;
@@ -24,7 +25,7 @@
   .app-content{
     height: 100%;
     background-color: #f3f6f7;
-    padding: 20px 10px 20px 0;
+    padding: 15px 10px 10px 0;
     position: relative;
     .app-content-wrapper{
       background-color: #fff;
