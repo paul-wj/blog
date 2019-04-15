@@ -1,8 +1,12 @@
+#root{
+  height: 100%;
+}
 .ant-layout, .ant-layout *{
   box-sizing: border-box;
 }
 .app-container{
   background-color: #fff;
+  height: 100%;
   .app-header{
     padding: 0;
     background: #fff;
@@ -11,12 +15,20 @@
     z-index: 10;
     max-width: 100%;
   }
+  .app-sider{
+    padding: 0 10px;
+  }
+  .app-row, .app-col{
+    height: 100%;
+  }
   .app-content{
-    background-color: #fff;
-    padding: 40px 0 0;
+    height: 100%;
+    background-color: #f3f6f7;
+    padding: 20px 10px 20px 0;
     position: relative;
     .app-content-wrapper{
       background-color: #fff;
+      height: 100%;
     }
   }
 }

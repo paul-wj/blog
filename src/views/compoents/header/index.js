@@ -20,7 +20,7 @@ class Header extends Component{
 	render() {
 		return <Row>
 			<Col {...headerLeftResponsive}><HeaderLeft/></Col>
-			<Col {...headerRightResponsive}>
+			<Col className="header-right" {...headerRightResponsive}>
 				<HeaderSearch/>
 				<HeaderNav navList={NAV_LIST}/>
 			</Col>

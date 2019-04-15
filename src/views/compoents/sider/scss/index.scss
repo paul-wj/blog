@@ -1,0 +1,34 @@
+.mt-10{
+  margin-top: 10px;
+}
+.app-sider-title{
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: rgba(72, 81, 91, 1);
+  span{
+    margin-left: 10px;
+  }
+}
+.app-sider-desc{
+  color: rgba(72, 80, 91, 0.68);
+  font-size: 14px;
+  text-indent: 10px;
+}
+.app-sider-statistics{
+  margin-top: 10px;
+  .app-sider-statistics__list{
+    text-align: center;
+    .app-sider-statistics__num{
+      font-size: 18px;
+      color: #505050;
+    }
+    .app-sider-statistics__name{
+      color: rgba(71, 80, 91, 0.7);
+      font-size: 13px;
+      font-weight: 700;
+    }
+  }
+}
+.app-sider-tag{
+  line-height: 30px;
+}
