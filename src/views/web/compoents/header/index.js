@@ -4,7 +4,7 @@ import {Row, Col} from 'antd'
 import HeaderLeft from './header-left'
 import HeaderSearch from './header-search'
 import HeaderNav from './header-nav'
-import '../../../static/scss/layout.scss'
+import '../../../../static/scss/layout.scss'
 import './scss/index.scss'
 
 import { NAV_LIST } from '../../conf/index'

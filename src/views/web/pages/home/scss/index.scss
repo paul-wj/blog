@@ -1,0 +1,47 @@
+.article-content{
+  width: 100%;
+  height: 100%;
+  padding-right: 10px;
+  overflow-y: auto;
+  .article-content-list{
+    position: relative;
+    border: 1px solid #ebedf0;
+    padding: 16px 24px;
+    margin-bottom: 10px;
+    transition: all .2s linear;
+    background-color: #fff;
+    &:hover {
+      box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
+      transform: translate3d(0, -5px, 0);
+      cursor: pointer;
+    }
+    .title {
+      color: #394d69;
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 1.2;
+      cursor: pointer;
+      &:hover {
+        color: #48b2ff;
+      }
+    }
+    .description {
+      // padding: 15px 10px;
+      cursor: pointer;
+      max-height: 260px;
+      overflow: hidden;
+    }
+    .create-time {
+      font-size: 0.5em;
+      padding-left: 20px;
+    }
+    .list-item-action {
+      vertical-align: middle;
+      margin-top: 10px;
+      color: rgba(0, 0, 0, 0.45);
+      a {
+        color: inherit;
+      }
+    }
+  }
+}

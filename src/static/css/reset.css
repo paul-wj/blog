@@ -59,8 +59,8 @@ li {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
 }
 
 ::-webkit-scrollbar-track-piece {
@@ -68,13 +68,12 @@ li {
 }
 
 ::-webkit-scrollbar-thumb:vertical {
-    height: 10px;
+    height: 5px;
     background-color: rgba(125, 125, 125, 1);
-
 }
 
 ::-webkit-scrollbar-thumb:horizontal {
-    width: 10px;
+    width: 5px;
     background-color: rgba(125, 125, 125, 1);
 }
 body {
