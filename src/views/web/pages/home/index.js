@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Divider, Icon} from 'antd';
-import './scss/index.scss'
+import './index.scss'
 class Home extends Component {
 	state = {
 		list: [],

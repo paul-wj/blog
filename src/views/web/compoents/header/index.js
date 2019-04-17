@@ -5,7 +5,7 @@ import HeaderLeft from './header-left'
 import HeaderSearch from './header-search'
 import HeaderNav from './header-nav'
 import '../../../../static/scss/layout.scss'
-import './scss/index.scss'
+import './index.scss'
 
 import { NAV_LIST } from '../../conf/index'
 const headerLeftResponsive = {xxl: 4, xl: 5, lg: 5, sm: 4, xs: 24 };

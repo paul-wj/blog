@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './static/css/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { message } from 'antd'
 
 // markdown 高亮
 import hljs from 'highlight.js'
@@ -15,6 +16,7 @@ hljs.registerLanguage('javascript', javascript);
 
 // 绑定 全局方法$http
 React.Component.prototype.$webApi = webApi;
+React.Component.prototype.$toast = message;
 
 ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
 

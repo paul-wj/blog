@@ -4,7 +4,7 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:9000';
 
 const singOut = () => {
-  window.location.href = '/';
+  // window.location.href = '/';
 };
 
 const getResult = res => {

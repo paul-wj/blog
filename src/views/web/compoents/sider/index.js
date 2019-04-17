@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Card, Avatar, Row, Col, Tag} from 'antd';
 
-import './scss/index.scss'
+import './index.scss'
 
 class AppSider extends Component{
 	state = {
