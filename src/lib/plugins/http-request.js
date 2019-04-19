@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { message } from 'antd'
-
+import $react from '../../index'
 const BASE_URL = 'http://localhost:9000';
 
+
 const singOut = () => {
-  message.error('登录状态已失效,请重新登录');
-  window.location.href = '/';
+	$react.history.push('/');
 };
 
 const getResult = res => {
@@ -47,7 +47,13 @@ const getResult = res => {
       message
     };
   } else if (result && code === 900) {
-    singOut();
+	  message.error('登录状态已失效,请重新登录');
+      singOut();
+      return {
+          flags: 'fail',
+          message: '登录状态已失效,请重新登录',
+          code
+      }
   }
   else {
     message.error(message);
