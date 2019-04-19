@@ -16,10 +16,7 @@ class HeaderNav extends Component {
 		mode: 'horizontal'
 	};
 
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
+	state = {};
 
 	render() {
 		const {navList, mode} = this.props;

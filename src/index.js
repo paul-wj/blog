@@ -2,10 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import webApi from './lib/api.js'
 import { BrowserRouter } from 'react-router-dom';
+
+
 import './static/css/index.css';
+import './static/less/index.less'
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { message } from 'antd'
+import lodash from 'lodash'
 
 // markdown 高亮
 import hljs from 'highlight.js'
@@ -17,6 +22,7 @@ hljs.registerLanguage('javascript', javascript);
 // 绑定 全局方法$http
 React.Component.prototype.$webApi = webApi;
 React.Component.prototype.$toast = message;
+React.Component.prototype.$lodash = lodash;
 
 ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
 

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import routes from './router/router'
 import { BrowserRouter, Route, Switch, withRouter} from "react-router-dom";
+
 @withRouter
 class App extends Component {
 	renderRoutes(routes, contextPath) {

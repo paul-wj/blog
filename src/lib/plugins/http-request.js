@@ -1,10 +1,11 @@
-import { message } from 'antd'
 import axios from 'axios';
+import { message } from 'antd'
 
 const BASE_URL = 'http://localhost:9000';
 
 const singOut = () => {
-  // window.location.href = '/';
+  message.error('登录状态已失效,请重新登录');
+  window.location.href = '/';
 };
 
 const getResult = res => {
