@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from "react-router-dom";
 import AppHeader from '../header/index'
 import AppSider from '../sider/index'
-import { Layout, Row, Col } from 'antd'
+import {Layout, Row, Col, BackTop} from 'antd'
 const {
 	Header
 } = Layout;
@@ -26,6 +26,7 @@ class WebLayout extends Component {
 					</Col>
 				</Row>
 			</Layout>
+			<BackTop target={() => document.querySelector('.app-content-wrapper')} />
 		</Layout>
 	}
 }
