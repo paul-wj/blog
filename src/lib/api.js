@@ -3,8 +3,8 @@ import {httpRequest} from './plugins/http-request';
 	 login(data){
 		 return httpRequest(`/login`, data, {method: 'post'})
 	 },
-	 getTagAllList() {
-		 return httpRequest(`/tag`, {}, {method: 'get'})
+	 getTagAllList(context) {
+		 return httpRequest(`/tag`, {}, {method: 'get'}, {}, context)
 	 },
 	 createTag(data) {
 		 return httpRequest(`/tag`, data, {method: 'post'})
@@ -15,8 +15,8 @@ import {httpRequest} from './plugins/http-request';
 	 deleteTag(id) {
 		 return httpRequest(`/tag/${id}`, {}, {method: 'delete'})
 	 },
-	 getCategoryAllList() {
-		 return httpRequest(`/category`, {}, {method: 'get'})
+	 getCategoryAllList(context) {
+		 return httpRequest(`/category`, {}, {method: 'get'}, {}, context)
 	 },
 	 createCategory(data) {
 		 return httpRequest(`/category`, data, {method: 'post'})
