@@ -22,29 +22,35 @@ class Tags extends Component {
 	};
 
 	getTagAllList = async () => {
-		let res = await this.$webApi.getTagAllList();
+		let res = await this.$webApi.getTagAllList(this);
 		if (res.flags === 'success') {
 			let result = res.data;
 			this.setState({tagList: []});
 			if (result && result.length) {
-				this.setState({tagList: result})
+				this.setState({tagList: result});
 			}
 		}
 	};
 
 	getCategoryAllList = async () => {
-		let res = await this.$webApi.getCategoryAllList();
+		let res = await this.$webApi.getCategoryAllList(this);
 		if (res.flags === 'success') {
 			let result = res.data;
 			this.setState({categoryList: []});
 			if (result && result.length) {
-				this.setState({categoryList: result})
+				this.setState({categoryList: result});
 			}
 		}
 	};
 	componentDidMount() {
 		this.getTagAllList();
 		this.getCategoryAllList();
+	}
+
+	componentWillUnmount() {
+		if (Array.isArray(this.cancleEventList)) {
+			this.cancleEventList.forEach(f => f());
+		}
 	}
 
 	render() {
