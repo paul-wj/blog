@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import webApi from './lib/api.js'
 import { BrowserRouter } from 'react-router-dom';
-
+import { Provider } from 'react-redux'
+import store from './redux'
 
 import './static/css/index.css';
 import './static/less/index.less'
@@ -23,8 +24,13 @@ hljs.registerLanguage('javascript', javascript);
 React.Component.prototype.$webApi = webApi;
 React.Component.prototype.$toast = message;
 React.Component.prototype.$lodash = lodash;
-
-export default ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
+export default ReactDOM.render(
+	<Provider store={store}>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</Provider>,
+	document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
