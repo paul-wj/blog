@@ -1,15 +1,17 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { Icon, Tag, Divider } from 'antd'
+
+
+@connect(state => ({
+	tagList: state.article.tagList,
+	categoryList: state.article.categoryList
+}))
 
 @withRouter
 class Tags extends Component {
-
-	state = {
-		tagList: [],
-		categoryList: []
-	};
 
 	static propTypes = {
 		type: PropTypes.string.isRequired,
@@ -21,42 +23,8 @@ class Tags extends Component {
 		list: []
 	};
 
-	getTagAllList = async () => {
-		let res = await this.$webApi.getTagAllList(this);
-		if (res.flags === 'success') {
-			let result = res.data;
-			this.setState({tagList: []});
-			if (result && result.length) {
-				this.setState({tagList: result});
-			}
-		}
-	};
-
-	getCategoryAllList = async () => {
-		let res = await this.$webApi.getCategoryAllList(this);
-		if (res.flags === 'success') {
-			let result = res.data;
-			this.setState({categoryList: []});
-			if (result && result.length) {
-				this.setState({categoryList: result});
-			}
-		}
-	};
-	componentDidMount() {
-		this.getTagAllList();
-		this.getCategoryAllList();
-	}
-
-	componentWillUnmount() {
-		if (Array.isArray(this.cancleEventList)) {
-			this.cancleEventList.forEach(f => f());
-		}
-	}
-
 	render() {
-		const { tagList, categoryList } = this.state;
-		const { type, list } = this.props;
-
+		const { tagList, categoryList, type, list } = this.props;
 		let currentList = type === 'tags' ? tagList.filter(item => list.includes(item.id + '')) : categoryList.filter(item => list.includes(item.id + ''));
 		return (
 			<Fragment>

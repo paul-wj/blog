@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
 import routes from './router/router'
 import { BrowserRouter, Route, Switch, withRouter} from "react-router-dom";
-
+import { connect } from 'react-redux'
+import { getTags, getCategories } from './redux/article/actions'
+@connect(state => state,{ getTags, getCategories })
 @withRouter
 class App extends Component {
+	componentDidMount() {
+		this.props.getTags();
+		this.props.getCategories();
+	}
+
+
 	renderRoutes(routes, contextPath) {
 		const children = [];
 		if (!routes || routes.length === 0) {
