@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { message } from 'antd'
 import $react from '../../index'
+
 const BASE_URL = 'http://localhost:9000';
 
 
@@ -70,9 +71,10 @@ const getResult = res => {
  * @param data
  * @param options
  * @param params
+ * @param context
  * @returns {Promise}
  */
-export const httpRequest = (url, data = {}, options = { method : 'post' }, params) => {
+export const httpRequest = (url, data = {}, options = { method : 'post'}, params, context) => {
 	let authorization = window.localStorage.getItem("authorization") || '';
     return axios(Object.assign({
         baseURL: BASE_URL,
@@ -81,9 +83,23 @@ export const httpRequest = (url, data = {}, options = { method : 'post' }, param
         data,
         params,
         timeout: 60000
-    }, options))
+    }, options, {
+	    cancelToken: new axios.CancelToken(c => {
+	      if (context && typeof context === 'object') {
+		      context.cancleEventList = context.cancleEventList || [];
+		      context.cancleEventList.push(c);
+          }
+	    })
+    }))
     .then(getResult)
     .catch(err => {
+      if (!err.response) {
+	      return {
+		      flags: 'fail',
+		      message: err.message,
+		      code: 500
+	      }
+      }
       if (!err.response || ![401, 422].includes(err.response.status)) {
         message.error('网络错误');
         return {
