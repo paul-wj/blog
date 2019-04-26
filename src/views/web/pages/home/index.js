@@ -20,6 +20,7 @@ class Home extends Component {
 					let index = item.content.indexOf('<!--more-->');
 					item.description = translateMarkdown(item.content.slice(0, index))
 				});
+				result.reverse();
 				this.setState({articleList: result})
 			}
 		}
@@ -29,23 +30,26 @@ class Home extends Component {
 		this.getArticleAllList();
 	}
 
+	componentWillUnmount() {
+	}
+
 	render() {
 		const articleList = this.state.articleList;
 		return <div className="article-content">
 			<ul>
-				{articleList.map((item, index) => <li key={index} className="article-content-list">
-					<Divider orientation="left">
-                        <span className="title">{item.title}</span>
-						<span className="create-time">{item.createTime}</span>
-					</Divider>
-					<div className="article-detail description" dangerouslySetInnerHTML={{ __html: item.description }} />
-					<div className="list-item-action">
-						<Icon type="message" style={{ marginRight: 7 }} />
-						1
-						<Tags type="tags" list={item.tagIds.split(',')} />
-						<Tags type="categories" list={item.categories.split(',')} />
-					</div>
-				</li>)}
+				{articleList.map((item, index) => (<li key={index} className="article-content-list" onClick={e => {this.props.history.push(`/article/${item.id}`)}}>
+						<Divider orientation="left">
+							<span className="title">{item.title}</span>
+							<span className="create-time">{item.updateTime}</span>
+						</Divider>
+						<div className="article-detail description" dangerouslySetInnerHTML={{ __html: item.description }} />
+						<div className="list-item-action">
+							<Icon type="message" style={{ marginRight: 7 }} />
+							1
+							<Tags type="tags" list={item.tagIds.split(',')} />
+							<Tags type="categories" list={item.categories.split(',')} />
+						</div>
+				</li>))}
 			</ul>
 		</div>
 	}
