@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 import { Icon, Tag, Divider } from 'antd'
+import { connect } from 'react-redux'
 
 
 @connect(state => ({

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Divider, Table, Drawer, Button, Input, Popconfirm } from 'antd'
 import FormItem from '../../compoents/base/form-item'
+
+
 class CategoryList extends Component {
 	constructor(props){
 		super(props);
@@ -39,6 +41,7 @@ class CategoryList extends Component {
 		}
 		this.setState({loading: false});
 	};
+
 	createCategory = async () => {
 		let res = await this.$webApi.createCategory(this.state.requestParams);
 		if (res.flags === 'success') {

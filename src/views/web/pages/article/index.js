@@ -17,6 +17,7 @@ class ArticleDetail extends Component {
 		if (!id) {
 			return
 		}
+		this.setState({title: null, tagIds: null, categories: null, content: null});
 		this.setState({loading: true});
 		let res = await this.$webApi.getArticleById(id);
 		if (res.flags === 'success') {
@@ -31,9 +32,13 @@ class ArticleDetail extends Component {
 		this.setState({loading: false});
 	};
 
-	componentDidMount() {
+	componentDidMount = () => {
 		this.getArticleById(this.props.match.params.id - 0);
-	}
+	};
+
+	componentWillReceiveProps = props => {
+		this.getArticleById(props.match.params.id - 0);
+	};
 
 	render() {
 		const {title, content} = this.state;

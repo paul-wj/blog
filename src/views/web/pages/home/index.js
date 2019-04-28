@@ -30,9 +30,6 @@ class Home extends Component {
 		this.getArticleAllList();
 	}
 
-	componentWillUnmount() {
-	}
-
 	render() {
 		const articleList = this.state.articleList;
 		return <div className="article-content">
