@@ -1,4 +1,4 @@
-import {changeState} from "../../lib/utils";
+import {changeState} from "../../lib/plugins/redux-plugins";
 const defaultState = {
 	categoryList: [],
 	tagList: []

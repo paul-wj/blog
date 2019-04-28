@@ -18,7 +18,3 @@ export const translateMarkdown = plainText => {
 		}
 	})
 };
-
-export const changeState = (state, [key, value]) => {
-	return key ? {...state, [key]: value} : state;
-};
