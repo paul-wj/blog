@@ -25,7 +25,7 @@ class Tags extends Component {
 
 	render() {
 		const { tagList, categoryList, type, list } = this.props;
-		let currentList = type === 'tags' ? tagList.filter(item => list.includes(item.id + '')) : categoryList.filter(item => list.includes(item.id + ''));
+		let currentList = type === 'tags' ? tagList.filter(item => list.includes(item.id)) : categoryList.filter(item => list.includes(item.id));
 		return (
 			<Fragment>
 				<Divider type="vertical" />

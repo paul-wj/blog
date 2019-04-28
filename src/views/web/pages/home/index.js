@@ -43,8 +43,8 @@ class Home extends Component {
 						<div className="list-item-action">
 							<Icon type="message" style={{ marginRight: 7 }} />
 							1
-							<Tags type="tags" list={item.tagIds.split(',')} />
-							<Tags type="categories" list={item.categories.split(',')} />
+							<Tags type="tags" list={item.tagIds} />
+							<Tags type="categories" list={item.categories} />
 						</div>
 				</li>))}
 			</ul>

@@ -1,11 +1,15 @@
 .article-detail{
   padding: 20px;
   background: #fff;
+  min-height: 100%;
   .article-header{
     text-align: center;
     h1{
       font-size: 20px;
       font-weight: 700;
+    }
+    .article-msg{
+      margin-bottom: 10px;
     }
   }
   pre {
