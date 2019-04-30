@@ -10,12 +10,12 @@ export default [{
 	childRoutes: [
 		{ path: '', name: '首页', component: adminIndex },
 		{
-			path: 'article', name: '文章管理', icon: 'edit',
+			path: 'article', name: '文章管理', icon: 'read',
 			childRoutes: [
-				{ path: 'article-edit', icon: 'edit', name: '新增文章', component: ArticleCreate },
-				{ path: 'article-list', icon: 'edit', name: '文章列表', component: ArticleList },
-				{ path: 'tag-list', icon: 'table', name: '标签列表', component: TagList },
-				{ path: 'category-list', icon: 'table', name: '目录列表', component: CategoryList },
+				{ path: 'article-edit', name: '新增文章', component: ArticleCreate },
+				{ path: 'article-list', name: '文章列表', component: ArticleList },
+				{ path: 'tag-list', name: '标签列表', component: TagList },
+				{ path: 'category-list', name: '目录列表', component: CategoryList },
 			]}
 	]
 }]

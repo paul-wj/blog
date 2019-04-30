@@ -30,7 +30,7 @@ class Tags extends Component {
 			<Fragment>
 				<Divider type="vertical" />
 				{type === 'tags' ? (
-					<Icon type="folder" style={{ marginRight: 7, verticalAlign: 'middle' }} />
+					<Icon type="tag" style={{ marginRight: 7, verticalAlign: 'middle' }} />
 				) : (
 					<Icon type="folder" style={{ marginRight: 7 }} />
 				)}

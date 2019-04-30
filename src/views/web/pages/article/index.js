@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {withRouter} from "react-router-dom";
 import {translateMarkdown} from '../../../../lib/utils'
-import { Spin, Icon } from 'antd';
+import { Spin, Icon, Comment, Form, Button, List, Input, Avatar} from 'antd';
 import { connect } from 'react-redux'
 import Tags from "../../compoents/base/tags";
 import './index.scss'
+const TextArea = Input.TextArea;
 
 
 @connect(state => ({
@@ -20,7 +21,9 @@ class ArticleDetail extends Component {
 		title: null,
 		tagIds: [],
 		categories: [],
-		content: null
+		content: null,
+		commentContent: null,
+		commentList: []
 	};
 
 	getArticleById = async id => {
@@ -41,16 +44,39 @@ class ArticleDetail extends Component {
 		this.setState({loading: false});
 	};
 
+	getArticleCommentList = async id => {
+		let res = await this.$webApi.getArticleCommentList(id);
+		if (res.flags === 'success') {
+			this.setState({commentList: []});
+			if (res.data && res.data.length) {
+				this.setState({commentList: res.data})
+			}
+		}
+	};
+
+	createArticleComment = async () => {
+		const id = this.props.match.params.id;
+		let res = await this.$webApi.createArticleComment(id, {content: this.state.commentContent});
+		if (res.flags === 'success') {
+			this.getArticleCommentList(id);
+			this.setState({commentContent: null});
+		}
+	};
+
 	componentDidMount = () => {
-		this.getArticleById(this.props.match.params.id - 0);
+		const id = this.props.match.params.id - 0;
+		this.getArticleById(id);
+		this.getArticleCommentList(id);
 	};
 
 	componentWillReceiveProps = props => {
-		this.getArticleById(props.match.params.id - 0);
+		const id = props.match.params.id - 0;
+		this.getArticleById(id);
+		this.getArticleCommentList(id);
 	};
 
 	render() {
-		const {title, content, updateTime, tagIds, categories} = this.state;
+		const {title, content, updateTime, tagIds, categories, commentList} = this.state;
 		return <Spin spinning={this.state.loading} delay={500}>
 			<div className="article-detail">
 				<div className="article-header">
@@ -62,6 +88,24 @@ class ArticleDetail extends Component {
 					</div>
 				</div>
 				<div className="description" dangerouslySetInnerHTML={{ __html: content }} />
+				<div>
+					<Form.Item>
+						<TextArea rows={4} value={this.state.commentContent} onInput={e => this.setState({commentContent: e.target.value})} />
+					</Form.Item>
+					<Form.Item>
+						<Button
+							htmlType="submit"
+							onClick={this.createArticleComment}
+							type="primary"
+						>
+							Add Comment
+						</Button>
+					</Form.Item>
+					<List
+						dataSource={commentList}
+						itemLayout="horizontal"
+						renderItem={item => <Comment author={<span>{item.userName}&nbsp;&nbsp;{item.createTime}</span>} avatar={<Avatar>{item.userName}</Avatar>} content={item.content} />}/>
+				</div>
 			</div>
 		</Spin>
 	}
