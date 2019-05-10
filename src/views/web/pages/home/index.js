@@ -42,7 +42,7 @@ class Home extends Component {
 						<div className="article-detail description" dangerouslySetInnerHTML={{ __html: item.description }} />
 						<div className="list-item-action">
 							<Icon type="message" style={{ marginRight: 7 }} />
-							1
+							{item.comments}
 							<Tags type="tags" list={item.tagIds} />
 							<Tags type="categories" list={item.categories} />
 						</div>

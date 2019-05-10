@@ -21,4 +21,17 @@
     background: #f7f7f7;
     line-height: 1.6;
   }
+  .comments{
+    margin-top: 20px;
+    .comment-confirm{
+      text-align: right;
+      margin-bottom: 10px;
+    }
+  }
+}
+.article-spin{
+  height: 100%;
+  .ant-spin-container{
+    height: 100%;
+  }
 }

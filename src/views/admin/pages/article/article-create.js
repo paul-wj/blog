@@ -29,8 +29,6 @@ class ArticleCreate extends Component {
 		if (res.flags === 'success') {
 			if (res.data) {
 				let { title, tagIds, categories, content } = res.data;
-				tagIds = tagIds.split(',').map(item => item - 0);
-				categories = categories.split(',').map(item => item - 0);
 				this.smde.value(content);
 				this.setState({
 					requestParams: Object.assign({}, this.state.requestParams, {title, tagIds, categories})

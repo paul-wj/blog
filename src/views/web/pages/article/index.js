@@ -77,7 +77,7 @@ class ArticleDetail extends Component {
 
 	render() {
 		const {title, content, updateTime, tagIds, categories, commentList} = this.state;
-		return <Spin spinning={this.state.loading} delay={500}>
+		return <Spin wrapperClassName="article-spin" spinning={this.state.loading} delay={500}>
 			<div className="article-detail">
 				<div className="article-header">
 					<h1>{title}</h1>
@@ -88,16 +88,15 @@ class ArticleDetail extends Component {
 					</div>
 				</div>
 				<div className="description" dangerouslySetInnerHTML={{ __html: content }} />
-				<div>
-					<Form.Item>
+				<div className="comments">
+					<Form.Item colon={false} label={<Avatar>汪</Avatar>} labelAlign={'left'} labelCol={{span: 1}} wrapperCol={{span: 23}}>
 						<TextArea rows={4} value={this.state.commentContent} onInput={e => this.setState({commentContent: e.target.value})} />
 					</Form.Item>
-					<Form.Item>
+					<Form.Item className="comment-confirm">
 						<Button
 							htmlType="submit"
 							onClick={this.createArticleComment}
-							type="primary"
-						>
+							type="primary">
 							Add Comment
 						</Button>
 					</Form.Item>
