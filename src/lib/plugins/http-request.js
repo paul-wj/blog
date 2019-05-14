@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { message } from 'antd'
 import $react from '../../index'
-
+import { message } from 'antd'
+const antdMessage = message;
 const BASE_URL = 'http://localhost:9000';
 
 
@@ -41,14 +41,14 @@ const getResult = res => {
     if (results && results.length) {
       message = results.reduce((startValue, currentValue) => [...startValue, currentValue.message], []).toString();
     }
-    message.error(message);
+    antdMessage.error(message);
     return {
       flags: 'fail',
       code,
       message
     };
   } else if (result && code === 900) {
-	  message.error('登录状态已失效,请重新登录');
+	  antdMessage.error('登录状态已失效,请重新登录');
       singOut();
       return {
           flags: 'fail',
@@ -57,7 +57,7 @@ const getResult = res => {
       }
   }
   else {
-    message.error(message);
+    antdMessage.error(message);
     return {
       flags: 'fail',
       message: result.message,
@@ -101,14 +101,14 @@ export const httpRequest = (url, data = {}, options = { method : 'post'}, params
 	      }
       }
       if (!err.response || ![401, 422].includes(err.response.status)) {
-        message.error('网络错误');
+        antdMessage.error('网络错误');
         return {
           flags: 'fail',
           message: '网络错误',
           code: err.response ? err.response.status : 0
         }
       }
-      message.error(err.response.data.message);
+      antdMessage.error(err.response.data.message);
       return {
         flags: 'fail',
         message: err.response.data.message,
