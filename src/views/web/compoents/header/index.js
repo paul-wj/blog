@@ -4,6 +4,7 @@ import {Row, Col} from 'antd'
 import HeaderLeft from './header-left'
 import HeaderSearch from './header-search'
 import HeaderNav from './header-nav'
+import UserInfo from './user-info'
 import '../../../../static/scss/layout.scss'
 import './index.scss'
 
@@ -22,6 +23,7 @@ class Header extends Component{
 			<Col {...headerLeftResponsive}><HeaderLeft/></Col>
 			<Col className="header-right" {...headerRightResponsive}>
 				<HeaderSearch/>
+				<UserInfo/>
 				<HeaderNav navList={NAV_LIST}/>
 			</Col>
 		</Row>

@@ -6,7 +6,6 @@
   }
 }
 .header-right{
-  padding-right: 60px;
   .header-search{
     border-left: 1px solid #ebedf0;
     float: left;
@@ -53,6 +52,10 @@
         }
       }
     }
+  }
+  .user-info{
+    float: right;
+    padding: 0 40px 0 16px;
   }
 }
 

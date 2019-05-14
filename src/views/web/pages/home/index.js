@@ -9,7 +9,6 @@ class Home extends Component {
 		total: 0,
 		loading: false
 	};
-
 	async getArticleAllList() {
 		let res = await this.$webApi.getArticleAllList();
 		if (res.flags === 'success') {
@@ -42,7 +41,7 @@ class Home extends Component {
 						<div className="article-detail description" dangerouslySetInnerHTML={{ __html: item.description }} />
 						<div className="list-item-action">
 							<Icon type="message" style={{ marginRight: 7 }} />
-							{item.comments}
+							{item.comments.length}
 							<Tags type="tags" list={item.tagIds} />
 							<Tags type="categories" list={item.categories} />
 						</div>
