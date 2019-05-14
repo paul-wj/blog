@@ -61,7 +61,8 @@ class ArticleCreate extends Component {
 
 	createArticle = async () => {
 		let {title, categories, tagIds} = this.state.requestParams;
-		let res = await this.$webApi.createArticle({title, categories: categories.toString(), tagIds: tagIds.toString(), content: this.smde.value()});
+		console.log(categories, tagIds)
+		let res = await this.$webApi.createArticle({title, categories, tagIds, content: this.smde.value()});
 		if (res.flags === 'success') {
 			this.$toast.success('保存文章成功');
 			this.onSuccess()
