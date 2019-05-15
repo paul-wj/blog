@@ -1,6 +1,6 @@
 import thunk from 'redux-thunk'
 import {compose, createStore, applyMiddleware} from 'redux'
-import { composeWithDevTools  } from 'redux-devtools-extension'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from 'redux-logger'
 import {IS_PROD} from "../conf";
 import {
