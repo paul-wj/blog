@@ -29,7 +29,7 @@ export const getReduxStoreStorage = () => {
 	if (reduxStore) {
 		const reduxStorage = JSON.parse(reduxStore);
 		//当前本地缓存版本号与当前代码版本号一致时取缓存数据
-		return reduxStorage.VERSION === VERSION ? reduxStorage : {};
+		return reduxStorage.VERSION === VERSION ? reduxStorage.data : {};
 	}
 	return {};
 };
