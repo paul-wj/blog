@@ -48,7 +48,9 @@ export const syncStoreDataToWebStorage = store => {
  * @param reduxStoreValue
  */
 export const setReduxStore = (reduxStoreValue) => {
-	window.localStorage.setItem(REDUX_STORE_KEY, JSON.stringify(reduxStoreValue));
+	window.onbeforeunload = (e) => {
+		window.localStorage.setItem(REDUX_STORE_KEY, JSON.stringify(reduxStoreValue));
+	};
 };
 
 export const setReduxDataForLocal = (store, needLocal = true) => {
