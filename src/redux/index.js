@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from 'redux-logger'
 import {IS_PROD} from "../conf";
 import {
+	setReduxStore,
 	getReduxStoreStorage,
 	syncStoreDataToWebStorage
 } from '../lib/plugins/redux-plugins'
@@ -18,6 +19,11 @@ const store = (initialState = getReduxStoreStorage()) => {
 		const nextRootReducer = require('./reducer').default;
 		store.replaceReducer(nextRootReducer);
 	}
+	//当页面刷新或关闭时存储state
+	// window.onbeforeunload = (e) => {
+	// 	console.log(123)
+	// 	setReduxStore(store.getState())
+	// };
 	//全局监听redux变量更新
 	syncStoreDataToWebStorage(store);
 	return store
