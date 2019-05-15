@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { login } from '../../../../redux/user/actions'
 
 
-@connect(state => state,{ login })
+@connect(state => ({userInfo: state.user.userInfo}),{ login })
 @withRouter
 class Login extends Component {
 	state = {
@@ -23,11 +23,8 @@ class Login extends Component {
 	};
 
 	login = async () => {
-		const { user: {userInfo} } = this.props;
 		await this.props.login(this.state);
-		if (userInfo) {
-			this.$toast.success('登录成功');
-			localStorage.setItem('authorization', userInfo.token);
+		if (this.props.userInfo.userId) {
 			this.props.history.push('/admin');
 		}
 	};

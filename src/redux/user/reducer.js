@@ -4,10 +4,11 @@ const defaultState = {
 		userId: null,
 		name: null,
 		token: null,
-		avatarColor: '#52c41a'
+		avatarColor: null
 	}
 };
-const userReducer = (state = defaultState, {type, payload}) => {
+export const userReducer = (state = {...defaultState}, {type, payload}) => {
+	console.log('userReducer:', {type, payload})
 	return changeState(state, [type, payload])
 };
 export default userReducer;

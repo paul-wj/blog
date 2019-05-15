@@ -18,3 +18,5 @@ export const translateMarkdown = plainText => {
 		}
 	})
 };
+
+export const getRandomColor = () => '0123456789abcdef'.split('').reduce((startValue, currentValue, currentIndex, targetArr) => currentIndex > 5 ? startValue : startValue + targetArr[Math.floor(Math.random()*16)], '#');

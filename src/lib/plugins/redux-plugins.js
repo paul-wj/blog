@@ -2,7 +2,9 @@ import {cloneDeep, merge} from 'lodash';
 const REDUX_STORE_KEY = 'reduxStore';
 
 //redux默认action key 或 defaultState不存在key的时候返回默认值
-export const changeState = (state, [key, value]) => key.indexOf('@@redux') === -1 && Object.keys(state).includes(key) ? {...state, [key]: value} : state;
+export const changeState = (state, [key, value]) => {
+	return JSON.parse(JSON.stringify(key.indexOf('@@redux') === -1 && Object.keys(state).includes(key) ? {...state, [key]: value} : state))
+};
 
 /**
  * 创建唯一标识
