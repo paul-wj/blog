@@ -2,8 +2,13 @@ import React, {Component} from 'react';
 import { withRouter } from "react-router-dom";
 import './index.scss'
 import logo from './logo.svg'
-
 import { Button, Input, Icon } from 'antd'
+
+import { connect } from 'react-redux'
+import { login } from '../../../../redux/user/actions'
+
+
+@connect(state => state,{ login })
 @withRouter
 class Login extends Component {
 	state = {
@@ -18,10 +23,11 @@ class Login extends Component {
 	};
 
 	login = async () => {
-		let res = await this.$webApi.login(this.state);
-		if (res.flags === 'success') {
+		const { user: {userInfo} } = this.props;
+		await this.props.login(this.state);
+		if (userInfo) {
 			this.$toast.success('登录成功');
-			localStorage.setItem('authorization', res.data.token);
+			localStorage.setItem('authorization', userInfo.token);
 			this.props.history.push('/admin');
 		}
 	};
