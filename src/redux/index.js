@@ -4,14 +4,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from 'redux-logger'
 import {IS_PROD} from "../conf";
 import {
-	getReduxStore,
+	getReduxStoreStorage,
 	syncStoreDataToWebStorage
 } from '../lib/plugins/redux-plugins'
 import rootReducer from './reducer'
 
 let plugins = IS_PROD ? compose(applyMiddleware(thunk)) : compose(composeWithDevTools(applyMiddleware(thunk, logger)));
 
-const store = (initialState = getReduxStore()) => {
+const store = (initialState = getReduxStoreStorage()) => {
 	const store = createStore(rootReducer, initialState, plugins);
 	if (module.hot && !IS_PROD) {
 		console.log('replacing reducer...');

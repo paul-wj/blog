@@ -1,4 +1,5 @@
 import {cloneDeep, merge} from 'lodash';
+import {VERSION} from "../../conf";
 const REDUX_STORE_KEY = 'reduxStore';
 
 //redux默认action key 或 defaultState不存在key的时候返回默认值
@@ -23,11 +24,14 @@ export const createGUID = () => {
  * 从 localStorage 获取 reduxStorage
  * @returns {boolean}
  */
-export const getReduxStore = () => {
+export const getReduxStoreStorage = () => {
 	let reduxStore = window.localStorage.getItem(REDUX_STORE_KEY);
 	if (reduxStore) {
-		return JSON.parse(window.localStorage.getItem(REDUX_STORE_KEY));
+		const reduxStorage = JSON.parse(reduxStore);
+		//当前本地缓存版本号与当前代码版本号一致时取缓存数据
+		return reduxStorage.VERSION === VERSION ? reduxStorage : {};
 	}
+	return {};
 };
 
 /**
@@ -38,8 +42,7 @@ export const syncStoreDataToWebStorage = store => {
 	// 当 store 初始化后调用
 	store.subscribe(() => {
 		const state = store.getState();
-		const reduxStoreGUID = createGUID();
-		setReduxStore({GUID: reduxStoreGUID, data: state});
+		setReduxStore({VERSION, data: state});
 	});
 };
 
@@ -48,14 +51,15 @@ export const syncStoreDataToWebStorage = store => {
  * @param reduxStoreValue
  */
 export const setReduxStore = (reduxStoreValue) => {
-	window.onbeforeunload = (e) => {
-		window.localStorage.setItem(REDUX_STORE_KEY, JSON.stringify(reduxStoreValue));
-	};
+	// window.onbeforeunload = (e) => {
+	// 	window.localStorage.setItem(REDUX_STORE_KEY, JSON.stringify(reduxStoreValue));
+	// };
+	window.localStorage.setItem(REDUX_STORE_KEY, JSON.stringify(reduxStoreValue));
 };
 
 export const setReduxDataForLocal = (store, needLocal = true) => {
 	if (!needLocal) return;
-	let localVuexStore = getReduxStore();
+	let localVuexStore = getReduxStoreStorage();
 	if (localVuexStore) {
 		store.replaceReducer( state => {
 			let copyNewStore = cloneDeep(state);
