@@ -2,11 +2,10 @@ import thunk from 'redux-thunk'
 import {compose, createStore, applyMiddleware} from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from 'redux-logger'
-import {IS_PROD} from "../conf";
+import {IS_PROD, VERSION} from "../conf";
 import {
 	setReduxStore,
-	getReduxStoreStorage,
-	syncStoreDataToWebStorage
+	getReduxStoreStorage
 } from '../lib/plugins/redux-plugins'
 import rootReducer from './reducer'
 
@@ -19,13 +18,13 @@ const store = (initialState = getReduxStoreStorage()) => {
 		const nextRootReducer = require('./reducer').default;
 		store.replaceReducer(nextRootReducer);
 	}
-	//当页面刷新或关闭时存储state
-	// window.onbeforeunload = (e) => {
-	// 	console.log(123)
-	// 	setReduxStore(store.getState())
-	// };
-	//全局监听redux变量更新
-	syncStoreDataToWebStorage(store);
+	//当页面刷新或关闭时存储state（节省性能）
+	window.onbeforeunload = (e) => {
+		const state = store.getState();
+		setReduxStore({VERSION, data: state});
+	};
+	// //全局监听redux变量更新
+	// syncStoreDataToWebStorage(store);
 	return store
 };
 
