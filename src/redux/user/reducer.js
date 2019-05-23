@@ -2,14 +2,12 @@ import {changeState} from "../../lib/plugins/redux-plugins";
 const defaultState = {
 	userInfo: {
 		userId: null,
-		name: null,
+		email: null,
+		username: null,
 		token: null,
 		avatarColor: null
 	}
 };
-export const userReducer = (state = {...defaultState}, {type, payload}) => {
-	console.log('userReducer:', {type, payload})
-	return changeState(state, [type, payload])
-};
+export const userReducer = (state = {...defaultState}, {type, payload}) => changeState(state, [type, payload]);
 export default userReducer;
 
