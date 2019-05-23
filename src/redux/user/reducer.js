@@ -4,6 +4,7 @@ const defaultState = {
 		userId: null,
 		email: null,
 		username: null,
+		nick: null,
 		token: null,
 		avatarColor: null
 	}
