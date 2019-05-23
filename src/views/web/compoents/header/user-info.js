@@ -32,8 +32,8 @@ class UserInfo extends Component {
 		const {userInfo} = this.props;
 		return <div className="user-info">
 			<AuthModal/>
-			{userInfo.name ? (<Dropdown placement="bottomCenter" overlay={this.renderDropDownMenu()} trigger={['click', 'hover']}>
-				<Avatar className="user-avatar" size="large" style={{backgroundColor: userInfo.avatarColor}}>{userInfo.name}</Avatar>
+			{userInfo.userId ? (<Dropdown placement="bottomCenter" overlay={this.renderDropDownMenu()} trigger={['click', 'hover']}>
+				<Avatar className="user-avatar" size="large" style={{backgroundColor: userInfo.avatarColor}}>{userInfo.username}</Avatar>
 			</Dropdown>) : (<Fragment>
 				<Button
 					ghost
