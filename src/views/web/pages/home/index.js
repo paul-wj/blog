@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Divider, Icon} from 'antd';
+import {Divider, Icon, Spin} from 'antd';
 import {translateMarkdown} from '../../../../lib/utils'
 import './index.scss'
 import Tags from '../../compoents/base/tags'
@@ -10,6 +10,7 @@ class Home extends Component {
 		loading: false
 	};
 	async getArticleAllList() {
+		this.setState({loading: true});
 		let res = await this.$webApi.getArticleAllList();
 		if (res.flags === 'success') {
 			let result = res.data;
@@ -23,6 +24,7 @@ class Home extends Component {
 				this.setState({articleList: result})
 			}
 		}
+		this.setState({loading: false});
 	}
 
 	componentDidMount() {
@@ -30,8 +32,9 @@ class Home extends Component {
 	}
 
 	render() {
-		const articleList = this.state.articleList;
+		const {loading, articleList} = this.state;
 		return <div className="article-content">
+			<Spin tip="Loading..." className="article-content-spin" size="large" spinning={loading}/>
 			<ul>
 				{articleList.map((item, index) => (<li key={index} className="article-content-list" onClick={e => {this.props.history.push(`/article/${item.id}`)}}>
 						<Divider orientation="left">
