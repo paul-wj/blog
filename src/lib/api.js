@@ -3,6 +3,12 @@ import {httpRequest} from './plugins/http-request';
 	 login(data){
 		 return httpRequest(`/login`, data, {method: 'post'})
 	 },
+	 registerUser(data) {
+		 return httpRequest(`/user`, data, {method: 'post'})
+	 },
+	 updateUser(id, data) {
+		 return httpRequest(`/user/${id}`, data, {method: 'patch'})
+	 },
 	 getTagAllList(context) {
 		 return httpRequest(`/tag`, {}, {method: 'get'}, {}, context)
 	 },
