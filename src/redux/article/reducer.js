@@ -3,8 +3,6 @@ const defaultState = {
 	categoryList: [],
 	tagList: []
 };
-export const articleReducer = (state = defaultState, {type, payload}) => {
-	console.log('articleReducer:', {type, payload})
-	return changeState(state, [type, payload])};
+export const articleReducer = (state = defaultState, {type, payload}) => changeState(state, [type, payload]);
 export default articleReducer;
 
