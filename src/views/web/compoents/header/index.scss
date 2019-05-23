@@ -65,5 +65,12 @@
     color: #ccc;
   }
 }
+@media screen and (max-width: 1000px) and (min-width: 576px) {
+  .header-left {
+    .header-title {
+      display: none;
+    }
+  }
+}
 
 

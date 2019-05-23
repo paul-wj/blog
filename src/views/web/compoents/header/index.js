@@ -5,7 +5,6 @@ import HeaderLeft from './header-left'
 import HeaderSearch from './header-search'
 import HeaderNav from './header-nav'
 import UserInfo from './user-info'
-import '../../../../static/scss/layout.scss'
 import './index.scss'
 
 import { NAV_LIST } from '../../conf/index'
