@@ -112,6 +112,15 @@ module.exports = function(webpackEnv) {
         },
       });
     }
+	  //添加全局scss引用
+	  if (preProcessor === 'sass-loader') {
+		  loaders.push({
+			  loader: require.resolve('sass-resources-loader'),
+			  options: {
+				  resources: path.resolve(__dirname, '../src/static/scss/index.scss')
+			  }
+		  });
+	  }
     return loaders;
   };
 
