@@ -7,7 +7,8 @@ import './index.scss'
 
 @connect(state => ({
 	tagList: state.article.tagList,
-	categoryList: state.article.categoryList
+	categoryList: state.article.categoryList,
+	userInfo: state.user.userInfo
 }))
 
 @withRouter
@@ -54,8 +55,11 @@ class AppSider extends Component{
 		const {statisticsList, articleList} = this.state;
 		return <div className="app-sider">
 			<Card>
-				<p className="app-sider-title"><Avatar size={64} icon="user"/><span>Web Blog</span></p>
-				<p className="app-sider-desc">这这这这这这这这这这这这这这这这这这是一个Web Blog</p>
+				<p className="app-sider-title">
+					<Avatar className="user-avatar" size={64}/>
+					<span>前端汪小二</span>
+				</p>
+				<p className="app-sider-desc">前端打杂，前端自娱自乐</p>
 			</Card>
 			<Card className="app-sider-statistics">
 				<Row gutter={24}>{statisticsList.map(statistics => <Col span={24/statisticsList.length} key={statistics.label} className="app-sider-statistics__list">
