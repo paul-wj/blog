@@ -1,13 +1,7 @@
 import axios from 'axios';
-import $react from '../../index'
 import { message } from 'antd'
 const antdMessage = message;
 const BASE_URL = 'http://localhost:9000';
-
-
-const singOut = () => {
-	$react.history.push('/');
-};
 
 const getResult = res => {
   let authorization = window.localStorage.getItem("authorization") || '';
@@ -49,7 +43,6 @@ const getResult = res => {
     };
   } else if (result && code === 900) {
 	  antdMessage.error('登录状态已失效,请重新登录');
-      singOut();
       return {
           flags: 'fail',
           message: '登录状态已失效,请重新登录',
