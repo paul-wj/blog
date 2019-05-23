@@ -12,8 +12,8 @@ import { login } from '../../../../redux/user/actions'
 @withRouter
 class Login extends Component {
 	state = {
-		username: 'paul',
-		password: 123456
+		email: 'paul@qq.com',
+		password: '123456'
 	};
 
 	handleChange = e => {
@@ -38,9 +38,9 @@ class Login extends Component {
 					size="large"
 					style={{ marginBottom: 25 }}
 					prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-					name="username"
-					placeholder="username"
-					value={this.state.username}
+					name="email"
+					placeholder="email"
+					value={this.state.email}
 					onChange={this.handleChange}/>
 				<Input
 					size="large"
