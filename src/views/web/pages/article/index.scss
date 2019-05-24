@@ -1,7 +1,9 @@
 .article-detail{
+  position: relative;
   padding: 20px;
   background: #fff;
   min-height: 100%;
+  @include spanStyle(article-spin);
   .article-header{
     text-align: center;
     h1{
@@ -27,11 +29,5 @@
       text-align: right;
       margin-bottom: 10px;
     }
-  }
-}
-.article-spin{
-  height: 100%;
-  .ant-spin-container{
-    height: 100%;
   }
 }
