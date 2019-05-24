@@ -30,9 +30,10 @@ class UserInfo extends Component {
 
 	render() {
 		const {userInfo} = this.props;
+		const token = localStorage.getItem('authorization');
 		return <div className="user-info">
 			<AuthModal/>
-			{userInfo.userId ? (<Dropdown placement="bottomCenter" overlay={this.renderDropDownMenu()} trigger={['click', 'hover']}>
+			{userInfo.userId && token ? (<Dropdown placement="bottomCenter" overlay={this.renderDropDownMenu()} trigger={['click', 'hover']}>
 				<Avatar className="user-avatar" size="large" style={{backgroundColor: userInfo.avatarColor}}>{userInfo.username}</Avatar>
 			</Dropdown>) : (<Fragment>
 				<Button
