@@ -41,7 +41,7 @@ export const editUser = (id, params) => {
 export const logout = () => {
 	return dispatch => {
 		localStorage.removeItem('authorization');
-		dispatch({ type: 'userInfo', payload: {userId: null, email: null, username: null, token: null, avatarColor: null}})
+		dispatch({ type: 'userInfo', payload: {userId: null, email: null, nick: null, username: null, token: null, avatarColor: null}})
 	}
 };
 
