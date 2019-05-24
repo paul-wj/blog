@@ -1,16 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import {withRouter} from "react-router-dom";
 import {translateMarkdown} from '../../../../lib/utils'
-import { Spin, Icon, Comment, Form, Button, List, Input, Avatar} from 'antd';
+import { Spin, Icon, Comment, Form, Button, List, Input, Avatar, Tooltip} from 'antd';
 import { connect } from 'react-redux'
 import Tags from "../../compoents/base/tags";
+import FormItem from '../../../admin/compoents/base/form-item'
 import './index.scss'
+
+import relativeTime from 'dayjs/plugin/relativeTime'
+import moment from 'dayjs'
+moment.extend(relativeTime);
+
 const TextArea = Input.TextArea;
 
 
 @connect(state => ({
 	tagList: state.article.tagList,
-	categoryList: state.article.categoryList
+	categoryList: state.article.categoryList,
+	userInfo: state.user.userInfo
 }))
 
 @withRouter
@@ -49,7 +56,12 @@ class ArticleDetail extends Component {
 		if (res.flags === 'success') {
 			this.setState({commentList: []});
 			if (res.data && res.data.length) {
-				this.setState({commentList: res.data})
+
+				this.setState({
+					commentList: res.data.map(item => {
+						return Object.assign({}, item, {isReply: false})
+					})
+				})
 			}
 		}
 	};
@@ -63,50 +75,83 @@ class ArticleDetail extends Component {
 		}
 	};
 
+	openReplyContainer(index) {
+		if (typeof index !== 'number') {
+			return
+		}
+		const {commentList} = this.state;
+		const currentCommentIsReply = commentList[index].isReply;
+		commentList[index].isReply = !currentCommentIsReply;
+		this.setState({commentList})
+	}
+
 	componentDidMount = () => {
 		const id = this.props.match.params.id - 0;
 		this.getArticleById(id);
 		this.getArticleCommentList(id);
 	};
 
-	componentWillReceiveProps = props => {
-		const id = props.match.params.id - 0;
+	componentWillReceiveProps = nextProps => {
+		const id = nextProps.match.params.id - 0;
 		this.getArticleById(id);
 		this.getArticleCommentList(id);
 	};
 
 	render() {
-		const {title, content, updateTime, tagIds, categories, commentList} = this.state;
-		return <Spin wrapperClassName="article-spin" spinning={this.state.loading} delay={500}>
-			<div className="article-detail">
-				<div className="article-header">
-					<h1>{title}</h1>
-					<div className="article-msg">
-						{updateTime ? <Icon type="clock-circle" /> : null}&nbsp;{updateTime}
-						{tagIds.length ? <Tags type="tags" list={tagIds} /> : null}
-						{categories.length ? <Tags type="categories" list={categories} /> : null}
-					</div>
-				</div>
-				<div className="description" dangerouslySetInnerHTML={{ __html: content }} />
-				<div className="comments">
-					<Form.Item colon={false} label={<Avatar>汪</Avatar>} labelAlign={'left'} labelCol={{span: 1}} wrapperCol={{span: 23}}>
-						<TextArea rows={4} value={this.state.commentContent} onInput={e => this.setState({commentContent: e.target.value})} />
-					</Form.Item>
-					<Form.Item className="comment-confirm">
-						<Button
-							htmlType="submit"
-							onClick={this.createArticleComment}
-							type="primary">
-							Add Comment
-						</Button>
-					</Form.Item>
-					<List
-						dataSource={commentList}
-						itemLayout="horizontal"
-						renderItem={item => <Comment author={<span>{item.userName}&nbsp;&nbsp;{item.createTime}</span>} avatar={<Avatar>{item.userName}</Avatar>} content={item.content} />}/>
+		const {userInfo} = this.props;
+		const {title, content, updateTime, tagIds, categories, commentList, loading} = this.state;
+
+		return <div className="article-detail">
+			<Spin tip="Loading..." className="article-spin" size="large" spinning={loading}/>
+			<div className="article-header">
+				<h1>{title}</h1>
+				<div className="article-msg">
+					{updateTime ? <Icon type="clock-circle" /> : null}&nbsp;{updateTime}
+					{tagIds.length ? <Tags type="tags" list={tagIds} /> : null}
+					{categories.length ? <Tags type="categories" list={categories} /> : null}
 				</div>
 			</div>
-		</Spin>
+			<div className="description" dangerouslySetInnerHTML={{ __html: content }} />
+
+			{title ? <div className="comments">
+				<FormItem labelWidth={40}>
+					<div slot="label"><Avatar>{userInfo.username}</Avatar></div>
+					<TextArea rows={4} value={this.state.commentContent} onInput={e => this.setState({commentContent: e.target.value})} />
+				</FormItem>
+				<Form.Item className="comment-confirm">
+					<Button
+						htmlType="submit"
+						onClick={this.createArticleComment}
+						type="primary">
+						添加评论
+					</Button>
+				</Form.Item>
+				<List
+					dataSource={commentList}
+					itemLayout="horizontal"
+					renderItem={(item, index) => <Comment
+						actions={ userInfo.userId !== item.userId ? [
+							<span><Tooltip title="Like"><Icon type="like"/></Tooltip><span style={{ paddingLeft: 8, cursor: 'auto' }}>1</span></span>,
+							<span><Tooltip title="Dislike"><Icon type="dislike"/></Tooltip><span style={{ paddingLeft: 8, cursor: 'auto' }}>{1}</span></span>,
+							<span onClick={this.openReplyContainer.bind(this, index)}>{`${item.isReply ? '取消' : ''}回复`}</span>,
+						] : null}
+						author={<span>{item.userName}</span>}
+						avatar={<Avatar>{item.userName}</Avatar>}
+						datetime={
+							<Tooltip title={moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')}>
+								<span>{moment(item.createTime).fromNow()}</span>
+							</Tooltip>
+						}
+						content={item.content}>
+						{item.isReply ? <Fragment>
+							<FormItem key={item.id} labelWidth={0}>
+								<TextArea rows={4} value={this.state.commentContent} onInput={e => this.setState({commentContent: e.target.value})} />
+							</FormItem>
+							<p style={{textAlign: 'right', paddingRight: '10px'}}><Button htmlType="submit" type="primary">发布</Button></p>
+						</Fragment> : null}
+					</Comment>}/>
+			</div> : null}
+		</div>
 	}
 }
 export default ArticleDetail
