@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
+import {withRouter} from "react-router-dom";
 import {Divider, Icon, Spin} from 'antd';
 import {translateMarkdown} from '../../../../lib/utils'
 import './index.scss'
 import Tags from '../../compoents/base/tags'
+
+import {connect} from 'react-redux'
+import {getArticleList} from '../../../../redux/article/actions'
+
+@connect(state => ({articleList: state.article.articleList}), {getArticleList})
+@withRouter
 class Home extends Component {
 	state = {
 		articleList: [],
@@ -11,7 +18,7 @@ class Home extends Component {
 	};
 	async getArticleAllList() {
 		this.setState({loading: true});
-		let res = await this.$webApi.getArticleAllList();
+		let res = await this.props.getArticleList();
 		if (res.flags === 'success') {
 			let result = res.data;
 			this.setState({articleList: []});
@@ -44,7 +51,7 @@ class Home extends Component {
 						<div className="article-detail description" dangerouslySetInnerHTML={{ __html: item.description }} />
 						<div className="list-item-action">
 							<Icon type="message" style={{ marginRight: 7 }} />
-							{item.comments.length}
+							{item.comments}
 							<Tags type="tags" list={item.tagIds} />
 							<Tags type="categories" list={item.categories} />
 						</div>
