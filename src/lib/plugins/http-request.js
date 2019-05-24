@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { message } from 'antd'
+import {clearGlobalLocalData} from '../utils'
 const antdMessage = message;
 const BASE_URL = 'http://localhost:9000';
 
@@ -42,6 +43,7 @@ const getResult = res => {
       message
     };
   } else if (result && code === 900) {
+      clearGlobalLocalData();
 	  antdMessage.error('登录状态已失效,请重新登录');
       return {
           flags: 'fail',
