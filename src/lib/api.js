@@ -53,6 +53,9 @@ import {httpRequest} from './plugins/http-request';
 	 },
 	 createArticleComment(id, data) {
 		 return httpRequest(`/article/comment/${id}`, data, {method: 'post'})
+	 },
+	 createArticleCommentReply(id, data) {
+		 return httpRequest(`/article/reply/${id}`, data, {method: 'post'})
 	 }
  };
 export default webApi;
