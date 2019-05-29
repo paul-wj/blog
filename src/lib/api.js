@@ -54,8 +54,14 @@ import {httpRequest} from './plugins/http-request';
 	 createArticleComment(id, data) {
 		 return httpRequest(`/article/comment/${id}`, data, {method: 'post'})
 	 },
+	 deleteArticleComment(commentId) {
+		 return httpRequest(`/article/comment/${commentId}`, {}, {method: 'delete'})
+	 },
 	 createArticleCommentReply(id, data) {
 		 return httpRequest(`/article/reply/${id}`, data, {method: 'post'})
+	 },
+	 deleteArticleCommentReply(replyId) {
+		 return httpRequest(`/article/reply/${replyId}`, {}, {method: 'delete'})
 	 }
  };
 export default webApi;

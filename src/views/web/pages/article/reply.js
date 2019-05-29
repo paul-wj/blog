@@ -11,6 +11,7 @@ import moment from 'dayjs'
 moment.extend(relativeTime);
 
 const TextArea = Input.TextArea;
+let scrollTop = 0;
 
 @connect(state => ({
 	userInfo: state.user.userInfo
@@ -24,7 +25,30 @@ class ArticleReply extends Component{
 
 	state = {
 		replyContent: null,
-		replyToReplyContent: null
+		replyToReplyContent: null,
+		contentDom: null
+	};
+
+	componentDidMount() {
+		if (!this.contentDom) {
+			this.contentDom = document.getElementsByClassName('app-content-wrapper')[0];
+			this.contentDom.addEventListener("scroll", this.contentDomScrollFn);
+		}
+	}
+	componentWillUnmount() {
+		this.contentDom.removeEventListener("scroll", this.contentDomScrollFn);
+	}
+
+	componentDidUpdate() {
+		if (scrollTop !== this.contentDom.scrollTop) {
+			this.contentDom.scrollTop = scrollTop;
+		}
+	}
+
+	contentDomScrollFn = () => {
+		return !this.$lodash.throttle(() => {
+			scrollTop = this.contentDom.scrollTop;
+		}, 200)()
 	};
 
 	openReplyContainer = index => {
@@ -49,6 +73,17 @@ class ArticleReply extends Component{
 			getCommentList();
 		}
 	};
+
+	deleteArticleComment = async index => {
+		const {getCommentList, commentList} = this.props;
+		const currentComment = commentList[index];
+		let res = await this.$webApi.deleteArticleComment(currentComment.id);
+		if (res.flags === 'success') {
+			this.$toast.success('删除成功');
+			getCommentList();
+		}
+	};
+
 	openReplyToReplyContainer = (commentIndex, replyIndex) => {
 		const {updateCommentList, commentList} = this.props;
 		const currentComment = commentList[commentIndex];
@@ -71,6 +106,16 @@ class ArticleReply extends Component{
 		}
 	};
 
+	deleteArticleCommentReply = async (commentIndex, replyIndex) => {
+		const {getCommentList, commentList} = this.props;
+		const currentReply = commentList[commentIndex].reply.replyList[replyIndex];
+		let res = await this.$webApi.deleteArticleCommentReply(currentReply.id);
+		if (res.flags === 'success') {
+			this.$toast.success('删除成功');
+			getCommentList();
+		}
+	};
+
 	render() {
 		const {commentList, userInfo} = this.props;
 		return commentList && commentList.length ? <List
@@ -80,7 +125,9 @@ class ArticleReply extends Component{
 				actions={[
 					<span><Tooltip title="Like" onClick={this.createArticleCommentReply.bind(this, commentIndex, 10)}><Icon type="like"/></Tooltip><span style={{ paddingLeft: 8, cursor: 'auto' }}>{comment.reply.likes}</span></span>,
 					<span><Tooltip title="Dislike" onClick={this.createArticleCommentReply.bind(this, commentIndex, 20)}><Icon type="dislike"/></Tooltip><span style={{ paddingLeft: 8, cursor: 'auto' }}>{comment.reply.dislikes}</span></span>,
-					userInfo.userId !== comment.userId ? <span onClick={this.openReplyContainer.bind(this, commentIndex)}>{`${comment.isReply ? '取消' : ''}回复`}</span> : null,
+					userInfo.userId !== comment.userId ?
+						<span onClick={this.openReplyContainer.bind(this, commentIndex)}>{`${comment.isReply ? '取消' : ''}回复`}</span> :
+						<span onClick={this.deleteArticleComment.bind(this, commentIndex)}><Tooltip title="Delete"><Icon type="delete"/></Tooltip></span>
 				]}
 				author={<span>{comment.userName}</span>}
 				avatar={<Avatar>{comment.userName}</Avatar>}
@@ -103,9 +150,11 @@ class ArticleReply extends Component{
 					itemLayout="horizontal"
 					renderItem={(reply, replyIndex) => <Comment
 						actions={[
-							<span><Tooltip title="Like" onClick={this.createArticleReplyToReply.bind(this, commentIndex, replyIndex, 10)}><Icon type="like"/></Tooltip><span style={{ paddingLeft: 8, cursor: 'auto' }}>{1}</span></span>,
-							<span><Tooltip title="Dislike" onClick={this.createArticleReplyToReply.bind(this, commentIndex, replyIndex, 20)}><Icon type="dislike"/></Tooltip><span style={{ paddingLeft: 8, cursor: 'auto' }}>{1}</span></span>,
-							userInfo.userId !== reply.userId ? <span onClick={this.openReplyToReplyContainer.bind(this, commentIndex, replyIndex)}>{`${reply.isReply ? '取消' : ''}回复`}</span> : null,
+							<span><Tooltip title="Like" onClick={this.createArticleReplyToReply.bind(this, commentIndex, replyIndex, 10)}><Icon type="like"/></Tooltip><span style={{ paddingLeft: 8, cursor: 'auto' }}>{reply.likes}</span></span>,
+							<span><Tooltip title="Dislike" onClick={this.createArticleReplyToReply.bind(this, commentIndex, replyIndex, 20)}><Icon type="dislike"/></Tooltip><span style={{ paddingLeft: 8, cursor: 'auto' }}>{reply.dislikes}</span></span>,
+							userInfo.userId !== reply.userId ?
+								<span onClick={this.openReplyToReplyContainer.bind(this, commentIndex, replyIndex)}>{`${reply.isReply ? '取消' : ''}回复`}</span> :
+								<span onClick={this.deleteArticleCommentReply.bind(this, commentIndex, replyIndex)}><Tooltip title="Delete"><Icon type="delete"/></Tooltip></span>
 						]}
 						author={<span>{reply.userName}&nbsp;&nbsp;<i style={{color: '#666', fontStyle: 'normal'}}>回复</i>&nbsp;&nbsp;{reply.toUserName}</span>}
 						avatar={<Avatar>{reply.userName}</Avatar>}
