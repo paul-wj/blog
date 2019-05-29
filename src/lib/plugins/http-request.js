@@ -44,10 +44,10 @@ const getResult = res => {
     };
   } else if (result && code === 900) {
       clearGlobalLocalData();
-	  antdMessage.error('登录状态已失效,请重新登录');
+	  antdMessage.error(result.message);
       return {
           flags: 'fail',
-          message: '登录状态已失效,请重新登录',
+          message: result.message,
           code
       }
   }
