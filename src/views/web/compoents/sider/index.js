@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Card, Avatar, Row, Col, Tag} from 'antd';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import {getArticleList} from '../../../../redux/article/actions'
 
 import './index.scss'
 
@@ -10,7 +11,7 @@ import './index.scss'
 	categoryList: state.article.categoryList,
 	userInfo: state.user.userInfo,
 	articleList: state.article.articleList
-}))
+}), {getArticleList})
 
 @withRouter
 class AppSider extends Component{
@@ -21,6 +22,10 @@ class AppSider extends Component{
 			{label: '标签', value: 0}
 		]
 	};
+
+	componentDidMount() {
+		this.props.getArticleList();
+	}
 
 	componentWillReceiveProps(nextProps) {
 		const {tagList, categoryList, articleList} = nextProps;
@@ -33,6 +38,8 @@ class AppSider extends Component{
 	render() {
 		const {tagList, articleList} = this.props;
 		const {statisticsList} = this.state;
+		const lastArticleList = articleList.length > 5 ? articleList.filter((item, index) => index < 5) : articleList;
+
 		return <div className="app-sider">
 			<Card>
 				<p className="app-sider-title">
@@ -46,9 +53,9 @@ class AppSider extends Component{
 					<span className="app-sider-statistics__num">{statistics.value}</span><br/><span className="app-sider-statistics__name">{statistics.label}</span>
 					</Col>)}</Row>
 			</Card>
-			<Card title="文章" className="mt-10">
+			<Card title="最近文章" className="mt-10">
 				<ul className="recent-list">
-					{articleList ? articleList.map(recent => <li key={recent.id} onClick={e => {this.props.history.push(`/article/${recent.id}`)}}>{recent.title}</li>) : null}
+					{lastArticleList ? lastArticleList.map(recent => <li key={recent.id} onClick={e => {this.props.history.push(`/article/${recent.id}`)}}>{recent.title}</li>) : null}
 				</ul>
 			</Card>
 			<Card title="标签" className="mt-10">

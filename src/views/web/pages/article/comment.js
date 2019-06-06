@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {withRouter} from "react-router-dom";
 import { connect } from 'react-redux'
-import {Avatar, Button, Form, Input} from "antd";
+import {Avatar, Button, Form, Input, Icon} from "antd";
 
 import FormItem from '../../../admin/compoents/base/form-item'
 import ArticleReply from './reply'
@@ -66,7 +66,7 @@ class ArticleComment extends Component {
 		const {commentList} = this.state;
 		return articleTitle ? <div className="comments">
 			<FormItem labelWidth={40}>
-				<div slot="label"><Avatar>{userInfo.username}</Avatar></div>
+				<div slot="label">{userInfo.username ? <Avatar>{userInfo.username}</Avatar> : <Icon style={{fontSize: '32px', color: '#ccc'}} type="github" />}</div>
 				<TextArea rows={4} value={this.state.commentContent} onInput={e => this.setState({commentContent: e.target.value})} />
 			</FormItem>
 			<Form.Item className="comment-confirm">

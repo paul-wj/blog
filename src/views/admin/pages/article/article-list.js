@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import { withRouter, Link } from 'react-router-dom'
-import {Divider, Table, Tag, Popconfirm } from 'antd'
+import {Divider, Table, Tag, Popconfirm} from 'antd'
+import {connect} from 'react-redux'
 
+@connect(state => ({
+	tagList: state.article.tagList,
+	categoryList: state.article.categoryList
+}))
 @withRouter
 class ArticleList extends Component {
 	constructor(props){
@@ -10,8 +15,8 @@ class ArticleList extends Component {
 			tableColumns : [
 				{ title: 'id', dataIndex: 'id', align: 'center'},
 				{ title: '标题', dataIndex: 'title', align: 'center'},
-				{ title: '标签', dataIndex: 'tagIds', align: 'center', render: value => this.state.tagList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color={tag.color}>{tag.name}</Tag>)},
-				{ title: '目录', dataIndex: 'categories', align: 'center', render: value => this.state.categoryList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color="#2db7f5">{tag.name}</Tag>)},
+				{ title: '标签', dataIndex: 'tagIds', align: 'center', render: value => this.props.tagList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color={tag.color}>{tag.name}</Tag>)},
+				{ title: '目录', dataIndex: 'categories', align: 'center', render: value => this.props.categoryList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color="#2db7f5">{tag.name}</Tag>)},
 				{ title: '更新时间', dataIndex: 'updateTime', align: 'center'},
 				{ title: '创建时间', dataIndex: 'createTime', align: 'center'},
 				{ title: '操作', align: 'center',  key: 'action',
@@ -24,63 +29,69 @@ class ArticleList extends Component {
 					</div>)}],
 			tableData: [],
 			loading: false,
-			tagList: [],
-			categoryList: []
+			pagination: {
+				showSizeChanger: true,
+				total: 0,
+				defaultCurrent: 1,
+				pageSize: 10,
+				current: 1,
+				onChange: this.changePaginationCurrent,
+				onShowSizeChange: this.onShowSizeChange
+			},
+			limit: 10,
+			offset: 0,
 		}
 	}
-	getArticleAllList = async () => {
+
+	getArticlePageList = async () => {
+		const {limit, offset, pagination} = this.state;
 		this.setState({loading: true});
-		let res = await this.$webApi.getArticleAllList();
+		let res = await this.$webApi.getArticlePageList({limit, offset});
 		if (res.flags === 'success') {
 			let result = res.data;
-			this.setState({tableData: []});
-			if (result && result.length) {
-				this.setState({tableData: result})
+			this.setState({tableData: [], total: 0});
+			if (result) {
+				let items = result.items;
+				this.setState({tableData: items, pagination: Object.assign({}, pagination, {total: result.total})})
 			}
 		}
 		this.setState({loading: false});
-	};
-
-	getTagAllList = async () => {
-		let res = await this.$webApi.getTagAllList();
-		if (res.flags === 'success') {
-			let result = res.data;
-			this.setState({tagList: []});
-			if (result && result.length) {
-				this.setState({tagList: result})
-			}
-		}
-	};
-
-	getCategoryAllList = async () => {
-		let res = await this.$webApi.getCategoryAllList();
-		if (res.flags === 'success') {
-			let result = res.data;
-			this.setState({categoryList: []});
-			if (result && result.length) {
-				this.setState({categoryList: result})
-			}
-		}
 	};
 
 	deleteArticle = async id => {
 		let res = await this.$webApi.deleteArticle(id);
 		if (res.flags === 'success') {
 			this.$toast.success('删除成功');
-			this.getArticleAllList();
+			this.getArticlePageList();
 		}
 	};
 
+	onShowSizeChange =  async (current, pageSize) => {
+		const {pagination} = this.state;
+		await this.setState({
+			pagination: Object.assign({}, pagination, {current, pageSize}),
+			limit: pageSize * current,
+			offset: pageSize * (current - 1)});
+		this.getArticlePageList();
+	};
+
+	changePaginationCurrent = async (current, pageSize) => {
+		const {pagination} = this.state;
+		await this.setState({
+			pagination: Object.assign({}, pagination, {current}),
+			limit: pageSize * current,
+			offset: pageSize * (current - 1)});
+		this.getArticlePageList();
+	};
+
 	componentDidMount() {
-		this.getArticleAllList();
-		this.getTagAllList();
-		this.getCategoryAllList();
+		this.getArticlePageList();
 	}
 
 	render() {
-		const { tableColumns, tableData, loading } = this.state;
+		const { tableColumns, tableData, loading, pagination} = this.state;
 		return <div>
-			<Table rowKey={record => record.id} columns={tableColumns} dataSource={tableData} bordered={true} loading={loading} />
+			<Table rowKey={record => record.id} columns={tableColumns} pagination={pagination} dataSource={tableData} bordered={true} loading={loading} />
 		</div>
 	}
 }
