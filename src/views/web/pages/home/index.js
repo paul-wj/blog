@@ -18,6 +18,11 @@ class Home extends Component {
 		pageSize: 10,
 		defaultCurrent: 1
 	};
+
+	/**
+	 * 获取分页文章列表
+	 * @returns {Promise<void>}
+	 */
 	async getArticlePageList() {
 		const {limit, offset, title} = this.state;
 		this.setState({loading: true});
@@ -40,31 +45,53 @@ class Home extends Component {
 		this.setState({loading: false});
 	}
 
+	/**
+	 * 每页数量改执行方法
+	 * @param current
+	 * @param pageSize
+	 * @returns {Promise<void>}
+	 */
 	onShowSizeChange =  async (current, pageSize) => {
 		await this.setState({current, pageSize, limit: pageSize * current, offset: pageSize * (current - 1)});
 		this.getArticlePageList();
 	};
 
+	/**
+	 * 页码改变执行方法
+	 * @param current
+	 * @param pageSize
+	 * @returns {Promise<void>}
+	 */
 	changePaginationCurrent = async (current, pageSize) => {
 		await this.setState({current, limit: pageSize * current, offset: pageSize * (current - 1)});
 		this.getArticlePageList();
 	};
 
-	componentDidMount() {
+	/**
+	 * 获取url中的参数方法
+	 * @param search
+	 * @returns {Promise<void>}
+	 */
+	getKeyword = async search => {
+		if (search) {
+			const {pageSize} = this.state;
+			const {current, keyword} = decodeQuery(search);
+			await this.setState({current: current - 0, title: keyword, limit: pageSize * current, offset: pageSize * (current - 1)});
+		} else {
+			await this.setState({current: 1, title: null, limit: 10, offset: 0});
+		}
 		this.getArticlePageList();
+	};
+
+	componentDidMount() {
+		const {search} = this.props.location;
+		this.getKeyword(search);
 	}
 
 	componentWillReceiveProps = async nextProps => {
 		const {search} = nextProps.location;
 		if (search !== this.props.location.search) {
-			if (search) {
-				const {pageSize} = this.state;
-				const {current, keyword} = decodeQuery(search);
-				await this.setState({current: current - 0, title: keyword, limit: pageSize * current, offset: pageSize * (current - 1)});
-			} else {
-				await this.setState({current: 1, title: null, limit: 10, offset: 0});
-			}
-			this.getArticlePageList();
+			this.getKeyword(search);
 		}
 	};
 
