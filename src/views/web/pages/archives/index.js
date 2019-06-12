@@ -74,14 +74,14 @@ class Archives extends Component{
 					<Link to={`/article/${article.id}`}>{article.title}</Link>
 					</Timeline.Item>)}
 			</Timeline>
-			<div className="archives--pagination">
+			{total > pageSize ? (<div className="archives--pagination">
 				<Pagination
 					onChange={this.changePaginationCurrent}
 					current={current}
 					pageSize={pageSize}
 					defaultCurrent={defaultCurrent}
 					total={total}/>
-			</div>
+			</div>) : null}
 		</div>
 	}
 }
