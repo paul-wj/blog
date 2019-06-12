@@ -39,6 +39,9 @@ import {httpRequest} from './plugins/http-request';
 	 getArticlePageList(params) {
 		 return httpRequest(`/article/page`, {}, {method: 'get'}, params)
 	 },
+	 getArticleSimplePageList(params) {
+		 return httpRequest(`/article/page/simple`, {}, {method: 'get'}, params)
+	 },
 	 getArticleById(id) {
 		 return httpRequest(`/article/${id}`, {}, {method: 'get'})
 	 },
