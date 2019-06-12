@@ -6,7 +6,8 @@ export default [{
 	name: 'app',
 	component: WebLayout,
 	childRoutes: [
-		{ path: '', component: Home },
-		{ path: 'article/:id', component: ArticleDetail}
+		//type(10: 导航菜单， 20：普通页面)
+		{ path: '/', component: Home, type: 10, name: '首页'},
+		{ path: 'article/:id', component: ArticleDetail, type: 20}
 	]
 }]
