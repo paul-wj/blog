@@ -1,13 +1,9 @@
 .article-content{
-  position: relative;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
   padding-bottom: 50px;
   @include spanStyle(article-content-spin);
   .article-content__wrapper{
     height: 100%;
-    overflow-y: auto;
     padding-right: 3px;
     .article-content-list{
       position: relative;
@@ -52,10 +48,13 @@
     }
   }
   .article-content__pagination{
-    position: absolute;
     width: 100%;
-    bottom: 9px;
+    position: absolute;
+    bottom: 0;
     left: 0;
+    z-index: 1;
+    padding: 10px 15px;
     text-align: right;
+    background-color: #f3f6f7;
   }
 }
