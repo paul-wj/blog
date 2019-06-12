@@ -1,6 +1,7 @@
 import marked from 'marked'
 import hljs from 'highlight.js'
 import xss from 'xss'
+import dayJs from 'dayjs'
 import store from '../redux/index'
 // 转化 md 语法为 html
 export const translateMarkdown = plainText => {
@@ -37,4 +38,11 @@ export const clearGlobalLocalData = () => {
 		store.dispatch({ type: 'userInfo', payload: {userId: null, email: null, nick: null, username: null, token: null, avatarColor: null}});
 	}
 	localStorage.removeItem('authorization');
+};
+
+export const formatDate = (time, timeFormat = 'YYYY/MM/DD HH:mm') => {
+	if (!time) {
+		return ''
+	}
+	return dayJs(time).format(timeFormat);
 };
