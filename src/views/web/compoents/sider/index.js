@@ -55,7 +55,7 @@ class AppSider extends Component{
 			</Card>
 			<Card title="最近文章" className="mt-10">
 				<ul className="recent-list">
-					{lastArticleList ? lastArticleList.map(recent => <li key={recent.id} onClick={e => {this.props.history.push(`/article/${recent.id}`)}}>{recent.title}</li>) : null}
+					{lastArticleList ? lastArticleList.reverse().map(recent => <li key={recent.id} onClick={e => {this.props.history.push(`/article/${recent.id}`)}}>{recent.title}</li>) : null}
 				</ul>
 			</Card>
 			<Card title="标签" className="mt-10">

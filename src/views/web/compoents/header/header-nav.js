@@ -21,10 +21,10 @@ class HeaderNav extends Component {
 	render() {
 		const {navList, mode} = this.props;
 		return <Menu className="header-menu" selectedKeys={[this.props.location.pathname]} mode={mode}>
-			{navList.map(nav => <Menu.Item key={nav.link}>
-				<Link to={nav.link}>
+			{navList.map(nav => <Menu.Item key={nav.path}>
+				<Link to={nav.path}>
 					{nav.icon && <Icon type={nav.icon}/>}
-					<span>{nav.title}</span>
+					<span>{nav.name}</span>
 				</Link>
 			</Menu.Item>)}
 		</Menu>
