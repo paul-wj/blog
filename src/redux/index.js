@@ -11,7 +11,7 @@ import rootReducer from './reducer'
 
 let plugins = IS_PROD ? compose(applyMiddleware(thunk)) : compose(composeWithDevTools(applyMiddleware(thunk, logger)));
 
-const store = (initialState = getReduxStoreStorage()) => {
+const store = ((initialState = getReduxStoreStorage()) => {
 	const store = createStore(rootReducer, initialState, plugins);
 	if (module.hot && !IS_PROD) {
 		console.log('replacing reducer...');
@@ -26,6 +26,6 @@ const store = (initialState = getReduxStoreStorage()) => {
 	// //全局监听redux变量更新
 	// syncStoreDataToWebStorage(store);
 	return store
-};
+})();
 
-export default store()
+export default store
