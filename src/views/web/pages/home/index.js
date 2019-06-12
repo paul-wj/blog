@@ -37,7 +37,6 @@ class Home extends Component {
 						let index = item.content.indexOf('<!--more-->');
 						item.description = translateMarkdown(item.content.slice(0, index))
 					});
-					items.reverse();
 				}
 				this.setState({articleList: items, total: result.total})
 			}
