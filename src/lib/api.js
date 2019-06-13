@@ -9,6 +9,9 @@ import {httpRequest} from './plugins/http-request';
 	 updateUser(id, data) {
 		 return httpRequest(`/user/${id}`, data, {method: 'patch'})
 	 },
+	 checkUserAuth() {
+		 return httpRequest(`/user/check-auth`, {}, {method: 'get'})
+	 },
 	 getTagAllList(context) {
 		 return httpRequest(`/tag`, {}, {method: 'get'}, {}, context)
 	 },

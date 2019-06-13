@@ -8,8 +8,12 @@ import './static/scss/index.scss'
 @withRouter
 class App extends Component {
 	componentDidMount() {
+		const token = localStorage.getItem('authorization');
 		this.props.getTags();
 		this.props.getCategories();
+		if (token) {
+			this.$webApi.checkUserAuth();
+		}
 	}
 
 
