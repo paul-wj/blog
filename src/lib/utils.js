@@ -46,3 +46,10 @@ export const formatDate = (time, timeFormat = 'YYYY/MM/DD HH:mm') => {
 	}
 	return dayJs(time).format(timeFormat);
 };
+
+export const firstLetterUppercase = (val) => {
+	if (!val) {
+		return ''
+	}
+	return val.substring(0, 1).toUpperCase() + val.substring(1);
+};
