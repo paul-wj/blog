@@ -76,6 +76,11 @@
     }
   }
 }
+@media only screen and (max-width: 750px){
+  .header-search{
+    display: none;
+  }
+}
 @media only screen and (max-width: 576px) {
   .header-left .nav-phone-icon {
     display: block;
