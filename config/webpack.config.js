@@ -117,7 +117,7 @@ module.exports = function(webpackEnv) {
 		  loaders.push({
 			  loader: require.resolve('sass-resources-loader'),
 			  options: {
-				  resources: path.resolve(__dirname, '../src/static/scss/index.scss')
+				  resources: path.resolve(__dirname, '../src/static/scss/mixin/index.scss')
 			  }
 		  });
 	  }

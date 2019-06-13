@@ -3,7 +3,6 @@ import routes from './router/router'
 import { BrowserRouter, Route, Switch, withRouter} from "react-router-dom";
 import { connect } from 'react-redux'
 import { getTags, getCategories } from './redux/article/actions'
-import './static/scss/index.scss'
 @connect(state => state,{ getTags, getCategories })
 @withRouter
 class App extends Component {
