@@ -20,7 +20,7 @@
     text-align: center;
     .app-sider-statistics__num{
       font-size: 18px;
-      color: #505050;
+      line-height: 24px;
     }
     .app-sider-statistics__name{
       color: rgba(71, 80, 91, 0.7);
@@ -30,8 +30,11 @@
   }
 }
 .recent-list{
-  color: #2db7f5;
+  color: #8590a6;
   cursor: pointer;
+  li:hover{
+    color: #2db7f5;
+  }
 }
 .app-sider-tag{
   line-height: 30px;

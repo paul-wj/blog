@@ -17,7 +17,7 @@ import './index.scss'
 class AppSider extends Component{
 	state = {
 		statisticsList: [
-			{label: '文章', value: 0},
+			{label: '文章', value: 0, path: '/'},
 			{label: '目录', value: 0},
 			{label: '标签', value: 0}
 		]
@@ -55,12 +55,12 @@ class AppSider extends Component{
 			</Card>
 			<Card title="最近文章" className="mt-10">
 				<ul className="recent-list">
-					{lastArticleList ? lastArticleList.reverse().map(recent => <li key={recent.id} onClick={e => {this.props.history.push(`/article/${recent.id}`)}}>{recent.title}</li>) : null}
+					{lastArticleList ? lastArticleList.map(recent => <li key={recent.id} onClick={e => {this.props.history.push(`/article/${recent.id}`)}}>{recent.title}</li>) : null}
 				</ul>
 			</Card>
 			<Card title="标签" className="mt-10">
 				<div className="app-sider-tag">
-					{tagList.map(tag => <Tag key={tag.id} color={tag.color}>{tag.name}</Tag>)}
+					{tagList.map(tag => <Tag  onClick={e => {this.props.history.push(`/tag/${tag.id}`)}} key={tag.id} color={tag.color}>{tag.name}</Tag>)}
 				</div>
 			</Card>
 		</div>
