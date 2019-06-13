@@ -48,6 +48,12 @@ import {httpRequest} from './plugins/http-request';
 	 getArticleById(id) {
 		 return httpRequest(`/article/${id}`, {}, {method: 'get'})
 	 },
+	 getArticlePageListByCategoryId(id, params) {
+		 return httpRequest(`/article/category/${id}`, {}, {method: 'get'}, params)
+	 },
+	 getArticlePageListByTagId(id, params) {
+		 return httpRequest(`/article/tag/${id}`, {}, {method: 'get'}, params)
+	 },
 	 editArticle(id, data) {
 		 return httpRequest(`/article/${id}`, data, {method: 'patch'})
 	 },
