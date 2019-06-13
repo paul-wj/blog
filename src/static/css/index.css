@@ -24,3 +24,6 @@ code {
   padding: 0;
   outline: none;
 }
+.fr{
+  float: right;
+}
