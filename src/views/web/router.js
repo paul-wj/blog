@@ -5,6 +5,7 @@ import Archives from './pages/archives'
 import Categories from './pages/categories'
 import CategoryDetail from './common/list/index'
 import TagDetail from  './common/list/index'
+import Statistics from './pages/statistics'
 export default [{
 	path: '/',
 	name: 'app',
@@ -14,6 +15,7 @@ export default [{
 		{ path: '/', component: Home, type: 10, name: '首页'},
 		{ path: '/archives', component: Archives, type: 10, name: '归档'},
 		{ path: '/categories', component: Categories, type: 10, name: '目录'},
+		{ path: '/statistics', component: Statistics, type: 10, name: '统计'},
 		{ path: 'article/:id', component: ArticleDetail, type: 20},
 		{ path: 'category/:id', component: CategoryDetail, type: 20},
 		{ path: 'tag/:id', component: TagDetail, type: 20}
