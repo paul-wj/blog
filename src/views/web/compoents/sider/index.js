@@ -3,7 +3,6 @@ import {Card, Avatar, Row, Col, Tag} from 'antd';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {getArticleList} from '../../../../redux/article/actions'
-
 import './index.scss'
 
 @connect(state => ({
@@ -39,7 +38,6 @@ class AppSider extends Component{
 		const {tagList, articleList} = this.props;
 		const {statisticsList} = this.state;
 		const lastArticleList = articleList.length > 5 ? articleList.filter((item, index) => index < 5) : articleList;
-
 		return <div className="app-sider">
 			<Card>
 				<p className="app-sider-title">

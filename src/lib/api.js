@@ -77,6 +77,9 @@ import {httpRequest} from './plugins/http-request';
 	 },
 	 deleteArticleCommentReply(replyId) {
 		 return httpRequest(`/article/reply/${replyId}`, {}, {method: 'delete'})
+	 },
+	 getStatisticsForArticle() {
+		 return httpRequest(`/statistics/article`, {}, {method: 'get'})
 	 }
  };
 export default webApi;
