@@ -8,7 +8,7 @@ export default [{
 	path: 'admin',
 	component: adminLayout,
 	childRoutes: [
-		{ path: '', name: '首页', component: adminIndex },
+		{ path: '', name: '首页', component: adminIndex, icon: 'home' },
 		{
 			path: 'article', name: '文章管理', icon: 'read',
 			childRoutes: [
