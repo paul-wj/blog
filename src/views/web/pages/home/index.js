@@ -102,7 +102,7 @@ class Home extends Component {
 				<ul className="article-content__wrapper">
 					{articleList.map((item, index) => (<li key={index} className="article-content-list" onClick={e => {this.props.history.push(`/article/${item.id}`)}}>
 						<Divider orientation="left">
-							<span className="title">{item.title}</span>
+							<span title={item.title} className="title">{item.title}</span>
 							<span className="create-time">{item.updateTime}</span>
 						</Divider>
 						<div className="article-detail description" dangerouslySetInnerHTML={{ __html: item.description }} />

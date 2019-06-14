@@ -38,6 +38,7 @@
         padding-left: 20px;
       }
       .list-item-action {
+        line-height: 26px;
         vertical-align: middle;
         margin-top: 10px;
         color: rgba(0, 0, 0, 0.45);
@@ -58,3 +59,11 @@
     background-color: #f3f6f7;
   }
 }
+@media screen and (max-width: 736px){
+  .ant-divider-inner-text {
+    max-width: calc(100vw - 77px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
