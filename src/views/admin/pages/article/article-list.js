@@ -15,8 +15,8 @@ class ArticleList extends Component {
 			tableColumns : [
 				{ title: 'id', dataIndex: 'id', align: 'center'},
 				{ title: '标题', dataIndex: 'title', align: 'center'},
-				{ title: '标签', dataIndex: 'tagIds', align: 'center', render: value => this.props.tagList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color={tag.color}>{tag.name}</Tag>)},
-				{ title: '目录', dataIndex: 'categories', align: 'center', render: value => this.props.categoryList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color="#2db7f5">{tag.name}</Tag>)},
+				{ title: '标签', dataIndex: 'tagIds', align: 'center', render: value => <div style={{lineHeight: '24px'}}>{this.props.tagList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color={tag.color}>{tag.name}</Tag>)}</div>},
+				{ title: '目录', dataIndex: 'categories', align: 'center', render: value => <div style={{lineHeight: '24px'}}>{this.props.categoryList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color="#2db7f5">{tag.name}</Tag>)}</div>},
 				{ title: '更新时间', dataIndex: 'updateTime', align: 'center'},
 				{ title: '创建时间', dataIndex: 'createTime', align: 'center'},
 				{ title: '操作', align: 'center',  key: 'action',
