@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
 import { withRouter } from "react-router-dom";
 import adminRoutes from '../../router'
+import { connect } from 'react-redux'
+import {setOpenKes, setSelectedKeys} from '../../../../redux/admin/actions'
 import './index.scss'
 
 import {Icon, Layout, Menu} from "antd";
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
+
+@connect(state => ({
+	collapsed: state.admin.collapsed,
+	openKeys: state.admin.openKeys,
+	selectedKeys: state.admin.selectedKeys
+}), {setOpenKes, setSelectedKeys})
 @withRouter
 class adminSider extends Component {
 	state = {
@@ -35,6 +43,14 @@ class adminSider extends Component {
 				<SubMenu key={menu.path} title={<span>{menu.icon ? <Icon type={menu.icon}/> : null}<span>{menu.name}</span></span>}>{this.createMenuComponent(menu.childRoutes)}</SubMenu> :
 				<Menu.Item onClick={() => {this.props.history.push(menu.path)}} key={menu.path}>{menu.icon ? <Icon type={menu.icon} /> : null}<span>{menu.name}</span></Menu.Item>)));
 
+	menuOpenChange = (openKeys) => {
+		this.props.setOpenKes(openKeys)
+	};
+
+	menuSelect = ({selectedKeys}) => {
+		this.props.setSelectedKeys(selectedKeys)
+	};
+
 	componentWillMount() {
 		let menuList = this.getMenuList();
 		this.setState({
@@ -42,23 +58,25 @@ class adminSider extends Component {
 		})
 	}
 	render() {
+		const { collapsed, openKeys, selectedKeys } = this.props;
 		let { menuList } = this.state;
 		return <Sider
 			className="admin-sider"
 			trigger={null}
 			collapsible
-			collapsed={this.state.collapsed}
-		>
-			<div className="admin-msg">
-				<Icon className="admin-logo" type="wechat" style={{color: '#52c41a', fontSize: '24px'}}/>
-				博客管理系统
+			collapsed={collapsed}>
+			<div className={`admin-msg ${collapsed ? 'admin-msg__center' : ''}`}>
+				<Icon className="admin-logo" type="wechat" style={{color: '#52c41a', fontSize: '16px'}}/>
+				{collapsed ? '' : '博客管理系统'}
 			</div>
 			<Menu
-				defaultSelectedKeys={[this.props.location.pathname]}
-				defaultOpenKeys={['sub1']}
+				onOpenChange={this.menuOpenChange}
+				onSelect={this.menuSelect}
+				defaultOpenKeys={openKeys}
+				defaultSelectedKeys={selectedKeys}
 				mode="inline"
 				theme="dark"
-				inlineCollapsed={this.state.collapsed}>
+				inlineCollapsed={collapsed}>
 				{menuList.length ? this.createMenuComponent(menuList) : null}
 			</Menu>
 		</Sider>;
