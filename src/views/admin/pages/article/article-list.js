@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import { withRouter, Link } from 'react-router-dom'
 import {Divider, Table, Tag, Popconfirm} from 'antd'
 import {connect} from 'react-redux'
-
+import {getArticleList} from '../../../../redux/article/actions'
 @connect(state => ({
 	tagList: state.article.tagList,
 	categoryList: state.article.categoryList
-}))
+}), {getArticleList})
 @withRouter
 class ArticleList extends Component {
 	constructor(props){
@@ -46,7 +46,8 @@ class ArticleList extends Component {
 	getArticlePageList = async () => {
 		const {limit, offset, pagination} = this.state;
 		this.setState({loading: true});
-		let res = await this.$webApi.getArticlePageList({limit, offset});
+		this.props.getArticleList();
+		let res = await this.$webApi.getArticleSimplePageList({limit, offset});
 		if (res.flags === 'success') {
 			let result = res.data;
 			this.setState({tableData: [], total: 0});
@@ -91,7 +92,7 @@ class ArticleList extends Component {
 	render() {
 		const { tableColumns, tableData, loading, pagination} = this.state;
 		return <div>
-			<Table rowKey={record => record.id} columns={tableColumns} pagination={pagination} dataSource={tableData} bordered={true} loading={loading} />
+			<Table rowKey={record => record.id} columns={tableColumns} pagination={pagination} dataSource={tableData} bordered={true} loading={loading}  scroll={{y: 600 }}/>
 		</div>
 	}
 }

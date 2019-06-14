@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import {Divider, Table, Drawer, Button, Input, Popconfirm } from 'antd'
 import FormItem from '../../compoents/base/form-item'
+import {getRandomColor} from '../../../../lib/utils'
+import { connect } from 'react-redux'
+import {getTags} from '../../../../redux/article/actions'
+
+@connect(state => ({}), {getTags})
 class TagList extends Component {
 	constructor(props){
 		super(props);
@@ -32,7 +37,7 @@ class TagList extends Component {
 	}
 	getTagAllList = async () => {
 		this.setState({loading: true});
-		let res = await this.$webApi.getTagAllList();
+		let res = await this.props.getTags();
 		if (res.flags === 'success') {
 			let result = res.data;
 			this.setState({tableData: []});
@@ -68,6 +73,7 @@ class TagList extends Component {
 		}
 	};
 	openDrawer = () => {
+
 		this.setState({visible: true,});
 	};
 	closeDrawer = () => {
@@ -89,6 +95,13 @@ class TagList extends Component {
 		this.createTag();
 	};
 
+	showCreateDrawer = () => {
+		this.setState({
+			requestParams: Object.assign({}, this.state.requestParams, {color: getRandomColor()})
+		});
+		this.openDrawer()
+	};
+
 	showEditDrawer = (e, row) => {
 		e.preventDefault();
 		let {id, name, color} = row;
@@ -105,7 +118,7 @@ class TagList extends Component {
 	render() {
 		const { tableColumns, tableData, loading, visible, requestParams } = this.state;
 		return <div>
-			<p><Button onClick={this.openDrawer} type="primary">新增标签</Button></p>
+			<p><Button onClick={this.showCreateDrawer} type="primary">新增标签</Button></p>
 			<Table rowKey={record => record.id} columns={tableColumns} dataSource={tableData} bordered={true} loading={loading} />
 			<Drawer
 				title={`${requestParams.id ? '编辑' : '新增'}标签`}

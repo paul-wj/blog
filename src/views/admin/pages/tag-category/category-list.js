@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {Divider, Table, Drawer, Button, Input, Popconfirm } from 'antd'
 import FormItem from '../../compoents/base/form-item'
+import { connect } from 'react-redux'
+import {getCategories} from '../../../../redux/article/actions'
 
-
+@connect(state => ({}), {getCategories})
 class CategoryList extends Component {
 	constructor(props){
 		super(props);
@@ -31,7 +33,7 @@ class CategoryList extends Component {
 	}
 	getCategoryAllList = async () => {
 		this.setState({loading: true});
-		let res = await this.$webApi.getCategoryAllList();
+		let res = await this.props.getCategories();
 		if (res.flags === 'success') {
 			let result = res.data;
 			this.setState({tableData: []});
