@@ -80,6 +80,12 @@ import {httpRequest} from './plugins/http-request';
 	 },
 	 getStatisticsForArticle() {
 		 return httpRequest(`/statistics/article`, {}, {method: 'get'})
+	 },
+	 getStatisticsForComment() {
+		 return httpRequest(`/statistics/comment`, {}, {method: 'get'})
+	 },
+	 getStatisticsForReply() {
+		 return httpRequest(`/statistics/reply`, {}, {method: 'get'})
 	 }
  };
 export default webApi;

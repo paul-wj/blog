@@ -3,7 +3,6 @@ import { message } from 'antd'
 import {clearGlobalLocalData} from '../utils'
 const antdMessage = message;
 const BASE_URL = process.env.BASE_API_URL;
-console.log(BASE_URL)
 
 const getResult = res => {
   let authorization = window.localStorage.getItem("authorization") || '';
