@@ -511,6 +511,10 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
+	    // http://vuejs.github.io/vue-loader/en/workflow/production.html
+	    new webpack.DefinePlugin({
+		    'process.env': require('./process.env.conf')[process.env.env_config]
+	    }),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
