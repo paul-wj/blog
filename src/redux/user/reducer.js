@@ -6,7 +6,8 @@ const defaultState = {
 		username: null,
 		nick: null,
 		token: null,
-		avatarColor: null
+		avatarColor: null,
+		profilePicture: null
 	}
 };
 export const userReducer = (state = {...defaultState}, {type, payload}) => changeState(state, [type, payload]);

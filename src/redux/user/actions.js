@@ -8,8 +8,8 @@ export const login =  params => {
 		if (res.flags === 'success') {
 			message.success('登录成功');
 			localStorage.setItem('authorization', result.token);
-			const {email, username, nick, token} = result;
-			dispatch({ type: 'userInfo', payload: {email, username, nick, token, userId: result.id, avatarColor: getRandomColor()}})
+			const {email, username, nick, token, profilePicture} = result;
+			dispatch({ type: 'userInfo', payload: {email, username, nick, profilePicture, token, userId: result.id, avatarColor: getRandomColor()}})
 		}
 		return res;
 	}
@@ -31,8 +31,8 @@ export const editUser = (id, params) => {
 			let result = res.data;
 			message.success('修改成功');
 			localStorage.setItem('authorization', result.token);
-			const {email, username, nick, token} = result;
-			dispatch({ type: 'userInfo', payload: {email, username, nick, token, userId: result.id, avatarColor: getRandomColor()}})
+			const {email, username, nick, token, profilePicture} = result;
+			dispatch({ type: 'userInfo', payload: {email, username, nick, profilePicture, token, userId: result.id, avatarColor: getRandomColor()}})
 		}
 		return res;
 	}

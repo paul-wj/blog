@@ -1,10 +1,20 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
-import {Modal, Form, Input, Checkbox} from 'antd'
+import {Modal, Form, Input, Checkbox, Upload, Icon} from 'antd'
 
 import {connect} from 'react-redux'
 import {openAuthModal, closeAuthModal} from '../../../../redux/common/actions'
 import {login, register, editUser} from "../../../../redux/user/actions";
+
+
+function getBase64(file) {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = () => resolve(reader.result);
+		reader.onerror = error => reject(error);
+	});
+}
 
 const CollectionCreateForm = Form.create({
 	onFieldsChange(props, changedFields) {
@@ -40,12 +50,12 @@ const CollectionCreateForm = Form.create({
 
 const authTypeMap = {
 	login: { title: '用户登录', formKeys: ['email', 'password']},
-	register: {title: '用户注册', formKeys: ['email', 'username', 'password', 'confirm']},
-	editUser: {title: '修改用户信息', formKeys: ['email', 'username', 'oldPassword', 'password', 'confirm']}
+	register: {title: '用户注册', formKeys: ['email', 'username', 'password', 'confirm', 'profilePicture']},
+	editUser: {title: '修改用户信息', formKeys: ['email', 'username', 'oldPassword', 'password', 'confirm', 'profilePicture']}
 };
 
 const checkboxOptions = [
-	{ label: '用户名', value: 'username' }, { label: '密码', value: 'password' }
+	{ label: '用户名', value: 'username' }, { label: '密码', value: 'password' }, {label: '用户头像', value: 'profilePicture'}
 ];
 
 @connect(state => ({
@@ -77,18 +87,29 @@ class AuthModal extends Component {
 				value: ''
 			}
 		},
-		checkboxValues: ['username']
+		checkboxValues: ['username'],
+		previewVisible: false,
+		previewImage: '',
+		fileList: []
 	};
 
 	componentWillReceiveProps(nextProps) {
-		const {fields} = this.state;
+		const {fields, fileList} = this.state;
 		const {userInfo} = nextProps;
 		//修改用户信息时塞入用户数据
 		if (userInfo.userId) {
-			this.setState({fields: Object.assign({}, fields, {
+			this.setState({
+				fields: Object.assign({}, fields, {
 					email: {value: userInfo.email},
 					username: {value: userInfo.username}
-				})})
+				}),
+				fileList: userInfo.profilePicture ? [{
+					uid: '-1',
+					name: userInfo.profilePicture.split('/')[4],
+					status: 'done',
+					url: userInfo.profilePicture,
+				}] : fileList
+			})
 		}
 	}
 
@@ -113,21 +134,23 @@ class AuthModal extends Component {
 
 	handleCreate = () => {
 		const {authModalType, userInfo} = this.props;
+		const {fileList, checkboxValues} = this.state;
 		const form = this.formRef;
 		form.validateFields(async (err, values) => {
 			if (err) {
 				return;
 			}
+			const profilePicture = fileList.length ? fileList[0].response.result : null;
 			// console.log('Received values of form: ', values);
 			if (['login', 'register'].includes(authModalType)) {
 				const {email, username, password} = values;
-				const res = await this.props[authModalType](authModalType === 'login' ? {email, password} : {email, password, username});
+				const res = await this.props[authModalType](authModalType === 'login' ? {email, password} : {email, password, username, profilePicture});
 				if (res.flags === 'success') {
 					this.closeModel()
 				}
 			} else {
 				const {email, username, password, oldPassword} = values;
-				const res = await this.props[authModalType](userInfo.userId, {email, username, password, oldPassword});
+				const res = await this.props[authModalType](userInfo.userId, {email, username, password, oldPassword, profilePicture: checkboxValues.includes('profilePicture') ? profilePicture : null});
 				if (res.flags === 'success') {
 					this.closeModel()
 				}
@@ -140,10 +163,15 @@ class AuthModal extends Component {
 		const form = this.formRef;
 		this.props.closeAuthModal();
 		form.resetFields();
-		this.setState({fields: Object.keys(fields).reduce((startValue, nextKey) => {
+		this.setState({
+			fields: Object.keys(fields).reduce((startValue, nextKey) => {
 				startValue[nextKey] = {value: ''};
 				return startValue
-			}, {})})
+			}, {}),
+			previewVisible: false,
+			previewImage: '',
+			fileList: []
+		})
 	};
 
 	handleFormChange = changedFields => {
@@ -152,9 +180,37 @@ class AuthModal extends Component {
 		}));
 	};
 
+	handleCancel = () => this.setState({ previewVisible: false });
+
+	handlePreview = async file => {
+		if (!file.url && !file.preview) {
+			file.preview = await getBase64(file.originFileObj);
+		}
+		this.setState({
+			previewImage: file.url || file.preview,
+			previewVisible: true,
+		});
+	};
+
+	handleChange = ({ fileList }) => {
+		if (fileList && fileList.length) {
+			const {response} = fileList[0];
+			if (response && response.code === 0) {
+				this.$toast.success(response.message);
+			}
+		}
+		this.setState({ fileList });
+	};
+
 	render() {
-		const { fields, checkboxValues } = this.state;
+		const { fields, checkboxValues, previewVisible, previewImage, fileList } = this.state;
 		const { authModalVisible, authModalType, userInfo } = this.props;
+		const uploadButton = (
+			<div>
+				<Icon type="plus" />
+				<div className="ant-upload-text">Upload</div>
+			</div>
+		);
 		const formList = [
 			{
 				key: 'email',
@@ -193,14 +249,35 @@ class AuthModal extends Component {
 					{ required: true, message: 'Please confirm your password!' },
 					{ validator: this.compareToFirstPassword}
 				]
+			},
+			{
+				key: 'profilePicture',
+				label: '用户头像',
+				el: <div>
+					<Upload
+						action={`${process.env.BASE_API_URL}/upload`}
+						listType="picture-card"
+						fileList={fileList}
+						onPreview={this.handlePreview}
+						onChange={this.handleChange}>
+						{fileList.length >= 1 ? null : uploadButton}
+					</Upload>
+					<Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+						<img alt="example" style={{ width: '100%' }} src={previewImage} />
+					</Modal>
+				</div>
 			}
 		];
 		let formKeys = authModalType ? authTypeMap[authModalType].formKeys : [];
 		const currentFormList = formList.filter(item => {
-			if (authModalType === 'editUser' && checkboxValues.length === 1) {
-				formKeys = checkboxValues.includes('password') ?
-					formKeys.filter(key => !['username'].includes(key)) :
-					formKeys.filter(key => !['oldPassword', 'confirm'].includes(key));
+			const checkboxValuesMap = {
+				password: ['email', 'oldPassword', 'confirm'],
+				username: ['email', 'username', 'password'],
+				profilePicture: ['email', 'password', 'profilePicture']
+			};
+			if (authModalType === 'editUser' && checkboxValues.length < 3) {
+				const checkboxValuesResults = Array.from(new Set(checkboxValues.reduce((startValue, nextKey) => [...startValue, ...checkboxValuesMap[nextKey]], [])));
+				formKeys = formKeys.filter(key => checkboxValuesResults.includes(key));
 			}
 			return formKeys.includes(item.key)
 		});
