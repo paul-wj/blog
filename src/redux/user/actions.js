@@ -45,5 +45,18 @@ export const logout = () => {
 	}
 };
 
+export const checkUserAuth = () => {
+	return async dispatch => {
+		const res = await webApi.checkUserAuth();
+		if (res.flags === 'success') {
+			let result = res.data;
+			localStorage.setItem('authorization', result.token);
+			const {email, username, nick, token, profilePicture} = result;
+			dispatch({ type: 'userInfo', payload: {email, username, nick, profilePicture, token, userId: result.id, avatarColor: getRandomColor()}})
+		}
+		return res;
+	}
+};
+
 
 

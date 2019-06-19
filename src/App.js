@@ -3,7 +3,9 @@ import routes from './router/router'
 import { BrowserRouter, Route, Switch, withRouter} from "react-router-dom";
 import { connect } from 'react-redux'
 import { getTags, getCategories } from './redux/article/actions'
-@connect(state => state,{ getTags, getCategories })
+import { checkUserAuth } from "./redux/user/actions";
+
+@connect(state => state,{ getTags, getCategories, checkUserAuth })
 @withRouter
 class App extends Component {
 	componentDidMount() {
@@ -11,7 +13,7 @@ class App extends Component {
 		this.props.getTags();
 		this.props.getCategories();
 		if (token) {
-			this.$webApi.checkUserAuth();
+			this.props.checkUserAuth();
 		}
 	}
 
