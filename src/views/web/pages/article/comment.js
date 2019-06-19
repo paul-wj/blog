@@ -63,10 +63,16 @@ class ArticleComment extends Component {
 
 	render() {
 		const {articleTitle, userInfo} = this.props;
+		const {userId, profilePicture} = userInfo;
 		const {commentList} = this.state;
 		return articleTitle ? <div className="comments">
 			<FormItem labelWidth={40}>
-				<div slot="label">{userInfo.username ? <Avatar>{userInfo.username}</Avatar> : <Icon style={{fontSize: '32px', color: '#ccc'}} type="github" />}</div>
+				<div slot="label">{
+					userId ?
+						(profilePicture ?
+							<Avatar src={profilePicture}/> :
+							<Avatar style={{backgroundColor: userInfo.avatarColor}}>{userInfo.username}</Avatar>)
+						: <Icon style={{fontSize: '32px', color: '#ccc'}} type="github" />}</div>
 				<TextArea rows={4} value={this.state.commentContent} onInput={e => this.setState({commentContent: e.target.value})} />
 			</FormItem>
 			<Form.Item className="comment-confirm">

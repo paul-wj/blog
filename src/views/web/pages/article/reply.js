@@ -130,7 +130,7 @@ class ArticleReply extends Component{
 						<span onClick={this.deleteArticleComment.bind(this, commentIndex)}><Tooltip title="Delete"><Icon type="delete"/></Tooltip></span>
 				]}
 				author={<span>{comment.userName}</span>}
-				avatar={<Avatar>{comment.userName}</Avatar>}
+				avatar={comment.userProfilePicture ? <Avatar src={comment.userProfilePicture}/> : <Avatar>{comment.userName}</Avatar>}
 				datetime={
 					<Tooltip title={moment(comment.createTime).format('YYYY-MM-DD HH:mm:ss')}>
 						<span>{moment(comment.createTime).fromNow()}</span>
@@ -157,7 +157,7 @@ class ArticleReply extends Component{
 								<span onClick={this.deleteArticleCommentReply.bind(this, commentIndex, replyIndex)}><Tooltip title="Delete"><Icon type="delete"/></Tooltip></span>
 						]}
 						author={<span>{reply.userName}&nbsp;&nbsp;<i style={{color: '#666', fontStyle: 'normal'}}>回复</i>&nbsp;&nbsp;{reply.toUserName}</span>}
-						avatar={<Avatar>{reply.userName}</Avatar>}
+						avatar={reply.userProfilePicture ? <Avatar src={reply.userProfilePicture}/> : <Avatar>{reply.userName}</Avatar>}
 						datetime={
 							<Tooltip title={moment(reply.createTime).format('YYYY-MM-DD HH:mm:ss')}>
 								<span>{moment(reply.createTime).fromNow()}</span>
