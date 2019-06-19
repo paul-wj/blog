@@ -34,8 +34,7 @@ class Home extends Component {
 				let items = result.items;
 				if (items && items.length) {
 					items.forEach(item => {
-						let index = item.content.indexOf('<!--more-->');
-						item.description = translateMarkdown(item.content.slice(0, index))
+						item.description = translateMarkdown(item.content)
 					});
 				}
 				this.setState({articleList: items, total: result.total})
