@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 import { connect } from 'react-redux'
 import {Avatar, Button, Comment, Icon, Input, List, Tooltip} from "antd";
 
-import FormItem from "../../../admin/compoents/base/form-item";
+import FormItem from "../../../admin/components/base/form-item";
 
 import relativeTime from 'dayjs/plugin/relativeTime'
 import moment from 'dayjs'

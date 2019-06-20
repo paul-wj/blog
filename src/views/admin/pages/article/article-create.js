@@ -5,7 +5,7 @@ import SimpleMDE from 'simplemde'
 import { translateMarkdown } from '../../../../lib/utils'
 import 'simplemde/dist/simplemde.min.css'
 import './index.scss'
-import FormItem from '../../compoents/base/form-item'
+import FormItem from '../../components/base/form-item'
 
 const Option = Select.Option;
 @withRouter

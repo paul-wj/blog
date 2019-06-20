@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 import { connect } from 'react-redux'
 import {Avatar, Button, Form, Input, Icon} from "antd";
 
-import FormItem from '../../../admin/compoents/base/form-item'
+import FormItem from '../../../admin/components/base/form-item'
 import ArticleReply from './reply'
 
 const TextArea = Input.TextArea;

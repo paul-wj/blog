@@ -1,9 +1,10 @@
-import adminLayout from './compoents/layout/index'
-import adminIndex from './pages/home/index'
-import ArticleCreate from './pages/article/article-create'
-import ArticleList from './pages/article/article-list'
-import TagList from './pages/tag-category/tag-list'
-import CategoryList from './pages/tag-category/category-list'
+import lazy from '../common/lazy'
+const adminLayout = lazy(() => import(/*webpackChunkName: 'adminLayout'*/'./components/layout/index'));
+const adminIndex = lazy(() => import(/*webpackChunkName: 'adminIndex'*/'./pages/home/index'));
+const ArticleCreate = lazy(() => import(/*webpackChunkName: 'ArticleCreate'*/'./pages/article/article-create'));
+const ArticleList = lazy(() => import(/*webpackChunkName: 'ArticleList'*/'./pages/article/article-list'));
+const TagList = lazy(() => import(/*webpackChunkName: 'TagList'*/'./pages/tag-category/tag-list'));
+const CategoryList = lazy(() => import(/*webpackChunkName: 'CategoryList'*/'./pages/tag-category/category-list'));
 export default [{
 	path: 'admin',
 	component: adminLayout,

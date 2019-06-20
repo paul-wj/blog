@@ -4,7 +4,7 @@ import {translateMarkdown} from '../../../../lib/utils'
 import { Spin, Icon} from 'antd';
 import { connect } from 'react-redux'
 
-import Tags from "../../compoents/base/tags";
+import Tags from "../../components/base/tags";
 import ArticleComment from './comment'
 
 import './index.scss'

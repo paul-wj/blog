@@ -1,11 +1,12 @@
-import WebLayout from './compoents/layout/index'
-import Home from './pages/home/index'
-import ArticleDetail from './pages/article/index'
-import Archives from './pages/archives'
-import Categories from './pages/categories'
-import CategoryDetail from './common/list/index'
-import TagDetail from  './common/list/index'
-import Statistics from './pages/statistics'
+import lazy from '../common/lazy'
+const WebLayout = lazy(() => import(/*webpackChunkName: 'WebLayout'*/'./components/layout/index'));
+const Home = lazy(() => import(/*webpackChunkName: 'Home'*/'./pages/home/index'));
+const ArticleDetail = lazy(() => import(/*webpackChunkName: 'ArticleDetail'*/'./pages/article/index'));
+const Archives = lazy(() => import(/*webpackChunkName: 'Archives'*/'./pages/archives'));
+const Categories = lazy(() => import(/*webpackChunkName: 'Categories'*/'./pages/categories'));
+const CategoryDetail = lazy(() => import(/*webpackChunkName: 'CategoryDetail'*/'./common/list/index'));
+const TagDetail = lazy(() => import(/*webpackChunkName: 'TagDetail'*/'./common/list/index'));
+const Statistics = lazy(() => import(/*webpackChunkName: 'Statistics'*/'./pages/statistics'));
 export default [{
 	path: '/',
 	name: 'app',

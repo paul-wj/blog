@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Divider, Table, Drawer, Button, Input, Popconfirm } from 'antd'
-import FormItem from '../../compoents/base/form-item'
+import FormItem from '../../components/base/form-item'
 import {getRandomColor} from '../../../../lib/utils'
 import { connect } from 'react-redux'
 import {getTags} from '../../../../redux/article/actions'

@@ -3,7 +3,7 @@ import {withRouter} from "react-router-dom";
 import {Divider, Icon, Spin, Pagination, Empty} from 'antd';
 import {translateMarkdown, decodeQuery} from '../../../../lib/utils'
 import './index.scss'
-import Tags from '../../compoents/base/tags'
+import Tags from '../../components/base/tags'
 
 @withRouter
 class Home extends Component {
