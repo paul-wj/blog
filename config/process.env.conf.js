@@ -5,6 +5,6 @@ module.exports = {
 	},
 	prod: {
 		NODE_ENV: '"production"',
-		BASE_API_URL: '"http://www.wangjie818.wang:9000"'
+		BASE_API_URL: '"https://www.wangjie818.wang/prod"'
 	}
 };
