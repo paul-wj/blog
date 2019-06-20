@@ -1,5 +1,5 @@
 import lazy from '../common/lazy'
-const WebLayout = lazy(() => import(/*webpackChunkName: 'WebLayout'*/'./components/layout/index'));
+import WebLayout from './components/layout/index';
 const Home = lazy(() => import(/*webpackChunkName: 'Home'*/'./pages/home/index'));
 const ArticleDetail = lazy(() => import(/*webpackChunkName: 'ArticleDetail'*/'./pages/article/index'));
 const Archives = lazy(() => import(/*webpackChunkName: 'Archives'*/'./pages/archives'));

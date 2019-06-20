@@ -1,5 +1,5 @@
 import lazy from '../common/lazy'
-const adminLayout = lazy(() => import(/*webpackChunkName: 'adminLayout'*/'./components/layout/index'));
+import adminLayout from './components/layout/index';
 const adminIndex = lazy(() => import(/*webpackChunkName: 'adminIndex'*/'./pages/home/index'));
 const ArticleCreate = lazy(() => import(/*webpackChunkName: 'ArticleCreate'*/'./pages/article/article-create'));
 const ArticleList = lazy(() => import(/*webpackChunkName: 'ArticleList'*/'./pages/article/article-list'));

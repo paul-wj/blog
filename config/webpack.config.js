@@ -241,11 +241,6 @@ module.exports = function(webpackEnv) {
 					    }
 					    : false,
 			    },
-		    }),
-		    isEnvProduction && new UglifyJsPlugin({//压缩js
-			    cache: true,
-			    parallel: true,
-			    sourceMap: true
 		    })
 	    ],
       // Automatically split vendor and commons
