@@ -1,5 +1,4 @@
 'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
@@ -23,7 +22,8 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
@@ -154,7 +154,12 @@ module.exports = function(webpackEnv) {
       // initialization, it doesn't blow up the WebpackDevServer client, and
       // changing JS code would still trigger a refresh.
     ].filter(Boolean),
-    output: {
+	  externals: {
+          'react': 'React',
+		  'react-dom': 'ReactDOM',
+		  'react-router-dom': 'ReactRouterDOM'
+      },
+	  output: {
       // The build folder.
       path: isEnvProduction ? paths.appBuild : undefined,
       // Add /* filename */ comments to generated require()s in the output.
@@ -182,67 +187,72 @@ module.exports = function(webpackEnv) {
     },
     optimization: {
       minimize: isEnvProduction,
-      minimizer: [
-        // This is only used in production mode
-        new TerserPlugin({
-          terserOptions: {
-            parse: {
-              // we want terser to parse ecma 8 code. However, we don't want it
-              // to apply any minfication steps that turns valid ecma 5 code
-              // into invalid ecma 5 code. This is why the 'compress' and 'output'
-              // sections only apply transformations that are ecma 5 safe
-              // https://github.com/facebook/create-react-app/pull/4234
-              ecma: 8,
-            },
-            compress: {
-              ecma: 5,
-              warnings: false,
-              // Disabled because of an issue with Uglify breaking seemingly valid code:
-              // https://github.com/facebook/create-react-app/issues/2376
-              // Pending further investigation:
-              // https://github.com/mishoo/UglifyJS2/issues/2011
-              comparisons: false,
-              // Disabled because of an issue with Terser breaking valid code:
-              // https://github.com/facebook/create-react-app/issues/5250
-              // Pending futher investigation:
-              // https://github.com/terser-js/terser/issues/120
-              inline: 2,
-            },
-            mangle: {
-              safari10: true,
-            },
-            output: {
-              ecma: 5,
-              comments: false,
-              // Turned on because emoji and regex is not minified properly using default
-              // https://github.com/facebook/create-react-app/issues/2488
-              ascii_only: true,
-            },
-          },
-          // Use multi-process parallel running to improve the build speed
-          // Default number of concurrent runs: os.cpus().length - 1
-          parallel: true,
-          // Enable file caching
-          cache: true,
-          sourceMap: shouldUseSourceMap,
-        }),
-        // This is only used in production mode
-        new OptimizeCSSAssetsPlugin({
-          cssProcessorOptions: {
-            parser: safePostCssParser,
-            map: shouldUseSourceMap
-              ? {
-                  // `inline: false` forces the sourcemap to be output into a
-                  // separate file
-                  inline: false,
-                  // `annotation: true` appends the sourceMappingURL to the end of
-                  // the css file, helping the browser find the sourcemap
-                  annotation: true,
-                }
-              : false,
-          },
-        }),
-      ],
+	    minimizer: [
+		    // This is only used in production mode
+		    new TerserPlugin({
+			    terserOptions: {
+				    parse: {
+					    // we want terser to parse ecma 8 code. However, we don't want it
+					    // to apply any minfication steps that turns valid ecma 5 code
+					    // into invalid ecma 5 code. This is why the 'compress' and 'output'
+					    // sections only apply transformations that are ecma 5 safe
+					    // https://github.com/facebook/create-react-app/pull/4234
+					    ecma: 8,
+				    },
+				    compress: {
+					    ecma: 5,
+					    warnings: false,
+					    // Disabled because of an issue with Uglify breaking seemingly valid code:
+					    // https://github.com/facebook/create-react-app/issues/2376
+					    // Pending further investigation:
+					    // https://github.com/mishoo/UglifyJS2/issues/2011
+					    comparisons: false,
+					    // Disabled because of an issue with Terser breaking valid code:
+					    // https://github.com/facebook/create-react-app/issues/5250
+					    // Pending futher investigation:
+					    // https://github.com/terser-js/terser/issues/120
+					    inline: 2,
+				    },
+				    mangle: {
+					    safari10: true,
+				    },
+				    output: {
+					    ecma: 5,
+					    comments: false,
+					    // Turned on because emoji and regex is not minified properly using default
+					    // https://github.com/facebook/create-react-app/issues/2488
+					    ascii_only: true,
+				    },
+			    },
+			    // Use multi-process parallel running to improve the build speed
+			    // Default number of concurrent runs: os.cpus().length - 1
+			    parallel: true,
+			    // Enable file caching
+			    cache: true,
+			    sourceMap: shouldUseSourceMap,
+		    }),
+		    // This is only used in production mode
+		    new OptimizeCSSAssetsPlugin({
+			    cssProcessorOptions: {
+				    parser: safePostCssParser,
+				    map: shouldUseSourceMap
+					    ? {
+						    // `inline: false` forces the sourcemap to be output into a
+						    // separate file
+						    inline: false,
+						    // `annotation: true` appends the sourceMappingURL to the end of
+						    // the css file, helping the browser find the sourcemap
+						    annotation: true,
+					    }
+					    : false,
+			    },
+		    }),
+		    isEnvProduction && new UglifyJsPlugin({//压缩js
+			    cache: true,
+			    parallel: true,
+			    sourceMap: true
+		    })
+	    ],
       // Automatically split vendor and commons
       // https://twitter.com/wSokra/status/969633336732905474
       // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -466,6 +476,7 @@ module.exports = function(webpackEnv) {
 			          {
 				          importLoaders: 2,
 				          sourceMap: isEnvProduction && shouldUseSourceMap,
+				          javascriptEnabled: true
 			          },
 			          'less-loader'
 		          ),
@@ -484,6 +495,7 @@ module.exports = function(webpackEnv) {
 				          sourceMap: isEnvProduction && shouldUseSourceMap,
 				          modules: true,
 				          getLocalIdent: getCSSModuleLocalIdent,
+				          javascriptEnabled: true
 			          },
 			          'less-loader'
 		          ),
@@ -513,6 +525,7 @@ module.exports = function(webpackEnv) {
     plugins: [
 	    // http://vuejs.github.io/vue-loader/en/workflow/production.html
 	    new webpack.DefinePlugin({
+		    'NODE_ENV': JSON.stringify('production'),
 		    'process.env': require('./process.env.conf')[process.env.env_config]
 	    }),
       // Generates an `index.html` file with the <script> injected.
@@ -633,6 +646,7 @@ module.exports = function(webpackEnv) {
           // The formatter is invoked directly in WebpackDevServerUtils during development
           formatter: isEnvProduction ? typescriptFormatter : undefined,
         }),
+	    isEnvProduction && new BundleAnalyzerPlugin()
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
