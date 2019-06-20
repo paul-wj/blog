@@ -15,11 +15,11 @@ import { message } from 'antd'
 import lodash from 'lodash'
 
 // markdown 高亮
-import hljs from 'highlight.js'
-import javascript from 'highlight.js/lib/languages/javascript'
-import 'highlight.js/styles/atom-one-light.css'
-
-hljs.registerLanguage('javascript', javascript);
+// import hljs from 'highlight.js'
+// import javascript from 'highlight.js/lib/languages/javascript'
+// import 'highlight.js/styles/atom-one-light.css'
+//
+// hljs.registerLanguage('javascript', javascript);
 
 // 绑定 全局方法$http
 React.Component.prototype.$webApi = webApi;

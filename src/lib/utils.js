@@ -1,5 +1,5 @@
 import marked from 'marked'
-import hljs from 'highlight.js'
+// import hljs from 'highlight.js'
 import xss from 'xss'
 import dayJs from 'dayjs'
 import store from '../redux/index'
@@ -15,7 +15,7 @@ export const translateMarkdown = plainText => {
 		smartLists: true,
 		smartypants: true,
 		highlight: function(code) {
-			return hljs.highlightAuto(code).value
+			return window.hljs.highlightAuto(code).value
 		}
 	})
 };
