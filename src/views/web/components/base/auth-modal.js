@@ -6,7 +6,6 @@ import {connect} from 'react-redux'
 import {openAuthModal, closeAuthModal} from '../../../../redux/common/actions'
 import {login, register, editUser} from "../../../../redux/user/actions";
 
-
 function getBase64(file) {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
@@ -180,6 +179,16 @@ class AuthModal extends Component {
 		}));
 	};
 
+	handleBeforeUpload = file => {
+		const isLt1M = file.size / 1024 / 1024 < 1;
+		if (!isLt1M) {
+			//添加图片大小限制
+			this.$toast.warning('头像图片大小不能超过1M');
+			return false;
+		}
+		return true;
+	};
+
 	handleCancel = () => this.setState({ previewVisible: false });
 
 	handlePreview = async file => {
@@ -255,9 +264,11 @@ class AuthModal extends Component {
 				label: '用户头像',
 				el: <div>
 					<Upload
+						accept="image/*"
 						action={`${process.env.BASE_API_URL}/upload`}
 						listType="picture-card"
 						fileList={fileList}
+						beforeUpload={this.handleBeforeUpload}
 						onPreview={this.handlePreview}
 						onChange={this.handleChange}>
 						{fileList.length >= 1 ? null : uploadButton}
