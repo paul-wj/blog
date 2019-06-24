@@ -12,8 +12,8 @@ import { login } from '../../../../redux/user/actions'
 @withRouter
 class Login extends Component {
 	state = {
-		email: 'paul@qq.com',
-		password: '123456'
+		email: '',
+		password: ''
 	};
 
 	handleChange = e => {
@@ -41,6 +41,7 @@ class Login extends Component {
 					name="email"
 					placeholder="email"
 					value={this.state.email}
+					onPressEnter={this.login}
 					onChange={this.handleChange}/>
 				<Input
 					size="large"
@@ -50,6 +51,7 @@ class Login extends Component {
 					name="password"
 					placeholder="Password"
 					value={this.state.password}
+					onPressEnter={this.login}
 					onChange={this.handleChange}
 				/>
 				<Button style={{ width: '100%' }} size="large" type="primary" onClick={this.login}>

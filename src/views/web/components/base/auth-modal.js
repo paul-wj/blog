@@ -224,7 +224,7 @@ class AuthModal extends Component {
 			{
 				key: 'email',
 				label: '邮箱',
-				el: <Input placeholder="请输入您的邮箱" disabled={!!userInfo.email} />,
+				el: <Input onPressEnter={this.handleCreate} placeholder="请输入您的邮箱" disabled={!!userInfo.email} />,
 				rules: [
 					{ type: 'email', message: 'The input is not valid E-mail!' },
 					{ required: true, message: 'Please input your E-mail!' }
@@ -233,7 +233,7 @@ class AuthModal extends Component {
 			{
 				key: 'username',
 				label: '用户名',
-				el: <Input placeholder="请输入您的用户名"/>,
+				el: <Input onPressEnter={this.handleCreate} placeholder="请输入您的用户名"/>,
 				rules: [
 					{ required: true, message: 'Please input your username!' }
 				]
@@ -241,19 +241,19 @@ class AuthModal extends Component {
 			{
 				key: 'oldPassword',
 				label: '原密码',
-				el: <Input placeholder="请输入原密码" type="password" />,
+				el: <Input onPressEnter={this.handleCreate} placeholder="请输入原密码" type="password" />,
 				rules: [{ required: true, message: 'oldPassword is required' }]
 			},
 			{
 				key: 'password',
 				label: '密码',
-				el: <Input placeholder="请输入密码" type="password" />,
+				el: <Input onPressEnter={this.handleCreate} placeholder="请输入密码" type="password" />,
 				rules: [{ required: true, message: 'Password is required' }]
 			},
 			{
 				key: 'confirm',
 				label: '确认密码',
-				el: <Input placeholder="请输入确认密码" type="password" />,
+				el: <Input onPressEnter={this.handleCreate} placeholder="请输入确认密码" type="password" />,
 				rules: [
 					{ required: true, message: 'Please confirm your password!' },
 					{ validator: this.compareToFirstPassword}
