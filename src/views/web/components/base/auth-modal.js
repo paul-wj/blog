@@ -112,6 +112,12 @@ class AuthModal extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this.setState = (state, callback) => {
+			return null;
+		}
+	}
+
 	checkboxChange = values => {
 		if (values.length === 0) {
 			return this.$toast.warning('请至少勾选一项')

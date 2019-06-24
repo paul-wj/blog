@@ -34,6 +34,12 @@ class AppSider extends Component{
 		this.setState({statisticsList: statisticsList.map(item => item.label === '标签' ? Object.assign(item, {value: tagList.length}) : item)});
 	}
 
+	componentWillUnmount() {
+		this.setState = (state, callback) => {
+			return null;
+		}
+	}
+
 	render() {
 		const {tagList, articleList} = this.props;
 		const {statisticsList} = this.state;

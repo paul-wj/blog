@@ -69,6 +69,12 @@ class CategoryDetail extends Component{
 		}
 	};
 
+	componentWillUnmount() {
+		this.setState = (state, callback) => {
+			return null;
+		}
+	}
+
 	render() {
 		const {type, id, loading, articleList, total, defaultCurrent, pageSize, current} = this.state;
 		const {tagList, categoryList} = this.props;

@@ -61,6 +61,12 @@ class ArticleDetail extends Component {
 		}
 	};
 
+	componentWillUnmount() {
+		this.setState = (state, callback) => {
+			return null;
+		}
+	}
+
 	render() {
 		const {articleId, title, content, updateTime, tagIds, categories, loading} = this.state;
 

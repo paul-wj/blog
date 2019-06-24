@@ -59,6 +59,12 @@ class ArticleComment extends Component {
 		}
 	};
 
+	componentWillUnmount() {
+		this.setState = (state, callback) => {
+			return null;
+		}
+	}
+
 
 
 	render() {

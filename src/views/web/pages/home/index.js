@@ -93,6 +93,12 @@ class Home extends Component {
 		}
 	};
 
+	componentWillUnmount() {
+		this.setState = (state, callback) => {
+			return null;
+		}
+	}
+
 	render() {
 		const {loading, articleList, total, defaultCurrent, pageSize, current} = this.state;
 		return <div className="article-content">
