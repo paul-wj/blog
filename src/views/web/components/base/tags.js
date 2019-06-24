@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { Icon, Tag, Divider } from 'antd'
 import { connect } from 'react-redux'
 
@@ -35,8 +35,11 @@ class Tags extends Component {
 					<Icon type="folder" style={{ marginRight: 7 }} />
 				)}
 				{currentList.map((item, i) => (
-					<Tag color={type === 'tags' ? item.color : '#2db7f5'} key={item.name}>
-						<Link to={`/${type}/${item.name}`}>{item.name}</Link>
+					<Tag onClick={e => {
+						e.stopPropagation();
+						this.props.history.push(`/${type === 'tags' ? 'tag' : 'category'}/${item.id}`);
+					}} color={type === 'tags' ? item.color : '#2db7f5'} key={item.name}>
+						{item.name}
 					</Tag>
 				))}
 			</Fragment>
