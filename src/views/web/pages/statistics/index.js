@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Row, Col, Card, Tooltip, Icon} from 'antd';
+import {Row, Col, Card, Tooltip, Icon, Spin} from 'antd';
 import './index.scss'
 
 const defaultStatistics = {
@@ -14,7 +14,8 @@ class Statistics extends Component{
 	state = {
 		articleStatistics: defaultStatistics,
 		commentStatistics: defaultStatistics,
-		replyStatistics: defaultStatistics
+		replyStatistics: defaultStatistics,
+		loading: false
 	};
 
 	getStatisticsForArticle = async () => {
@@ -43,11 +44,13 @@ class Statistics extends Component{
 			}
 		}
 	};
-
+	init = async () => {
+		await this.setState({loading: true});
+		await Promise.all([this.getStatisticsForArticle(), this.getStatisticsForComment(), this.getStatisticsForReply()]);
+		this.setState({loading: false});
+	};
 	componentDidMount() {
-		this.getStatisticsForArticle();
-		this.getStatisticsForComment();
-		this.getStatisticsForReply();
+		this.init();
 	}
 	render() {
 		const gridOptions = {
@@ -60,9 +63,10 @@ class Statistics extends Component{
 		const colStyle = {
 			marginBottom: '10px'
 		};
-		const {articleStatistics, commentStatistics, replyStatistics} = this.state;
+		const {articleStatistics, commentStatistics, replyStatistics, loading} = this.state;
 		return <div className="statistics">
-			<Row gutter={16}>
+			<Spin tip="Loading..." className="statistics-content-spin" size="large" spinning={loading}/>
+			{!loading ? <Row gutter={16}>
 				<Col style={colStyle} {...gridOptions}>
 					<Card className="statistics--card">
 						<div className="statistics--card--top">
@@ -126,7 +130,7 @@ class Statistics extends Component{
 						</div>
 					</Card>
 				</Col>
-			</Row>
+			</Row> : null}
 		</div>
 	}
 }

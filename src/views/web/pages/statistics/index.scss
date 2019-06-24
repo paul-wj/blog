@@ -1,4 +1,5 @@
 .statistics{
+  @include spanStyle(statistics-content-spin);
   .statistics--card{
     padding: 20px 24px 8px;
     .statistics--card--top{
