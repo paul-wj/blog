@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Spin} from "antd";
 
 /**
  * 使用 webpack 的 import 方法实现动态加载组件！dynamic import
@@ -18,16 +19,7 @@ export const asyncComponent = importComponent =>
 
 		render() {
 			const RenderComponent = this.state.component;
-			return RenderComponent ? <RenderComponent {...this.props} /> :
-				<div className="react-spin react-spin-spinning react-spin-show-text">
-					<span className="react-spin-dot react-spin-dot-spin">
-						<i className="react-spin-dot-item"/>
-						<i className="react-spin-dot-item"/>
-						<i className="react-spin-dot-item"/>
-						<i className="react-spin-dot-item"/>
-					</span>
-					<div className="react-spin-text">Loading...</div>
-				</div>
+			return RenderComponent ? <RenderComponent {...this.props} /> : <Spin tip="Loading..." className="global-spin" size="large" spinning={true}/>
 		}
 	};
 

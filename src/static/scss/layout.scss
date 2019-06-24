@@ -7,6 +7,7 @@
 .app-container{
   background-color: #fff;
   height: 100%;
+  @include spanStyle(global-spin);
   .app-header{
     padding: 0;
     background: #fff;
