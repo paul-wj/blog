@@ -44,10 +44,11 @@ class Statistics extends Component{
 			}
 		}
 	};
-	init = async () => {
-		await this.setState({loading: true});
-		await Promise.all([this.getStatisticsForArticle(), this.getStatisticsForComment(), this.getStatisticsForReply()]);
-		this.setState({loading: false});
+	init = () => {
+		this.setState({loading: true}, async () => {
+			await Promise.all([this.getStatisticsForArticle(), this.getStatisticsForComment(), this.getStatisticsForReply()]);
+			this.setState({loading: false});
+		});
 	};
 	componentDidMount() {
 		this.init();

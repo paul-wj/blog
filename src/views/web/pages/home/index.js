@@ -49,9 +49,8 @@ class Home extends Component {
 	 * @param pageSize
 	 * @returns {Promise<void>}
 	 */
-	onShowSizeChange =  async (current, pageSize) => {
-		await this.setState({current, pageSize, limit: pageSize * current, offset: pageSize * (current - 1)});
-		this.getArticlePageList();
+	onShowSizeChange =  (current, pageSize) => {
+		this.setState({current, pageSize, limit: pageSize * current, offset: pageSize * (current - 1)}, () => {this.getArticlePageList()});
 	};
 
 	/**
@@ -60,9 +59,8 @@ class Home extends Component {
 	 * @param pageSize
 	 * @returns {Promise<void>}
 	 */
-	changePaginationCurrent = async (current, pageSize) => {
-		await this.setState({current, limit: pageSize * current, offset: pageSize * (current - 1)});
-		this.getArticlePageList();
+	changePaginationCurrent = (current, pageSize) => {
+		this.setState({current, limit: pageSize * current, offset: pageSize * (current - 1)}, () => {this.getArticlePageList()});
 	};
 
 	/**
@@ -70,15 +68,14 @@ class Home extends Component {
 	 * @param search
 	 * @returns {Promise<void>}
 	 */
-	getKeyword = async search => {
+	getKeyword = search => {
 		if (search) {
 			const {pageSize} = this.state;
 			const {current, keyword} = decodeQuery(search);
-			await this.setState({current: current - 0, title: keyword, limit: pageSize * current, offset: pageSize * (current - 1)});
+			this.setState({current: current - 0, title: keyword, limit: pageSize * current, offset: pageSize * (current - 1)}, () => {this.getArticlePageList()});
 		} else {
-			await this.setState({current: 1, title: null, limit: 10, offset: 0});
+			this.setState({current: 1, title: null, limit: 10, offset: 0}, () => {this.getArticlePageList()});
 		}
-		this.getArticlePageList();
 	};
 
 	componentDidMount() {

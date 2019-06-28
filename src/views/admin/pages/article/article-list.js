@@ -67,22 +67,22 @@ class ArticleList extends Component {
 		}
 	};
 
-	onShowSizeChange =  async (current, pageSize) => {
+	onShowSizeChange = (current, pageSize) => {
 		const {pagination} = this.state;
-		await this.setState({
+		this.setState({
 			pagination: Object.assign({}, pagination, {current, pageSize}),
 			limit: pageSize * current,
-			offset: pageSize * (current - 1)});
-		this.getArticlePageList();
+			offset: pageSize * (current - 1)}, () => {
+			this.getArticlePageList();
+		});
 	};
 
-	changePaginationCurrent = async (current, pageSize) => {
+	changePaginationCurrent = (current, pageSize) => {
 		const {pagination} = this.state;
-		await this.setState({
+		this.setState({
 			pagination: Object.assign({}, pagination, {current}),
 			limit: pageSize * current,
-			offset: pageSize * (current - 1)});
-		this.getArticlePageList();
+			offset: pageSize * (current - 1)}, () => {this.getArticlePageList()});
 	};
 
 	componentDidMount() {

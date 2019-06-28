@@ -49,10 +49,10 @@ class CategoryDetail extends Component{
 	 * 获取url中的参数方法
 	 * @returns {Promise<void>}
 	 */
-	getKeyword = async id => {
+	getKeyword = id => {
 		const {url} = this.props.match;
 		if (id) {
-			await this.setState({id, type: url.indexOf('category') > -1 ? 'category' : 'tag'});
+			this.setState({id, type: url.indexOf('category') > -1 ? 'category' : 'tag'}, () => {this.getArticlePageListByCategoryId()});
 		}
 		this.getArticlePageListByCategoryId();
 	};

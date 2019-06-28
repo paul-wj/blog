@@ -41,9 +41,8 @@ class Archives extends Component{
 	 * @param pageSize
 	 * @returns {Promise<void>}
 	 */
-	changePaginationCurrent = async (current, pageSize) => {
-		await this.setState({current, limit: pageSize * current, offset: pageSize * (current - 1)});
-		this.getArticleSimplePageList();
+	changePaginationCurrent = (current, pageSize) => {
+		this.setState({current, limit: pageSize * current, offset: pageSize * (current - 1)}, () => {this.getArticleSimplePageList()});
 	};
 
 	componentDidMount() {
