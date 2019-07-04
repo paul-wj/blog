@@ -13,13 +13,13 @@ class ArticleList extends Component {
 		super(props);
 		this.state = {
 			tableColumns : [
-				{ title: 'id', dataIndex: 'id', align: 'center'},
+				{ title: 'id', dataIndex: 'id', align: 'center',  width: 50},
 				{ title: '标题', dataIndex: 'title', align: 'center'},
-				{ title: '标签', dataIndex: 'tagIds', align: 'center', render: value => <div style={{lineHeight: '24px'}}>{this.props.tagList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color={tag.color}>{tag.name}</Tag>)}</div>},
-				{ title: '目录', dataIndex: 'categories', align: 'center', render: value => <div style={{lineHeight: '24px'}}>{this.props.categoryList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color="#2db7f5">{tag.name}</Tag>)}</div>},
-				{ title: '更新时间', dataIndex: 'updateTime', align: 'center'},
-				{ title: '创建时间', dataIndex: 'createTime', align: 'center'},
-				{ title: '操作', align: 'center',  key: 'action',
+				{ title: '标签', dataIndex: 'tagIds', align: 'center', width: 400, render: value => <div style={{lineHeight: '24px'}}>{this.props.tagList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color={tag.color}>{tag.name}</Tag>)}</div>},
+				{ title: '目录', dataIndex: 'categories', align: 'center', width: 200, render: value => <div style={{lineHeight: '24px'}}>{this.props.categoryList.filter(item => value.includes(item.id)).map(tag => <Tag key={tag.id} color="#2db7f5">{tag.name}</Tag>)}</div>},
+				{ title: '更新时间', dataIndex: 'updateTime', align: 'center', width: 200},
+				{ title: '创建时间', dataIndex: 'createTime', align: 'center', width: 200},
+				{ title: '操作', align: 'center',  key: 'action', width: 150,
 					render: (value, record) => (<div>
 						<button className="link-button"><Link to={{pathname: '/admin/article-edit', state: { articleId: record.id }}}>编辑</Link></button>
 						<Divider type="vertical" />
@@ -92,7 +92,7 @@ class ArticleList extends Component {
 	render() {
 		const { tableColumns, tableData, loading, pagination} = this.state;
 		return <div>
-			<Table rowKey={record => record.id} columns={tableColumns} pagination={pagination} dataSource={tableData} bordered={true} loading={loading}  scroll={{y: 600 }}/>
+			<Table rowKey={record => record.id} columns={tableColumns} pagination={pagination} dataSource={tableData} bordered={true} loading={loading}  scroll={{x: true, y: 600 }}/>
 		</div>
 	}
 }
