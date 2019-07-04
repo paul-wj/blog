@@ -145,7 +145,7 @@ class AuthModal extends Component {
 			if (err) {
 				return;
 			}
-			const profilePicture = fileList.length ? fileList[0].response.result : null;
+			const profilePicture = Array.isArray(fileList) && fileList.length ? fileList[0].response.result : null;
 			// console.log('Received values of form: ', values);
 			if (['login', 'register'].includes(authModalType)) {
 				const {email, username, password} = values;
