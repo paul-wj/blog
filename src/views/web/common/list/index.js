@@ -54,7 +54,6 @@ class CategoryDetail extends Component{
 		if (id) {
 			this.setState({id, type: url.indexOf('category') > -1 ? 'category' : 'tag'}, () => {this.getArticlePageListByCategoryId()});
 		}
-		this.getArticlePageListByCategoryId();
 	};
 
 	componentDidMount() {
