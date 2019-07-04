@@ -3,7 +3,8 @@ import routes from './router/router'
 import { BrowserRouter, Route, Switch, withRouter} from "react-router-dom";
 import { connect } from 'react-redux'
 import { getTags, getCategories } from './redux/article/actions'
-import { checkUserAuth } from "./redux/user/actions";
+import { checkUserAuth } from './redux/user/actions';
+import {clearGlobalLocalData} from './lib/utils'
 
 @connect(state => state,{ getTags, getCategories, checkUserAuth })
 @withRouter
@@ -14,9 +15,10 @@ class App extends Component {
 		this.props.getCategories();
 		if (token) {
 			this.props.checkUserAuth();
+		} else {
+			clearGlobalLocalData();
 		}
 	}
-
 
 	renderRoutes(routes, contextPath) {
 		const children = [];
