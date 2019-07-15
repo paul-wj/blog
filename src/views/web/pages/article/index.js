@@ -10,7 +10,7 @@ import ArticleComment from './comment'
 import './index.scss'
 
 
-
+let scrollTop = 0;
 @connect(state => ({
 	tagList: state.article.tagList,
 	categoryList: state.article.categoryList,
@@ -28,7 +28,14 @@ class ArticleDetail extends Component {
 		categories: [],
 		content: null,
 		commentContent: null,
-		commentList: []
+		commentList: [],
+		contentDom: null
+	};
+
+	contentDomScrollFn = () => {
+		return !this.$lodash.throttle(() => {
+			scrollTop = this.contentDom.scrollTop;
+		}, 200)()
 	};
 
 	getArticleById = async id => {
@@ -48,6 +55,10 @@ class ArticleDetail extends Component {
 	};
 
 	componentDidMount = () => {
+		if (!this.contentDom) {
+			this.contentDom = document.getElementsByClassName('app-content-wrapper')[0];
+			this.contentDom.addEventListener("scroll", this.contentDomScrollFn);
+		}
 		const articleId = this.props.match.params.id - 0;
 		this.setState({articleId});
 		this.getArticleById(articleId);
@@ -61,10 +72,18 @@ class ArticleDetail extends Component {
 		}
 	};
 
+	componentDidUpdate() {
+		if (scrollTop !== this.contentDom.scrollTop) {
+			this.contentDom.scrollTop = scrollTop;
+		}
+	}
+
 	componentWillUnmount() {
 		this.setState = (state, callback) => {
 			return null;
-		}
+		};
+		this.contentDom.removeEventListener("scroll", this.contentDomScrollFn);
+		scrollTop = 0;
 	}
 
 	render() {

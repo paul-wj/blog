@@ -11,7 +11,6 @@ import moment from 'dayjs'
 moment.extend(relativeTime);
 
 const TextArea = Input.TextArea;
-let scrollTop = 0;
 
 @connect(state => ({
 	userInfo: state.user.userInfo
@@ -25,31 +24,9 @@ class ArticleReply extends Component{
 
 	state = {
 		replyContent: null,
-		replyToReplyContent: null,
-		contentDom: null
+		replyToReplyContent: null
 	};
 
-	componentDidMount() {
-		if (!this.contentDom) {
-			this.contentDom = document.getElementsByClassName('app-content-wrapper')[0];
-			this.contentDom.addEventListener("scroll", this.contentDomScrollFn);
-		}
-	}
-	componentWillUnmount() {
-		this.contentDom.removeEventListener("scroll", this.contentDomScrollFn);
-	}
-
-	componentDidUpdate() {
-		if (scrollTop !== this.contentDom.scrollTop) {
-			this.contentDom.scrollTop = scrollTop;
-		}
-	}
-
-	contentDomScrollFn = () => {
-		return !this.$lodash.throttle(() => {
-			scrollTop = this.contentDom.scrollTop;
-		}, 200)()
-	};
 
 	openReplyContainer = index => {
 		const {updateCommentList, commentList} = this.props;
