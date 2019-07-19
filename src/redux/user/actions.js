@@ -39,9 +39,11 @@ export const editUser = (id, params) => {
 };
 
 export const logout = () => {
-	return dispatch => {
+	return async dispatch => {
+		await webApi.loginOut();
 		localStorage.removeItem('authorization');
 		dispatch({ type: 'userInfo', payload: {userId: null, email: null, nick: null, username: null, token: null, avatarColor: null}})
+		message.success('退出成功');
 	}
 };
 
