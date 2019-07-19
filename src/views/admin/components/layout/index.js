@@ -27,9 +27,15 @@ class adminLayout extends Component {
 				<AdminSider/>
 				<Layout>
 					<AdminHeader/>
-					<Content style={{
-						margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280,
-					}}>
+					<Content
+						style={{
+							margin: '24px 16px',
+							padding: 24,
+							background: '#fff',
+							minHeight: 280,
+							overflow: 'hidden',
+							overflowY: 'auto'
+						}}>
 						{this.props.children}
 					</Content>
 				</Layout>
