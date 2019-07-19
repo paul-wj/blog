@@ -44,7 +44,7 @@ const getResult = res => {
     };
   } else if (result && code === 900) {
       clearGlobalLocalData();
-      if (!(res.config.url.indexOf('/user/check-auth') > -1)) {
+      if (!['/user/check-auth', '/login-out'].some(url => res.config.url.indexOf(url) > -1)) {
 	      antdMessage.error(result.message);
       }
       return {

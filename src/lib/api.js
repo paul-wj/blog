@@ -3,6 +3,9 @@ import {httpRequest} from './plugins/http-request';
 	 login(data){
 		 return httpRequest(`/login`, data, {method: 'post'})
 	 },
+	 loginOut() {
+		 return httpRequest(`/login-out`, {}, {method: 'delete'})
+	 },
 	 registerUser(data) {
 		 return httpRequest(`/user`, data, {method: 'post'})
 	 },
