@@ -4,8 +4,8 @@ import xss from 'xss'
 import dayJs from 'dayjs'
 import store from '../redux/index'
 // 转化 md 语法为 html
-export const translateMarkdown = plainText => {
-	return marked(xss(plainText), {
+export const translateMarkdown = (plainText, isMarkDown = true) => {
+	return marked(isMarkDown ? plainText : xss(plainText), {
 		renderer: new marked.Renderer(),
 		gfm: true,
 		pedantic: false,
@@ -17,7 +17,7 @@ export const translateMarkdown = plainText => {
 		highlight: function(code) {
 			return window.hljs.highlightAuto(code).value
 		}
-	})
+	});
 };
 
 export const decodeQuery = url => {
