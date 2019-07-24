@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {withRouter} from "react-router-dom";
 import {Spin, Descriptions} from 'antd';
 import './index.scss'
-import {getRandomColor, translateMarkdown} from "../../../../lib/utils";
+import {getRandomColor} from "../../../../lib/utils";
 import dayJs from 'dayjs';
 
 @withRouter
