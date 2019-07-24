@@ -89,6 +89,12 @@ import {httpRequest} from './plugins/http-request';
 	 },
 	 getStatisticsForReply() {
 		 return httpRequest(`/statistics/reply`, {}, {method: 'get'})
+	 },
+	 getRecipeAllList() {
+		 return httpRequest(`/recipe`, {}, {method: 'get'}, {})
+	 },
+	 getCurrentWeekRecipe() {
+		 return httpRequest(`/recipe-week`, {}, {method: 'get'}, {})
 	 }
  };
 export default webApi;

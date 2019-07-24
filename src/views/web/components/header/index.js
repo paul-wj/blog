@@ -13,9 +13,7 @@ const headerRightResponsive = {xxl: 20, xl: 19, lg: 19, sm: 20, xs: 0 };
 class Header extends Component{
 	constructor(props) {
 		super(props);
-		this.state = {
-			test: 123
-		}
+		this.state = {}
 	}
 	render() {
 		const navList = router[0].childRoutes.filter(item => item.type === 10);
