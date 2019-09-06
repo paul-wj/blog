@@ -163,7 +163,9 @@ export default class Music extends Component{
 		currentTime: '',
 		endTime: '',
 		progress: 0,
-		timer: null
+		timer: null,
+		isOpen: false,
+		isMask: false
 	};
 
 	async getSongList() {
@@ -226,16 +228,35 @@ export default class Music extends Component{
 			cancelAnimationFrame(timer);
 		}
 	}
+	toggleSongListContainer() {
+		const {isOpen} = this.state;
+		const currentIsOpen = !isOpen;
+		this.setState({isOpen: currentIsOpen}, () => {
+			const songContainerDom = document.querySelector('.song-container');
+			if (currentIsOpen) {
+				songContainerDom.style.display = 'block';
+				songContainerDom.className = `song-container rollIn animated`;
+			} else {
+				songContainerDom.className = `song-container hinge animated`;
+				this.setState({isMask: true});
+				const timer = setTimeout(() => {
+					clearTimeout(timer);
+					songContainerDom.style.display = 'none';
+					this.setState({isMask: false})
+				}, 3000)
+			}
+		});
+	}
 
 	componentDidMount() {
 		this.getSongList();
 	}
 
 	render(){
-		const {skip, play, onProgressChange} = this;
-		const {isPause, name, author, picUrl, progress, currentTime, endTime} = this.state;
+		const {skip, play, onProgressChange, toggleSongListContainer} = this;
+		const {isPause, name, author, picUrl, progress, currentTime, endTime, isOpen, isMask} = this.state;
 		return (<Card className="music">
-			<p className="music-title">私人播放器<span className="iconfont icon-category" /></p>
+			<p className="music-title">私人播放器<span onClick={toggleSongListContainer.bind(this)} className="iconfont icon-category" /></p>
 			<p className="music-name">{name}</p>
 			<p className="music-author">{author}</p>
 			{picUrl ? <p className="music-pic"><img src={picUrl} width="100%" alt={name} /></p> : null}
@@ -246,6 +267,10 @@ export default class Music extends Component{
 				<i onClick={play.bind(this)} className={`iconfont ${isPause ? 'icon-bofang' : 'icon-zanting'}`}/>
 				<i onClick={skip.bind(this, 'next')} className="iconfont icon-left right" />
 			</div>
+			<div className="song-container">
+				<span onClick={toggleSongListContainer.bind(this)}>关闭</span>
+			</div>
+			<div className="song-mask" style={{display: isMask ? 'block' : ''}} />
 		</Card>)
 	}
 }

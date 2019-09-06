@@ -53,10 +53,30 @@
   text-align: center;
 }
 .music{
+  position: relative;
   margin-top: 10px;
-  overflow: hidden;
   p{
     margin-bottom: 0;
+  }
+  .song-container{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    z-index: 10;
+  }
+  .song-mask{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 9;
   }
   .music-title{
     color: #071124;
