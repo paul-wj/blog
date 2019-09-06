@@ -18,10 +18,16 @@
     max-width: 100%;
   }
   .app-sider{
-    padding-left: 10px;
+    height: 100%;
+    padding: 0 10px 10px;
+    overflow: hidden;
+    overflow-y: auto;
   }
   .app-row, .app-col{
     height: 100%;
+    &>div{
+      height: 100%;
+    }
   }
   .app-content{
     height: 100%;

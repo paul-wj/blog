@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import {Card, Avatar, Row, Col, Tag} from 'antd';
+import {Card, Icon, Row, Col, Tag} from 'antd';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {getArticleList} from '../../../../redux/article/actions'
+import Clock from '../../../../lib/plugins/clock'
+import Music from './music'
 import './index.scss'
 
 @connect(state => ({
@@ -24,6 +26,12 @@ class AppSider extends Component{
 
 	componentDidMount() {
 		this.props.getArticleList();
+		new Clock({
+			el: document.getElementById('clock'),
+			radius: 35,
+			width: 80,
+			height: 80
+		})
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -47,15 +55,31 @@ class AppSider extends Component{
 		return <div className="app-sider">
 			<Card>
 				<p className="app-sider-title">
-					<Avatar className="user-avatar" size={64}/>
+					<canvas id="clock"/>
 					<span>前端汪小二</span>
 				</p>
 				<p className="app-sider-desc">前端打杂，前端自娱自乐</p>
+				<p className="warehouse">
+					<a href="https://github.com/wj5576081" rel="noreferrer noopener" target="_blank"><Icon type="github" />&nbsp;github</a>
+				</p>
 			</Card>
+			<Music/>
 			<Card className="app-sider-statistics">
-				<Row gutter={24}>{statisticsList.map(statistics => <Col span={24/statisticsList.length} key={statistics.label} className="app-sider-statistics__list">
-					<span className="app-sider-statistics__num">{statistics.value}</span><br/><span className="app-sider-statistics__name">{statistics.label}</span>
-					</Col>)}</Row>
+				<Row gutter={24}>
+					{statisticsList.map((statistics, index) => <Col
+						span={24/statisticsList.length}
+						key={statistics.label}
+						className="app-sider-statistics__list"
+					>
+						<span className={`app-sider-statistics__num ${index < 2 ? 'link' : ''}`} onClick={e => {
+							if (index < 2) {
+								this.props.history.push(`/${index === 0 ? 'archives' : 'categories'}`);
+							}
+						}}>{statistics.value}</span>
+						<br/>
+						<span className="app-sider-statistics__name">{statistics.label}</span>
+					</Col>)}
+				</Row>
 			</Card>
 			<Card title="最近文章" className="mt-10">
 				<ul className="recent-list">
@@ -64,7 +88,7 @@ class AppSider extends Component{
 			</Card>
 			<Card title="标签" className="mt-10">
 				<div className="app-sider-tag">
-					{tagList.map(tag => <Tag  onClick={e => {this.props.history.push(`/tag/${tag.id}`)}} key={tag.id} color={tag.color}>{tag.name}</Tag>)}
+					{tagList.map(tag => <Tag style={{cursor: 'pointer'}} onClick={e => {this.props.history.push(`/tag/${tag.id}`)}} key={tag.id} color={tag.color}>{tag.name}</Tag>)}
 				</div>
 			</Card>
 		</div>

@@ -2,6 +2,8 @@
   margin-top: 10px;
 }
 .app-sider-title{
+  display: flex;
+  align-items: center;
   font-size: 20px;
   margin-bottom: 10px;
   color: rgba(72, 81, 91, 1);
@@ -11,8 +13,14 @@
 }
 .app-sider-desc{
   color: rgba(72, 80, 91, 0.68);
-  font-size: 14px;
+  font-size: 15px;
   text-indent: 10px;
+}
+.warehouse{
+  text-align: center;
+  a{
+    color: rgba(0, 0, 0, 0.65);
+  }
 }
 .app-sider-statistics{
   margin-top: 10px;
@@ -21,6 +29,10 @@
     .app-sider-statistics__num{
       font-size: 18px;
       line-height: 24px;
+      &.link{
+        color: #1890ff;
+        cursor: pointer;
+      }
     }
     .app-sider-statistics__name{
       color: rgba(71, 80, 91, 0.7);
@@ -39,4 +51,65 @@
 .app-sider-tag{
   line-height: 30px;
   text-align: center;
+}
+.music{
+  margin-top: 10px;
+  overflow: hidden;
+  p{
+    margin-bottom: 0;
+  }
+  .music-title{
+    color: #071124;
+    font-size: 15px;
+    line-height: 24px;
+    margin-bottom: 10px;
+    span{
+      float: right;
+      cursor: pointer;
+      color: rgba(0, 0, 0, .85);
+    }
+  }
+  .music-name{
+    font-size: 18px;
+    color: #051129;
+    font-weight: 700;
+    line-height: 30px;
+  }
+  .music-author{
+    font-size: 18px;
+    color: #979CA8;
+    line-height: 30px;
+    word-break:break-all;
+  }
+  .music-pic{
+    padding: 5px;
+  }
+  .music-time{
+    font-size: 12px;
+    margin: -10px 0 10px;
+    padding-right: 5px;
+    overflow: hidden;
+    text-align: right;
+  }
+  .music-control{
+    line-height: 1;
+    padding: 0 15px;
+    font-size: 26px;
+    text-align: center;
+    overflow: hidden;
+    color: #999;
+    i{
+      cursor: pointer;
+      font-style: normal;
+      font-size: 26px;
+      color: #999;
+      &.icon-left{
+        float: left;
+      }
+      &.right{
+        float: right;
+        transform: rotate(180deg);
+      }
+    }
+  }
 }
