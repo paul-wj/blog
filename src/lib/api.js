@@ -95,6 +95,9 @@ import {httpRequest} from './plugins/http-request';
 	 },
 	 getCurrentWeekRecipe() {
 		 return httpRequest(`/recipe-week`, {}, {method: 'get'}, {})
+	 },
+	 getSongList() {
+		 return httpRequest(`/song`, {}, {method: 'get'}, {})
 	 }
  };
 export default webApi;
