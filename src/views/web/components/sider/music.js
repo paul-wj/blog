@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import {Card, Slider, message} from 'antd';
 import {Howl, Howler} from 'howler';
 import lodash from 'lodash'
@@ -143,6 +143,15 @@ class MusicHowl {
 		}
 	}
 
+	static changeVolume(val) {
+		const volumeNum = val/100;
+		Howler.volume(volumeNum);
+	}
+
+	static changeMute(mute) {
+		Howler.mute(mute);
+	}
+
 	cancelStep() {
 		const {timer} = this;
 		if (timer) {
@@ -151,8 +160,9 @@ class MusicHowl {
 	}
 }
 
-export default class Music extends Component{
 
+export default class Music extends Component{
+	songContainerScrollTop = 0;
 	state = {
 		songList: [],
 		musicHowl: null,
@@ -165,19 +175,22 @@ export default class Music extends Component{
 		progress: 0,
 		timer: null,
 		isOpen: false,
-		isMask: false
+		isMask: false,
+		volume: 50,
+		isMute: false
 	};
 
 	async getSongList() {
 		let res = await this.$webApi.getSongList();
 		if (res.flags === 'success') {
-			const result = res.data.reverse();
 			this.setState({songList: []});
+			let result = res.data;
 			if (result && result.length) {
+				result = result.reverse();
 				const musicHowl = new MusicHowl(result);
 				const {name, author, picUrl, endTime} = musicHowl;
 				this.setState({songList: result, musicHowl, name, author, picUrl, endTime}, () => {
-					this.play();
+					// this.play();
 				});
 			}
 		}
@@ -198,6 +211,14 @@ export default class Music extends Component{
 	skip(direction) {
 		const {musicHowl} = this.state;
 		musicHowl.skip(direction);
+		const {name, author, picUrl} = musicHowl;
+		this.setState({isPause: false, name, author, picUrl});
+		this.step();
+	}
+
+	skipTo(index)　{
+		const {musicHowl} = this.state;
+		musicHowl.skipTo(index);
 		const {name, author, picUrl} = musicHowl;
 		this.setState({isPause: false, name, author, picUrl});
 		this.step();
@@ -228,24 +249,46 @@ export default class Music extends Component{
 			cancelAnimationFrame(timer);
 		}
 	}
+
 	toggleSongListContainer() {
+		const {songContainerScrollTop} = this;
 		const {isOpen} = this.state;
 		const currentIsOpen = !isOpen;
 		this.setState({isOpen: currentIsOpen}, () => {
 			const songContainerDom = document.querySelector('.song-container');
 			if (currentIsOpen) {
 				songContainerDom.style.display = 'block';
+				songContainerDom.scrollTop = songContainerScrollTop;
 				songContainerDom.className = `song-container rollIn animated`;
 			} else {
+				this.songContainerScrollTop = songContainerDom.scrollTop;
 				songContainerDom.className = `song-container hinge animated`;
 				this.setState({isMask: true});
 				const timer = setTimeout(() => {
 					clearTimeout(timer);
 					songContainerDom.style.display = 'none';
 					this.setState({isMask: false})
-				}, 3000)
+				}, 1000)
 			}
 		});
+	}
+
+	changeVolume(val) {
+		const {changeVolume, isMute} = MusicHowl;
+		changeVolume(val);
+		if (isMute && val !== 0) {
+			this.changeMute();
+		}
+		this.setState({volume: val});
+	}
+
+	changeMute(e) {
+		e.stopPropagation();
+		const {changeMute} = MusicHowl;
+		const {isMute} = this.state;
+		const currentIsMute = !isMute;
+		changeMute(currentIsMute);
+		this.setState({isMute: currentIsMute})
 	}
 
 	componentDidMount() {
@@ -253,9 +296,9 @@ export default class Music extends Component{
 	}
 
 	render(){
-		const {skip, play, onProgressChange, toggleSongListContainer} = this;
-		const {isPause, name, author, picUrl, progress, currentTime, endTime, isOpen, isMask} = this.state;
-		return (<Card className="music">
+		const {play, skip, skipTo, onProgressChange, toggleSongListContainer, changeVolume, changeMute} = this;
+		const {isPause, name, author, picUrl, progress, currentTime, endTime, isMask, songList, volume, isMute} = this.state;
+		return (<Fragment>{ songList.length ? <Card className="music">
 			<p className="music-title">私人播放器<span onClick={toggleSongListContainer.bind(this)} className="iconfont icon-category" /></p>
 			<p className="music-name">{name}</p>
 			<p className="music-author">{author}</p>
@@ -267,10 +310,29 @@ export default class Music extends Component{
 				<i onClick={play.bind(this)} className={`iconfont ${isPause ? 'icon-bofang' : 'icon-zanting'}`}/>
 				<i onClick={skip.bind(this, 'next')} className="iconfont icon-left right" />
 			</div>
+			<div className="music-control-options">
+				<div className={`iconfont ${!isMute ? 'icon-shengyin' : 'icon-jingyin'}`}>
+					<span className="placeholder" onClick={changeMute.bind(this)} />
+					<Slider onChange={changeVolume.bind(this)} vertical className="voice-container" value={volume} />
+				</div>
+			</div>
 			<div className="song-container">
-				<span onClick={toggleSongListContainer.bind(this)}>关闭</span>
+				<div>
+					<ul>
+						{songList.map((song, index) => <li onClick={() => {
+							skipTo.call(this, index);
+							toggleSongListContainer.call(this);
+						}} className={name === song.name && author === song.author ? 'active' : ''} key={song.id}>
+							<i className="song-sign" />
+							<span className="song-order">{index + 1}</span>
+							<span className="song-name" title={song.name}>{song.name}</span>
+							<span className="song-author" title={song.author}>{song.author}</span>
+						</li>)}
+					</ul>
+				</div>
+				<i className="iconfont icon-close2 song-container-close" onClick={toggleSongListContainer.bind(this)} />
 			</div>
 			<div className="song-mask" style={{display: isMask ? 'block' : ''}} />
-		</Card>)
+		</Card> : null} </Fragment>)
 	}
 }
