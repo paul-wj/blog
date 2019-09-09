@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {Icon, Dropdown, Menu } from 'antd'
+import {Icon, Dropdown, Menu, Drawer} from 'antd'
+import Music from '../sider/music'
 import PropTypes from "prop-types";
 import {Link, withRouter} from 'react-router-dom'
 
@@ -17,6 +18,10 @@ class HeaderLeft extends Component{
 		navList: []
 	};
 
+	state = {
+		isShowMusic: false
+	};
+
 	menuChangeFn = ({item, key, keyPath, selectedKeys, domEvent}) => {
 		if (key === '修改账户信息') {
 			this.props.openAuthModal('editUser')
@@ -31,6 +36,11 @@ class HeaderLeft extends Component{
 			this.props.openAuthModal('register')
 		}
 	};
+
+	toggleOpenDrawer() {
+		const {isShowMusic} = this.state;
+		this.setState({isShowMusic: !isShowMusic})
+	}
 
 	getMenuDom = () => {
 		const {navList, location, userInfo} = this.props;
@@ -47,12 +57,24 @@ class HeaderLeft extends Component{
 	};
 
 	render() {
+		const {toggleOpenDrawer} = this;
 		return <div className="header-left">
+			<i onClick={toggleOpenDrawer.bind(this)} className="iconfont icon-yinle header-music" />
 			<Icon type="wechat" style={{color: '#52c41a', fontSize: '24px'}} />
 			<span className="header-title">汪小二的博客</span>
 			<Dropdown overlayClassName="header-dropdown" trigger={['click']} overlay={this.getMenuDom()}>
-				<Icon type="menu-o" className="nav-phone-icon" />
+				<i className="iconfont icon-menu nav-phone-icon" />
 			</Dropdown>
+			<Drawer
+				placement="top"
+				height="100%"
+				closable={false}
+				visible={this.state.isShowMusic}
+				className="music-container"
+			>
+				<Music className="music-mobile" />
+				<span className="music-mobile-close"><i onClick={toggleOpenDrawer.bind(this)} className="iconfont icon-close" /></span>
+			</Drawer>
 		</div>
 	}
 }

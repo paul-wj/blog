@@ -126,6 +126,9 @@
       margin-left: -12px;
       font-size: 24px;
       cursor: pointer;
+      &.active{
+        display: inline-block;
+      }
     }
     &:hover{
       .song-container-close{
@@ -229,5 +232,11 @@
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .music .song-container .song-container-close{
+    display: inline-block;
   }
 }
