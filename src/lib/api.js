@@ -1,5 +1,11 @@
 import {httpRequest} from './plugins/http-request';
  const webApi =  {
+	 getSongList() {
+		return httpRequest(`/song`, {}, {method: 'get'}, {})
+	 },
+	 getWeather(data) {
+		 return httpRequest(`/weather`, {}, {method: 'get'}, data)
+	 },
 	 login(data){
 		 return httpRequest(`/login`, data, {method: 'post'})
 	 },
@@ -95,9 +101,6 @@ import {httpRequest} from './plugins/http-request';
 	 },
 	 getCurrentWeekRecipe() {
 		 return httpRequest(`/recipe-week`, {}, {method: 'get'}, {})
-	 },
-	 getSongList() {
-		 return httpRequest(`/song`, {}, {method: 'get'}, {})
 	 }
  };
 export default webApi;

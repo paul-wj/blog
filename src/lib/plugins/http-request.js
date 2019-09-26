@@ -73,9 +73,13 @@ const getResult = res => {
  */
 export const httpRequest = (url, data = {}, options = { method : 'post'}, params, context) => {
 	let authorization = window.localStorage.getItem("authorization") || '';
+	const cip = window.returnCitySN ? window.returnCitySN.cip : '';
     return axios(Object.assign({
         baseURL: BASE_URL,
-        headers: {authorization},
+        headers: {
+            authorization,
+            cip
+        },
         url,
         data,
         params,
