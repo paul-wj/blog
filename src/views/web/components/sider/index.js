@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {getArticleList} from '../../../../redux/article/actions'
 import Clock from '../../../../lib/plugins/clock'
 import Music from './music'
-import Weather from './weather'
+// import Weather from './weather'
 import './index.scss'
 
 @connect(state => ({
@@ -64,7 +64,7 @@ class AppSider extends Component{
 					<a href="https://github.com/wj5576081" rel="noreferrer noopener" target="_blank"><Icon type="github" />&nbsp;github</a>
 				</p>
 			</Card>
-			<Weather/>
+			{/*<Weather/>*/}
 			<Music/>
 			<Card className="app-sider-statistics">
 				<Row gutter={24}>
