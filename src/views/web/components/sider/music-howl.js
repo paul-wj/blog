@@ -1,7 +1,7 @@
 import lodash from "lodash";
 import {Howl, Howler} from "howler";
 import {message} from "antd";
-
+//howler尚未能解决手机端后台播放问题  HTML5 Audio pool exhausted, returning potentially locked audio object.  https://github.com/goldfire/howler.js/issues/1110
 export default class MusicHowl {
 	constructor(playlist) {
 		this.playlist = playlist;
@@ -12,6 +12,7 @@ export default class MusicHowl {
 		this.author = currentPlay.author;
 		this.picUrl = currentPlay.picUrl;
 		this.endTime = '';
+		currentPlay.howl = this.createSound(currentPlay);
 	}
 
 	static formatTime(time) {
@@ -27,6 +28,55 @@ export default class MusicHowl {
 		return (lodash.debounce(callbak, 100))();
 	}
 
+	createSound(soundData) {
+		const step = this.step.bind(this);
+		const self = this;
+		const sound = new Howl({
+			src: [soundData.url],
+			html5: true,
+			onplay: function () {
+				//设置当前歌曲时间长度
+				self.endTime = MusicHowl.formatTime(Math.round(sound.duration()));
+				self.timer = requestAnimationFrame(step);
+				console.log(`${soundData.name}play`)
+			},
+			onload: function () {
+				console.log(`${soundData.name}load`)
+			},
+			onloaderror: function(id, err) {
+				console.log(id, err, 'loading');
+				if (id) {
+					message.error('歌曲加载出错，请切换歌曲');
+				}
+			},
+			onplayerror: function(id, err) {
+				console.log(id, err, 'playing');
+				if (id) {
+					message.error('歌曲播放出错，请切换歌曲');
+				}
+				self.skip('next');
+			},
+			onend: function () {
+				self.cancelStep();
+				self.skip('next');
+				console.log(`${soundData.name}end`)
+			},
+			onpause: function () {
+				self.cancelStep();
+				console.log(`${soundData.name}pause`)
+			},
+			onstop: function () {
+				self.cancelStep();
+				console.log(`${soundData.name}stop`)
+			},
+			onseek: function () {
+				self.timer = requestAnimationFrame(step);
+				console.log(`${soundData.name}seek`)
+			}
+		});
+		return sound;
+	}
+
 	//开始播放
 	play(soundIndex) {
 		const {playlist, index} = this;
@@ -37,54 +87,11 @@ export default class MusicHowl {
 		this.author = soundData.author;
 		this.picUrl = soundData.picUrl;
 
-		const self = this;
 		let sound;
 		if (soundData.howl) {
 			sound = soundData.howl;
 		} else {
-			const step = this.step.bind(this);
-			sound = soundData.howl = new Howl({
-				src: [soundData.url],
-				html5: true,
-				onplay: function () {
-					//设置当前歌曲时间长度
-					self.endTime = MusicHowl.formatTime(Math.round(sound.duration()));
-					self.timer = requestAnimationFrame(step);
-					console.log(`${soundData.name}play`)
-				},
-				onload: function () {
-					console.log(`${soundData.name}load`)
-				},
-				onloaderror: function(id, err) {
-					console.log(id, err, 'loading');
-					if (id) {
-						message.error('歌曲加载出错，请切换歌曲');
-					}
-				},
-				onplayerror: function(id, err) {
-					console.log(id, err, 'playing');
-					if (id) {
-						message.error('歌曲播放出错，请切换歌曲');
-					}
-				},
-				onend: function () {
-					self.cancelStep();
-					self.skip('next');
-					console.log(`${soundData.name}end`)
-				},
-				onpause: function () {
-					self.cancelStep();
-					console.log(`${soundData.name}pause`)
-				},
-				onstop: function () {
-					self.cancelStep();
-					console.log(`${soundData.name}stop`)
-				},
-				onseek: function () {
-					self.timer = requestAnimationFrame(step);
-					console.log(`${soundData.name}seek`)
-				}
-			})
+			sound = soundData.howl = this.createSound(soundData)
 		}
 		this.index = soundIndex;
 		this.isPause = false;
@@ -117,6 +124,7 @@ export default class MusicHowl {
 		const currentSound = playlist[index].howl;
 		if (currentSound) {
 			currentSound.stop();
+			currentSound.unload();
 		}
 		this.play(currentIndex)
 	}
@@ -125,12 +133,13 @@ export default class MusicHowl {
 		MusicHowl.debounceSeek(() => {
 			const {playlist, index} = this;
 			const sound = playlist[index].howl;
+			const seek = sound.duration() * (per/100);
 			if (sound.playing()) {
-				const seek = sound.duration() * (per/100);
 				sound.seek(Math.round(seek));
 			}
 		});
 	}
+
 	step() {
 		const {playlist, index} = this;
 		const sound = playlist[index].howl;

@@ -67,18 +67,16 @@ class Music extends Component{
 	skipTo(index)　{
 		const {musicHowl} = this.state;
 		musicHowl.skipTo(index);
-		const {name, author, picUrl} = musicHowl;
-		this.setState({isPause: false, name, author, picUrl});
 		this.step();
 	}
 
 	step() {
 		const {endTime, musicHowl} = this.state;
-		const {currentTime, progress, endTime: currentEndTime} = musicHowl;
+		const {currentTime, progress, endTime: currentEndTime, name, author, picUrl} = musicHowl;
 		if (endTime !== currentEndTime) {
-			this.setState({currentTime, progress, endTime: currentEndTime});
+			this.setState({currentTime, progress, endTime: currentEndTime, name, author, picUrl});
 		} else {
-			this.setState({currentTime, progress});
+			this.setState({currentTime, progress, name, author, picUrl});
 		}
 		const timer = requestAnimationFrame(this.step.bind(this));
 		this.setState({timer});
