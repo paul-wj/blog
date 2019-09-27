@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import { Input, Select, Button} from 'antd';
 import SimpleMDE from 'simplemde'
 import { translateMarkdown } from '../../../../lib/utils'
-import 'simplemde/dist/simplemde.min.css'
 import './index.scss'
 import FormItem from '../../components/base/form-item'
 
