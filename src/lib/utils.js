@@ -53,3 +53,11 @@ export const firstLetterUppercase = (val) => {
 	}
 	return val.substring(0, 1).toUpperCase() + val.substring(1);
 };
+
+export const LazyLoadingCssCdn = url => {
+	const cssEle = document.createElement("link");
+	cssEle.rel = "stylesheet";
+	cssEle.type = "text/css";
+	cssEle.href = url;
+	document.body.appendChild(cssEle);
+};
