@@ -660,7 +660,8 @@ module.exports = function(webpackEnv) {
 		  'lodash': '_',
 		  'axios' : 'axios',
 		  'simplemde': 'SimpleMDE',
-		  'howler': 'Howler'
+		  'howler': 'Howler',
+		  'marked': 'marked'
 	  }
   };
 };
