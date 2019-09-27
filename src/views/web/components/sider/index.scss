@@ -1,6 +1,11 @@
 .mt-10{
   margin-top: 10px;
 }
+.app-sider{
+  &> .ant-card.ant-card-bordered{
+    margin-bottom: 10px;
+  }
+}
 .app-sider-title{
   display: flex;
   align-items: center;
