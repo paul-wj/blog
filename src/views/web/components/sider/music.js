@@ -34,7 +34,6 @@ class Music extends Component{
 			this.setState({songList: []});
 			let result = res.data;
 			if (result && result.length) {
-				result = result.reverse();
 				const musicHowl = new MusicHowl(result);
 				const {name, author, picUrl, endTime} = musicHowl;
 				this.setState({songList: result, musicHowl, name, author, picUrl, endTime}, () => {
