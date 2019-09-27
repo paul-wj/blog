@@ -66,6 +66,7 @@ class Music extends Component{
 	skipTo(index)　{
 		const {musicHowl} = this.state;
 		musicHowl.skipTo(index);
+		this.setState({isPause: false});
 		this.step();
 	}
 
