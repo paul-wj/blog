@@ -247,28 +247,8 @@ module.exports = function(webpackEnv) {
       // https://twitter.com/wSokra/status/969633336732905474
       // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
       splitChunks: {
-	      chunks: 'all',
-	      name: false,
-	      cacheGroups: {
-		      commons: {
-			      name: 'commons',
-			      chunks: 'initial',
-			      minChunks: 2
-		      },
-		      'react-vendor': {
-			      test: /[\\/]node_modules[\\/](react|react-dom|redux|react-router-dom)[\\/]/,
-			      name: 'react-vendor',
-			      priority: 3,
-			      reuseExistingChunk: false
-		      },
-		      'antd-vendor': {
-			      test: /[\\/]node_modules[\\/](antd)[\\/]/,
-			      name: 'antd-vendor',
-			      priority: 2,
-			      reuseExistingChunk: false
-		      },
-
-	      }
+        chunks: 'all',
+        name: false,
       },
       // Keep the runtime chunk separated to enable long term caching
       // https://twitter.com/wSokra/status/969679223278505985
@@ -672,5 +652,15 @@ module.exports = function(webpackEnv) {
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
+	  externals: {
+		  "react": "React",
+		  "react-dom": "ReactDOM",
+		  'react-router-dom': 'ReactRouterDOM',
+		  'antd': 'antd',
+		  'lodash': '_',
+		  'axios' : 'axios',
+		  'simplemde': 'SimpleMDE',
+		  'howler': 'Howler'
+	  }
   };
 };

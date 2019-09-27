@@ -5,262 +5,37 @@
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="theme-color" content="#000000" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <link href="https://cdn.bootcss.com/antd/3.20.5/antd.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.css" rel="stylesheet">
     <title>汪小二的博客</title>
+    <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+    <script src="https://unpkg.com/react@16.8.5/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16.8.5/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://cdn.bootcss.com/react-router-dom/4.4.0-beta.6/react-router-dom.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/antd/3.20.5/antd.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
     <script src="https://cdn.bootcss.com/highlight.js/9.15.6/highlight.min.js"></script>
-    <style>
-      .react-spin {
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        color: rgba(0, 0, 0, 0.65);
-        font-size: 14px;
-        font-variant: tabular-nums;
-        line-height: 1.5;
-        list-style: none;
-        -webkit-font-feature-settings: 'tnum';
-        font-feature-settings: 'tnum';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        display: none;
-        color: #1890ff;
-        text-align: center;
-        vertical-align: middle;
-        opacity: 0;
-        -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-        transition: -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-        transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-        transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-        transform: translate3d(-50%, -50%, 0);
-      }
-      .react-spin-spinning {
-        /*position: static;*/
-        display: inline-block;
-        opacity: 1;
-      }
-      .react-spin-nested-loading {
-        position: relative;
-      }
-      .react-spin-nested-loading > div > .react-spin {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 4;
-        display: block;
-        width: 100%;
-        height: 100%;
-        max-height: 400px;
-      }
-      .react-spin-nested-loading > div > .react-spin .react-spin-dot {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin: -10px;
-      }
-      .react-spin-nested-loading > div > .react-spin .react-spin-text {
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        padding-top: 5px;
-        text-shadow: 0 1px 2px #fff;
-      }
-      .react-spin-nested-loading > div > .react-spin.react-spin-show-text .react-spin-dot {
-        margin-top: -20px;
-      }
-      .react-spin-nested-loading > div > .react-spin-sm .react-spin-dot {
-        margin: -7px;
-      }
-      .react-spin-nested-loading > div > .react-spin-sm .react-spin-text {
-        padding-top: 2px;
-      }
-      .react-spin-nested-loading > div > .react-spin-sm.react-spin-show-text .react-spin-dot {
-        margin-top: -17px;
-      }
-      .react-spin-nested-loading > div > .react-spin-lg .react-spin-dot {
-        margin: -16px;
-      }
-      .react-spin-nested-loading > div > .react-spin-lg .react-spin-text {
-        padding-top: 11px;
-      }
-      .react-spin-nested-loading > div > .react-spin-lg.react-spin-show-text .react-spin-dot {
-        margin-top: -26px;
-      }
-      .react-spin-container {
-        position: relative;
-        -webkit-transition: opacity 0.3s;
-        transition: opacity 0.3s;
-      }
-      .react-spin-container::after {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 10;
-        display: none \9;
-        width: 100%;
-        height: 100%;
-        background: #fff;
-        opacity: 0;
-        -webkit-transition: all 0.3s;
-        transition: all 0.3s;
-        pointer-events: none;
-        content: '';
-      }
-      .react-spin-blur {
-        clear: both;
-        overflow: hidden;
-        opacity: 0.5;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        pointer-events: none;
-      }
-      .react-spin-blur::after {
-        opacity: 0.4;
-        pointer-events: auto;
-      }
-      .react-spin-tip {
-        color: rgba(0, 0, 0, 0.45);
-      }
-      .react-spin-dot {
-        position: relative;
-        display: inline-block;
-        font-size: 20px;
-        width: 50px;
-        height: 50px;
-      }
-      .react-spin-dot i {
-        position: absolute;
-        display: block;
-        width: 25px;
-        height: 25px;
-        background-color: #1890ff;
-        border-radius: 100%;
-        -webkit-transform: scale(0.75);
-        -ms-transform: scale(0.75);
-        transform: scale(0.75);
-        -webkit-transform-origin: 50% 50%;
-        -ms-transform-origin: 50% 50%;
-        transform-origin: 50% 50%;
-        opacity: 0.3;
-        -webkit-animation: antSpinMove 1s infinite linear alternate;
-        animation: antSpinMove 1s infinite linear alternate;
-      }
-      .react-spin-dot i:nth-child(1) {
-        top: 0;
-        left: 0;
-      }
-      .react-spin-dot i:nth-child(2) {
-        top: 0;
-        right: 0;
-        -webkit-animation-delay: 0.4s;
-        animation-delay: 0.4s;
-      }
-      .react-spin-dot i:nth-child(3) {
-        right: 0;
-        bottom: 0;
-        -webkit-animation-delay: 0.8s;
-        animation-delay: 0.8s;
-      }
-      .react-spin-dot i:nth-child(4) {
-        bottom: 0;
-        left: 0;
-        -webkit-animation-delay: 1.2s;
-        animation-delay: 1.2s;
-      }
-      .react-spin-dot-spin {
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
-        -webkit-animation: antRotate 1.2s infinite linear;
-        animation: antRotate 1.2s infinite linear;
-      }
-      .react-spin-sm .react-spin-dot {
-        font-size: 14px;
-        width: 14px;
-        height: 14px;
-      }
-      .react-spin-sm .react-spin-dot i {
-        width: 6px;
-        height: 6px;
-      }
-      .react-spin-lg .react-spin-dot {
-        font-size: 32px;
-        width: 32px;
-        height: 32px;
-      }
-      .react-spin-lg .react-spin-dot i {
-        width: 14px;
-        height: 14px;
-      }
-      .react-spin.react-spin-show-text .react-spin-text {
-        display: block;
-      }
-      @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-        /* IE10+ */
-        .react-spin-blur {
-          background: #fff;
-          opacity: 0.5;
-        }
-      }
-      @-webkit-keyframes antSpinMove {
-        to {
-          opacity: 1;
-        }
-      }
-      @keyframes antSpinMove {
-        to {
-          opacity: 1;
-        }
-      }
-      @-webkit-keyframes antRotate {
-        to {
-          -webkit-transform: rotate(405deg);
-          transform: rotate(405deg);
-        }
-      }
-      @keyframes antRotate {
-        to {
-          -webkit-transform: rotate(405deg);
-          transform: rotate(405deg);
-        }
-      }
-    </style>
+    <script src="https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.js" ></script>
+    <script src="https://cdn.bootcss.com/howler/2.1.2/howler.min.js"></script>
+    <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
-      <div class="react-spin react-spin-spinning react-spin-show-text"><span class="react-spin-dot react-spin-dot-spin"><i class="react-spin-dot-item"></i><i class="react-spin-dot-item"></i><i class="react-spin-dot-item"></i><i class="react-spin-dot-item"></i></span><div class="react-spin-text">服务器带宽太小(1M)，首次加载时间稍长，请耐心等待...</div></div>
+      <div class="ant-spin ant-spin-spinning ant-spin-show-text" style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);">
+        <span class="ant-spin-dot ant-spin-dot-spin">
+          <i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i>
+          <i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i>
+        </span>
+        <div class="ant-spin-text">服务器带宽太小(1M)，首次加载时间稍长，请耐心等待...</div>
+      </div>
     </div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag-category.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
-  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
   <!--<script src="//cdn.bootcss.com/eruda/1.2.6/eruda.min.js"></script>-->
   <!--<script>eruda.init();</script>-->
 </html>
