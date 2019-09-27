@@ -1,6 +1,8 @@
-import lodash from "lodash";
-import {Howl, Howler} from "howler";
+import {debounce} from "lodash";
 import {message} from "antd";
+// import {Howl, Howler} from "howler";
+
+const {Howl, Howler} = window;
 //howler尚未能解决手机端后台播放问题  HTML5 Audio pool exhausted, returning potentially locked audio object.  https://github.com/goldfire/howler.js/issues/1110
 export default class MusicHowl {
 	constructor(playlist) {
@@ -25,7 +27,7 @@ export default class MusicHowl {
 	}
 
 	static debounceSeek(callbak) {
-		return (lodash.debounce(callbak, 100))();
+		return (debounce(callbak, 100))();
 	}
 
 	createSound(soundData) {
