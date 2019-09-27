@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import adminRoutes from '../../router'
 import { connect } from 'react-redux'
 import {setOpenKes, setSelectedKeys} from '../../../../redux/admin/actions'
+import {cloneDeep} from 'lodash'
 import './index.scss'
 
 import {Icon, Layout, Menu} from "antd";
@@ -24,7 +25,7 @@ class adminSider extends Component {
 
 	getMenuList = () => {
 		let prePath = `/${adminRoutes[0].path}`;
-		let routes = this.$lodash.cloneDeep(adminRoutes[0].childRoutes);
+		let routes = cloneDeep(adminRoutes[0].childRoutes);
 		let callback = (routes) => {
 			routes.forEach(route => {
 				if (route.path === '' || route.path) {

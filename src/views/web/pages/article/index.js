@@ -3,12 +3,11 @@ import {withRouter} from "react-router-dom";
 import {translateMarkdown} from '../../../../lib/utils'
 import { Spin, Icon} from 'antd';
 import { connect } from 'react-redux'
-
+import {throttle} from 'lodash'
 import Tags from "../../components/base/tags";
 import ArticleComment from './comment'
 
 import './index.scss'
-
 
 let scrollTop = 0;
 @connect(state => ({
@@ -33,7 +32,7 @@ class ArticleDetail extends Component {
 	};
 
 	contentDomScrollFn = () => {
-		return !this.$lodash.throttle(() => {
+		return throttle(() => {
 			scrollTop = this.contentDom.scrollTop;
 		}, 200)()
 	};
