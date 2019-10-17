@@ -9,6 +9,30 @@
     <link href="https://cdn.bootcss.com/antd/3.20.5/antd.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.css" rel="stylesheet">
     <title>汪小二的博客</title>
+    <!--ie 9,10 不支持es6，7问题， 按需加载-->
+    <script type="text/javascript">
+	    if(!window.Promise){
+		    var newScript = document.createElement('script');
+		    newScript.type = "text/javascript";
+		    newScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.6.0/polyfill.min.js?excludes=Object.setPrototypeOf';
+		    document.head.appendChild(newScript);
+	    }
+	    (function() {
+		    Object.setPrototypeOf = Object.setPrototypeOf || ({__proto__: []} instanceof Array ? setProtoOf : mixinProperties);
+		    function setProtoOf(obj, proto) {
+			    obj.__proto__ = proto;
+			    return obj;
+		    }
+		    function mixinProperties(obj, proto) {
+			    for (var prop in proto) {
+				    if (!obj.hasOwnProperty(prop)) {
+					    obj[prop] = proto[prop];
+				    }
+			    }
+			    return obj;
+		    }
+	    })();
+    </script>
     <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
     <script src="https://unpkg.com/react@16.8.5/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16.8.5/umd/react-dom.production.min.js" crossorigin></script>
