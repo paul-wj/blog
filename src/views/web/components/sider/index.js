@@ -65,7 +65,7 @@ class AppSider extends Component{
 				</p>
 			</Card>
 			{/*<Weather/>*/}
-			<Music/>
+			{window.attachEvent ? null : <Music/>}
 			<Card className="app-sider-statistics">
 				<Row gutter={24}>
 					{statisticsList.map((statistics, index) => <Col
