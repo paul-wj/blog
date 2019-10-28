@@ -1,5 +1,5 @@
 ## 前台： react全家桶 + antd
-## 后台：koa2 + mysql + ioredis &nbsp;&nbsp;[(https://github.com/wj5576081/react-blog)](https://github.com/wj5576081/react-blog)
+## 后台：koa2 + mysql + ioredis &nbsp;&nbsp;[(https://github.com/wj5576081/blog-amdin)](https://github.com/wj5576081/blog-amdin)
 
 > 一个及其简洁的个人博客系统、个人玩耍使用、想到好玩的就写！！
 
