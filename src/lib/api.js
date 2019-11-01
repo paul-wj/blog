@@ -101,6 +101,15 @@ import {httpRequest} from './plugins/http-request';
 	 },
 	 getCurrentWeekRecipe() {
 		 return httpRequest(`/recipe-week`, {}, {method: 'get'}, {})
+	 },
+	 getUnreadMessageList() {
+		 return httpRequest(`/message-un-read`, {}, {method: 'get'}, {})
+	 },
+	 readMessage(data) {
+		 return httpRequest(`/message-read`, data, {method: 'post'}, {})
+	 },
+	 clearUnreadMessage(data) {
+		 return httpRequest(`/message-read-batch`, data, {method: 'post'}, {})
 	 }
  };
 export default webApi;
