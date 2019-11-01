@@ -68,7 +68,7 @@ class ArticleComment extends Component {
 
 
 	render() {
-		const {articleTitle, userInfo} = this.props;
+		const {articleId, articleTitle, userInfo} = this.props;
 		const {userId, profilePicture} = userInfo;
 		const {commentList} = this.state;
 		return articleTitle ? <div className="comments">
@@ -89,7 +89,7 @@ class ArticleComment extends Component {
 					添加评论
 				</Button>
 			</Form.Item>
-			<ArticleReply getCommentList={this.getArticleCommentList} updateCommentList={msg => this.updateCommentList(msg)} commentList={commentList} />
+			<ArticleReply articleId={articleId} getCommentList={this.getArticleCommentList} updateCommentList={msg => this.updateCommentList(msg)} commentList={commentList} />
 		</div> : null
 	}
 }

@@ -19,6 +19,7 @@ const TextArea = Input.TextArea;
 class ArticleReply extends Component{
 
 	static propTypes = {
+		articleId: PropTypes.number.isRequired,
 		commentList: PropTypes.array.isRequired
 	};
 
@@ -39,9 +40,9 @@ class ArticleReply extends Component{
 	};
 
 	createArticleCommentReply = async (index, type) => {
-		const {getCommentList, commentList} = this.props;
+		const {articleId, getCommentList, commentList} = this.props;
 		const currentComment = commentList[index];
-		let res = await this.$webApi.createArticleCommentReply(currentComment.id, {replyWay: 10, content: this.state.replyContent, toUserId: currentComment.userId, type});
+		let res = await this.$webApi.createArticleCommentReply(currentComment.id, {articleId, replyWay: 10, content: this.state.replyContent, toUserId: currentComment.userId, type});
 		if (res.flags === 'success') {
 			if (type === 30) {
 				this.$toast.success('回复成功');
@@ -70,10 +71,10 @@ class ArticleReply extends Component{
 		updateCommentList(commentList)
 	};
 	createArticleReplyToReply = async (commentIndex, replyIndex, type) => {
-		const {getCommentList, commentList} = this.props;
+		const {articleId, getCommentList, commentList} = this.props;
 		const currentComment = commentList[commentIndex];
 		const currentReply = currentComment.reply.replyList[replyIndex];
-		let res = await this.$webApi.createArticleCommentReply(currentComment.id, {replyWay: 20, replyId: currentReply.id, content: this.state.replyToReplyContent, toUserId: currentReply.userId, type});
+		let res = await this.$webApi.createArticleCommentReply(currentComment.id, {articleId, replyWay: 20, replyId: currentReply.id, content: this.state.replyToReplyContent, toUserId: currentReply.userId, type});
 		if (res.flags === 'success') {
 			if (type === 30) {
 				this.$toast.success('回复成功');
