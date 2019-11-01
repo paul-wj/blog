@@ -16,14 +16,12 @@ class HeaderNav extends Component {
 		mode: 'horizontal'
 	};
 
-	state = {};
-
 	render() {
 		const {navList, mode} = this.props;
 		return <Menu className="header-menu" selectedKeys={[this.props.location.pathname]} mode={mode}>
 			{navList.map(nav => <Menu.Item key={nav.path}>
 				<Link to={nav.path}>
-					{nav.icon && <Icon type={nav.icon}/>}
+					{nav.iconType ? nav.iconType === 10 ? <Icon type={nav.iconClassName}/> : <i className={`iconfont ${nav.iconClassName}`}/> : null}
 					<span>{nav.name}</span>
 				</Link>
 			</Menu.Item>)}
