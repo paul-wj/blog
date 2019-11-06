@@ -56,13 +56,12 @@ class WebLayout extends Component {
 
 	startWebSocketServer(userId) {
 		const webSocket = new WebSocket();
-		webSocket.connect('ws://188.188.188.233:9000', '/notice');
+		webSocket.connect(`ws://${process.env.SOCKET_URL}`, '/notice');
 
 		webSocket.register('connect', ()=>{
 			console.log('Socket connected');
 			webSocket.socket.emit('joinNoticeRoom', userId);
 			WebLayout.createWebSocket(userId, webSocket);
-			// webSocket.socket.emit('sendNotice', '123123');
 		});
 
 		webSocket.register('disconnect', ()=>{
