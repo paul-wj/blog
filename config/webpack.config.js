@@ -661,7 +661,8 @@ module.exports = function(webpackEnv) {
 		  'axios' : 'axios',
 		  'simplemde': 'SimpleMDE',
 		  'howler': 'Howler',
-		  'marked': 'marked'
+		  'marked': 'marked',
+		  'socket.io-client': 'io'
 	  }
   };
 };
