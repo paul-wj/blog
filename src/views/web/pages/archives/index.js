@@ -42,7 +42,7 @@ class Archives extends Component{
 	 * @returns {Promise<void>}
 	 */
 	changePaginationCurrent = (current, pageSize) => {
-		this.setState({current, limit: pageSize * current, offset: pageSize * (current - 1)}, () => {this.getArticleSimplePageList()});
+		this.setState({current, limit: pageSize, offset: pageSize * (current - 1)}, () => {this.getArticleSimplePageList()});
 	};
 
 	componentDidMount() {

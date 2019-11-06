@@ -50,7 +50,7 @@ class Home extends Component {
 	 * @returns {Promise<void>}
 	 */
 	onShowSizeChange =  (current, pageSize) => {
-		this.setState({current, pageSize, limit: pageSize * current, offset: pageSize * (current - 1)}, () => {this.getArticlePageList()});
+		this.setState({current, pageSize, limit: pageSize, offset: pageSize * (current - 1)}, () => {this.getArticlePageList()});
 	};
 
 	/**
@@ -60,7 +60,7 @@ class Home extends Component {
 	 * @returns {Promise<void>}
 	 */
 	changePaginationCurrent = (current, pageSize) => {
-		this.setState({current, limit: pageSize * current, offset: pageSize * (current - 1)}, () => {this.getArticlePageList()});
+		this.setState({current, limit: pageSize, offset: pageSize * (current - 1)}, () => {this.getArticlePageList()});
 	};
 
 	/**
@@ -72,7 +72,7 @@ class Home extends Component {
 		if (search) {
 			const {pageSize} = this.state;
 			const {current, keyword} = decodeQuery(search);
-			this.setState({current: current - 0, title: keyword, limit: pageSize * current, offset: pageSize * (current - 1)}, () => {this.getArticlePageList()});
+			this.setState({current: current - 0, title: keyword, limit: pageSize, offset: pageSize * (current - 1)}, () => {this.getArticlePageList()});
 		} else {
 			this.setState({current: 1, title: null, limit: 10, offset: 0}, () => {this.getArticlePageList()});
 		}

@@ -71,7 +71,7 @@ class ArticleList extends Component {
 		const {pagination} = this.state;
 		this.setState({
 			pagination: Object.assign({}, pagination, {current, pageSize}),
-			limit: pageSize * current,
+			limit: pageSize,
 			offset: pageSize * (current - 1)}, () => {
 			this.getArticlePageList();
 		});
@@ -81,7 +81,7 @@ class ArticleList extends Component {
 		const {pagination} = this.state;
 		this.setState({
 			pagination: Object.assign({}, pagination, {current}),
-			limit: pageSize * current,
+			limit: pageSize,
 			offset: pageSize * (current - 1)}, () => {this.getArticlePageList()});
 	};
 
