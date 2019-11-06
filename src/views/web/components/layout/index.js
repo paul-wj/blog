@@ -56,7 +56,8 @@ class WebLayout extends Component {
 
 	startWebSocketServer(userId) {
 		const webSocket = new WebSocket();
-		webSocket.connect(`ws://${process.env.SOCKET_URL}`, '/notice');
+		const {NODE_ENV, SOCKET_URL} = process.env;
+		webSocket.connect(`${SOCKET_URL}`, `${NODE_ENV === 'production' ? '/prod' : ''}/notice`);
 
 		webSocket.register('connect', ()=>{
 			console.log('Socket connected');

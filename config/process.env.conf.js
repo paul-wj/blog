@@ -7,6 +7,6 @@ module.exports = {
 	prod: {
 		NODE_ENV: '"production"',
 		BASE_API_URL: '"https://www.wangjie818.wang/prod"',
-		SOCKET_URL: '"118.24.181.75:9000"'
+		SOCKET_URL: '"https://www.wangjie818.wang"'
 	}
 };
