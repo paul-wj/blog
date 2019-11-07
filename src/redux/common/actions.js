@@ -17,6 +17,10 @@ export const closeAuthModal = () => {
 
 //获取未读通知列表
 export const getUnreadMessageList = () => {
+	const token = localStorage.getItem('authorization');
+	if (!token) {
+		return
+	}
 	return async dispatch => {
 		const res = await webApi.getUnreadMessageList();
 		let unreadMessageList = [];
