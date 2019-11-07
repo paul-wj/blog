@@ -41,6 +41,10 @@ class UserNotice extends Component {
 
 	clearUnreadMessage = async () => {
 		const messageIdList = this.props.unreadMessageList.map(item => item.messageId);
+		if (!messageIdList.length) {
+			this.$toast.warning('暂无可清空消息');
+			return
+		}
 		const res = await this.$webApi.clearUnreadMessage({messageIdList});
 		if (res.flags === 'success') {
 			this.props.getUnreadMessageList();
