@@ -85,8 +85,10 @@ class WebLayout extends Component {
 
 	disconnectWebSocketServer() {
 		const {userInfo: {userId}} = this.props;
-		window[`sockets_${userId}`] = null;
-		delete window[`sockets_${userId}`];
+		const socketsKey = `sockets_${userId}`;
+		window[socketsKey].disconnect();
+		window[socketsKey] = null;
+		delete window[socketsKey];
 	}
 
 	render() {
