@@ -17,6 +17,7 @@
 - [x] 后台：文章管理
 - [x] 响应式、回到顶部、`markdown` 代码高亮
 - [x] 用户可以评论与回复
+- [x] 全局消息通知系统（socket.io）
 
 ### 技术栈
 - 前端 （基于 `create-react-app eject` 后的配置）
@@ -25,6 +26,7 @@
   - `marked highlight.js howler`
   - `webpack` 打包公共静态资源改为cdn（本人服务器带宽太小，解决首屏加载过慢问题）
   - `axios` 封装
+  - `socket.io`
 
 ## 博客预览
 ### pc 端
