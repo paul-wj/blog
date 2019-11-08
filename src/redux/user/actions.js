@@ -43,7 +43,7 @@ export const logout = () => {
 	return async dispatch => {
 		await webApi.loginOut();
 		localStorage.removeItem('authorization');
-		dispatch({ type: 'userInfo', payload: {userId: null, email: null, nick: null, username: null, token: null, avatarColor: null}});
+		dispatch({ type: 'userInfo', payload: {userId: null, email: null, nick: null, username: null, token: null, avatarColor: null, profilePicture: null}});
 		message.success('退出成功');
 	}
 };
