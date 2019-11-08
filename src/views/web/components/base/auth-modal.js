@@ -220,6 +220,7 @@ class AuthModal extends Component {
 	render() {
 		const { fields, checkboxValues, previewVisible, previewImage, fileList } = this.state;
 		const { authModalVisible, authModalType, userInfo } = this.props;
+		const isLoginModalType = authModalType === 'login';
 		const uploadButton = (
 			<div>
 				<Icon type="plus" />
@@ -229,11 +230,13 @@ class AuthModal extends Component {
 		const formList = [
 			{
 				key: 'email',
-				label: '邮箱',
-				el: <Input onPressEnter={this.handleCreate} placeholder="请输入您的邮箱" disabled={!!userInfo.email} />,
-				rules: [
-					{ type: 'email', message: 'The input is not valid E-mail!' },
-					{ required: true, message: 'Please input your E-mail!' }
+				label: isLoginModalType ? '账号' : '邮箱',
+				el: <Input onPressEnter={this.handleCreate} placeholder={isLoginModalType ? '请输入您的用户名或邮箱' : '请输入您的邮箱'} disabled={!!userInfo.email} />,
+				rules: isLoginModalType ? [
+					{required: true, message: 'Please input your username or Email!'}
+				] : [
+					{type: 'email', message: 'The input is not valid E-mail!'},
+					{required: true, message: 'Please input your E-mail!'}
 				]
 			},
 			{

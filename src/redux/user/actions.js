@@ -3,7 +3,8 @@ import {getRandomColor} from '../../lib/utils'
 import {message} from 'antd'
 export const login =  params => {
 	return async dispatch => {
-		const res = await webApi.login(params);
+		const {email: account, password} = params;
+		const res = await webApi.login({account, password});
 		let result = res.data;
 		if (res.flags === 'success') {
 			message.success('登录成功');
