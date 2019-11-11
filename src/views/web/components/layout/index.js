@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux'
 import AppHeader from '../header/index'
 import AppSider from '../sider/index'
-import {Layout, Row, Col, BackTop, notification} from 'antd'
+import {Layout, Row, Col, BackTop, notification, Alert} from 'antd'
 import {noticeTypeList} from "../../../../conf";
 import {getUnreadMessageList} from '../../../../redux/common/actions'
 import WebSocket from "../../../../lib/plugins/web-socket";
@@ -87,13 +87,17 @@ class WebLayout extends Component {
 	disconnectWebSocketServer() {
 		const {userInfo: {userId}} = this.props;
 		const socketsKey = `sockets_${userId}`;
-		window[socketsKey].disconnect();
-		window[socketsKey] = null;
-		delete window[socketsKey];
+		if (window[socketsKey]) {
+			window[socketsKey].disconnect();
+			window[socketsKey] = null;
+			delete window[socketsKey];
+		}
 	}
 
 	render() {
-
+		const {userInfo: {userId}} = this.props;
+		const token = localStorage.getItem('authorization');
+		const isLogin = userId && token;
 		return <Layout className="app-container">
 			<Header className="app-header"><AppHeader/></Header>
 			<Layout className="app-content">
@@ -102,7 +106,17 @@ class WebLayout extends Component {
 						<AppSider/>
 					</Col>
 					<Col className="app-col" {...contentLayout}>
-						<article className="app-content-wrapper">{this.props.children}</article>
+						{!isLogin ? (<div style={{height: 'auto', padding: '0 15px', marginBottom: '10px'}}>
+							<Alert
+								message="测试账号信息"
+								description="测试账号：admin 密码：admin"
+								type="info"
+								showIcon
+							/>
+						</div>) : null}
+						<article className="app-content-wrapper">
+							{this.props.children}
+						</article>
 					</Col>
 				</Row>
 			</Layout>
