@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
 import routes from './router/router'
-import { BrowserRouter, Route, Switch, withRouter} from "react-router-dom";
-import { connect } from 'react-redux'
-import { getTags, getCategories } from './redux/article/actions'
-import { checkUserAuth } from './redux/user/actions';
+import {BrowserRouter, Route, Switch, withRouter} from "react-router-dom";
+import {connect} from 'react-redux'
+import {getAppLayoutWidth} from './redux/app/actions'
+import {getTags, getCategories} from './redux/article/actions'
+import {checkUserAuth} from './redux/user/actions';
 import {clearGlobalLocalData} from './lib/utils'
+import {throttle} from "lodash";
 
-@connect(state => state,{ getTags, getCategories, checkUserAuth })
+@connect(state => state,{getAppLayoutWidth, getTags, getCategories, checkUserAuth})
 @withRouter
 class App extends Component {
 	componentDidMount() {
+		this.props.getAppLayoutWidth();
+		window.onresize = this.windowOnResizeFn();
 		const token = localStorage.getItem('authorization');
 		this.props.getTags();
 		this.props.getCategories();
@@ -18,6 +22,16 @@ class App extends Component {
 		} else {
 			clearGlobalLocalData();
 		}
+	}
+
+	windowOnResizeFn = () => {
+		return throttle(() => {
+			this.props.getAppLayoutWidth();
+		}, 2000)
+	};
+
+	componentWillUnmount() {
+		window.onresize = null;
 	}
 
 	renderRoutes(routes, contextPath) {
@@ -46,6 +60,7 @@ class App extends Component {
 		routes.forEach(item => renderRoute(item, contextPath));
 		return <Switch>{children}</Switch>
 	}
+
 	render() {
 		const children = this.renderRoutes(routes, '/');
 		return <BrowserRouter>{children}</BrowserRouter>
