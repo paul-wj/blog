@@ -71,7 +71,7 @@ class ArticleComment extends Component {
 		const {articleId, articleTitle, userInfo} = this.props;
 		const {userId, profilePicture} = userInfo;
 		const {commentList} = this.state;
-		return articleTitle ? <div className="comments">
+		return articleTitle ? <div id="comments" className="comments">
 			<FormItem labelWidth={40}>
 				<div slot="label">{
 					userId ?

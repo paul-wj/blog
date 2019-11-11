@@ -111,6 +111,9 @@ class Home extends Component {
 						<div className="list-item-action">
 							<Icon type="message" style={{ marginRight: 7 }} />
 							{item.comments}
+							&nbsp;&nbsp;
+							<Icon type="eye" style={{ marginRight: 7 }} />
+							{item.viewCount}
 							<Tags type="tags" list={item.tagIds} />
 							<Tags type="categories" list={item.categories} />
 						</div>
