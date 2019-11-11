@@ -12,7 +12,8 @@ import './index.scss'
 	tagList: state.article.tagList,
 	categoryList: state.article.categoryList,
 	userInfo: state.user.userInfo,
-	articleList: state.article.articleList
+	articleList: state.article.articleList,
+	appLayoutWidth: state.app.appLayoutWidth
 }), {getArticleList})
 
 @withRouter
@@ -50,7 +51,7 @@ class AppSider extends Component{
 	}
 
 	render() {
-		const {tagList, articleList} = this.props;
+		const {tagList, articleList, appLayoutWidth} = this.props;
 		const {statisticsList} = this.state;
 		const lastArticleList = articleList.length > 5 ? articleList.filter((item, index) => index < 5) : articleList;
 		return <div className="app-sider">
@@ -65,7 +66,7 @@ class AppSider extends Component{
 				</p>
 			</Card>
 			{/*<Weather/>*/}
-			{window.attachEvent ? null : <Music/>}
+			{appLayoutWidth < 992 || window.attachEvent ? null : <Music/>}
 			<Card className="app-sider-statistics">
 				<Row gutter={24}>
 					{statisticsList.map((statistics, index) => <Col
