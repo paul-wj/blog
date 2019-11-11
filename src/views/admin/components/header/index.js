@@ -3,11 +3,11 @@ import { withRouter } from "react-router-dom";
 import {Icon, Layout} from "antd";
 
 import { connect } from 'react-redux'
-import {toggleCollapsed} from '../../../../redux/admin/actions'
+import {toggleCollapsed} from '../../../../redux/app/actions'
 const { Header } = Layout;
 
 @connect(state => ({
-	collapsed: state.admin.collapsed,
+	collapsed: state.app.collapsed,
 }), {toggleCollapsed})
 @withRouter
 class adminHeader extends Component {

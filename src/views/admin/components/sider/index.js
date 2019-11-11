@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { withRouter } from "react-router-dom";
 import adminRoutes from '../../router'
 import { connect } from 'react-redux'
-import {setOpenKes, setSelectedKeys} from '../../../../redux/admin/actions'
+import {setOpenKes, setSelectedKeys} from '../../../../redux/app/actions'
 import {cloneDeep} from 'lodash'
 import './index.scss'
 
@@ -12,9 +12,9 @@ const SubMenu = Menu.SubMenu;
 
 
 @connect(state => ({
-	collapsed: state.admin.collapsed,
-	openKeys: state.admin.openKeys,
-	selectedKeys: state.admin.selectedKeys
+	collapsed: state.app.collapsed,
+	openKeys: state.app.openKeys,
+	selectedKeys: state.app.selectedKeys
 }), {setOpenKes, setSelectedKeys})
 @withRouter
 class adminSider extends Component {

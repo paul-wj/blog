@@ -19,7 +19,7 @@ const badgeStyle = {
 
 
 @connect(state => ({
-	unreadMessageList: state.admin.unreadMessageList
+	unreadMessageList: state.app.unreadMessageList
 }), {getUnreadMessageList})
 @withRouter
 class UserNotice extends Component {

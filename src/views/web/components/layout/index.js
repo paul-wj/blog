@@ -12,7 +12,8 @@ import WebSocket from "../../../../lib/plugins/web-socket";
 const {
 	Header
 } = Layout;
-
+const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 };
+const contentLayout = { xxl: 20, xl: 19, lg: 19, sm: 24, xs: 24 };
 
 @connect(state => ({userInfo: state.user.userInfo}), {getUnreadMessageList})
 @withRouter
@@ -92,13 +93,14 @@ class WebLayout extends Component {
 	}
 
 	render() {
-		const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 };
-		const contentLayout = { xxl: 20, xl: 19, lg: 19, sm: 24, xs: 24 };
+
 		return <Layout className="app-container">
 			<Header className="app-header"><AppHeader/></Header>
 			<Layout className="app-content">
 				<Row className="app-row">
-					<Col {...siderLayout}><AppSider/></Col>
+					<Col {...siderLayout}>
+						<AppSider/>
+					</Col>
 					<Col className="app-col" {...contentLayout}>
 						<article className="app-content-wrapper">{this.props.children}</article>
 					</Col>
