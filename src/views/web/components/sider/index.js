@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Card, Icon, Row, Col, Tag} from 'antd';
+import {Card, Icon, Row, Col, Tag, Divider} from 'antd';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {getArticleList} from '../../../../redux/article/actions'
@@ -7,6 +7,10 @@ import Clock from '../../../../lib/plugins/clock'
 import Music from './music'
 // import Weather from './weather'
 import './index.scss'
+
+const MyIcon = Icon.createFromIconfontCN({
+	scriptUrl: '//at.alicdn.com/t/font_1231743_04crk3acxsun.js',
+});
 
 @connect(state => ({
 	tagList: state.article.tagList,
@@ -62,7 +66,9 @@ class AppSider extends Component{
 				</p>
 				<p className="app-sider-desc">前端打杂，前端自娱自乐</p>
 				<p className="warehouse">
-					<a href="https://github.com/wj5576081" rel="noreferrer noopener" target="_blank"><Icon type="github" />&nbsp;github</a>
+					<a className="github-link" href="https://github.com/wj5576081" rel="noreferrer noopener" target="_blank"><Icon type="github" />&nbsp;github</a>
+					<Divider type="vertical" />
+					<a className="juejin-link" href="https://juejin.im/user/58be7c26a22b9d005ef8ab3f" rel="noreferrer noopener" target="_blank"><MyIcon type="icon-juejin" />&nbsp;juejin</a>
 				</p>
 			</Card>
 			{/*<Weather/>*/}
