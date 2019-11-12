@@ -12,6 +12,8 @@ const defaultStatistics = {
 class Statistics extends Component{
 
 	state = {
+		visitCounts: 0,
+		visitPersons: 0,
 		articleStatistics: defaultStatistics,
 		commentStatistics: defaultStatistics,
 		replyStatistics: defaultStatistics,
@@ -44,10 +46,33 @@ class Statistics extends Component{
 			}
 		}
 	};
+
+	getStatisticsForWebsiteVisits = () => {
+		let visitCounts = 0;
+		let visitPersons = 0;
+		const visitCountDom = document.getElementById("busuanzi_container_site_pv");
+		const visitPersonDom = document.getElementById("busuanzi_container_site_uv");
+		if (visitCountDom.style.display !== 'none') {
+			visitCounts = document.getElementById('busuanzi_value_site_pv').innerText;
+		}
+		if (visitPersonDom.style.display !== 'none') {
+			visitPersons = document.getElementById('busuanzi_value_site_uv').innerText;
+		}
+		this.setState({
+			visitCounts,
+			visitPersons,
+			loading: false
+		})
+	};
+
+
 	init = () => {
 		this.setState({loading: true}, async () => {
 			await Promise.all([this.getStatisticsForArticle(), this.getStatisticsForComment(), this.getStatisticsForReply()]);
-			this.setState({loading: false});
+			const timer = setTimeout(() => {
+				clearTimeout(timer);
+				this.getStatisticsForWebsiteVisits();
+			}, 500)
 		});
 	};
 	componentDidMount() {
@@ -64,10 +89,30 @@ class Statistics extends Component{
 		const colStyle = {
 			marginBottom: '10px'
 		};
-		const {articleStatistics, commentStatistics, replyStatistics, loading} = this.state;
+		const {articleStatistics, commentStatistics, replyStatistics, loading, visitCounts, visitPersons} = this.state;
 		return <div className="statistics">
 			<Spin tip="Loading..." className="statistics-content-spin" size="large" spinning={loading}/>
 			{!loading ? <Row gutter={16}>
+				<Col style={colStyle} {...gridOptions}>
+					<Card className="statistics--card">
+						<div className="statistics--card--top">
+							<div className="statistics--card--top--title">网站访问量
+								<Tooltip placement="top" title="网站访问量">
+									<Icon className="fr" type="exclamation-circle" />
+								</Tooltip>
+							</div>
+							<div className="statistics--card--top--total">{ articleStatistics.total }</div>
+						</div>
+						<div className="statistics--card--content">
+							<div className="statistics--card--content--fixed">
+								<span>总访问量：<i>{visitCounts}</i></span>
+							</div>
+						</div>
+						<div className="statistics--card--footer">
+							<span>总访客数：<i style={{fontStyle: 'normal'}}>{visitPersons}</i></span>
+						</div>
+					</Card>
+				</Col>
 				<Col style={colStyle} {...gridOptions}>
 					<Card className="statistics--card">
 						<div className="statistics--card--top">

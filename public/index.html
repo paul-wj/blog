@@ -9,6 +9,14 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link href="https://cdn.bootcss.com/antd/3.20.5/antd.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.css" rel="stylesheet">
+    <style>
+      #busuanzi_container_site_pv, #busuanzi_container_site_uv{
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
+    </style>
     <title>汪小二的博客</title>
     <!--ie 9,10 不支持es6，7问题， 按需加载-->
     <script type="text/javascript">
@@ -50,6 +58,7 @@
     <script src="https://cdn.bootcss.com/marked/0.6.2/marked.min.js"></script>
     <script src="https://cdn.bootcss.com/howler/2.1.2/howler.min.js"></script>
     <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -62,6 +71,8 @@
         <div class="ant-spin-text">服务器带宽太小(1M)，首次加载时间稍长，请耐心等待...</div>
       </div>
     </div>
+    <span id="busuanzi_container_site_pv" style='display:none'>| 总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span>
+    <span id="busuanzi_container_site_uv" style='display:none'>| 总访客数 <span id="busuanzi_value_site_uv"></span> 人 </span>
   </body>
   <!--<script src="//cdn.bootcss.com/eruda/1.2.6/eruda.min.js"></script>-->
   <!--<script>eruda.init();</script>-->
