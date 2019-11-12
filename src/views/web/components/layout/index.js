@@ -100,7 +100,7 @@ class WebLayout extends Component {
 		const isLogin = userId && token;
 		return <Layout className="app-container">
 			<Header className="app-header"><AppHeader/></Header>
-			<Layout className="app-content">
+			<Layout className="app-content" style={{overflow: isLogin ? '' : 'hidden'}}>
 				<Row className="app-row">
 					<Col {...siderLayout}>
 						<AppSider/>
@@ -114,7 +114,7 @@ class WebLayout extends Component {
 								showIcon
 							/>
 						</div>) : null}
-						<article className="app-content-wrapper">
+						<article className="app-content-wrapper" style={{paddingBottom: isLogin ? '' : '82px'}}>
 							{this.props.children}
 						</article>
 					</Col>
