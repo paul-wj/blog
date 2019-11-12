@@ -5,6 +5,9 @@
   &> .ant-card.ant-card-bordered{
     margin-bottom: 10px;
   }
+  .ant-card-body{
+    padding: 15px;
+  }
 }
 .app-sider-title{
   font-size: 0;
@@ -18,7 +21,7 @@
   span{
     float: left;
     margin-left: 10px;
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 .app-sider-desc{
