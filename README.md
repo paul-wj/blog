@@ -1,5 +1,5 @@
 ## 前台： react全家桶 + antd
-## 后台：koa2 + mysql + ioredis &nbsp;&nbsp;[(https://github.com/wj5576081/blog-amdin)](https://github.com/wj5576081/blog-amdin)
+## 后台：koa2 + mysql + ioredis &nbsp;&nbsp;[(博客后台git地址)](https://github.com/paul-wj/blog-amdin)
 
 > 一个及其简洁的个人博客系统、个人玩耍使用、想到好玩的就写！！
 
@@ -61,7 +61,7 @@
 
 ## 使用这个项目
 ```bash
-git clone https://github.com/wj5576081/react-first.git
+git clone https://github.com/paul-wj/blog.git
 
 ## 安装依赖以及开启开发模式
 cd react-first
