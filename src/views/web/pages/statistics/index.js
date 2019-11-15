@@ -101,7 +101,7 @@ class Statistics extends Component{
 									<Icon className="fr" type="exclamation-circle" />
 								</Tooltip>
 							</div>
-							<div className="statistics--card--top--total">{ articleStatistics.total }</div>
+							<div className="statistics--card--top--total">{ visitCounts }</div>
 						</div>
 						<div className="statistics--card--content">
 							<div className="statistics--card--content--fixed">
