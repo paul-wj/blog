@@ -25,7 +25,8 @@ class Music extends Component{
 		isOpen: false,
 		isMask: false,
 		volume: 50,
-		isMute: false
+		isMute: false,
+		isOrderPlay: true
 	};
 
 	async getSongList() {
@@ -56,8 +57,12 @@ class Music extends Component{
 	}
 
 	skip(direction) {
-		const {musicHowl} = this.state;
-		musicHowl.skip(direction);
+		const {musicHowl, isOrderPlay, songList} = this.state;
+		if (isOrderPlay) {
+			musicHowl.skip(direction);
+		} else {
+			musicHowl.skipTo(Math.floor(songList.length * Math.random()));
+		}
 		const {name, author, picUrl} = musicHowl;
 		this.setState({isPause: false, name, author, picUrl});
 		this.step();
@@ -145,26 +150,26 @@ class Music extends Component{
 	render(){
 		const {className} = this.props;
 		const {play, skip, skipTo, onProgressChange, toggleSongListContainer, changeVolume, changeMute} = this;
-		const {isPause, name, author, picUrl, progress, currentTime, endTime, isMask, songList, volume, isMute} = this.state;
-		return (<Fragment>{ songList.length ? <Card className={`music ${className}`}>
+		const {isPause, name, author, picUrl, progress, currentTime, endTime, isMask, songList, volume, isMute, isOrderPlay} = this.state;
+		return (<Fragment>{ songList.length ? <Card className={`music ${className || ''}`}>
 			<div className="music-content">
 				<p className="music-title">私人播放器<span onClick={toggleSongListContainer.bind(this)} className="iconfont icon-category" /></p>
 				<p className="music-name">{name}</p>
 				<p className="music-author">{author}</p>
 				{picUrl ? <p className="music-pic"><img src={picUrl} width="100%" alt={name} /></p> : null}
-				<Slider onChange={onProgressChange.bind(this)} style={{margin: '14px 2px 10px'}} value={progress} tipFormatter={null} />
+				<Slider onChange={onProgressChange.bind(this)} disabled={isPause} style={{margin: '14px 2px 10px'}} value={progress} tipFormatter={null} />
 				<p className="music-time" style={{visibility: currentTime && endTime ? 'visible' : 'hidden'}}><span>{currentTime}</span>/<span>{endTime}</span></p>
 				<div className="music-control">
-					<i onClick={skip.bind(this, 'prev')} className="iconfont icon-left" />
-					<i onClick={play.bind(this)} className={`iconfont ${isPause ? 'icon-bofang' : 'icon-zanting'}`}/>
-					<i onClick={skip.bind(this, 'next')} className="iconfont icon-left right" />
+					<span className={`random-play ${isOrderPlay ? '' : 'active'}`}><i onClick={() => this.setState({isOrderPlay: false})} className="iconfont icon-suiji" /></span>
+					<span className="left"><i onClick={skip.bind(this, 'prev')} className="iconfont icon-left" /></span>
+					<span className="action"><i onClick={play.bind(this)} className={`iconfont ${isPause ? 'icon-bofang' : 'icon-zanting'}`}/></span>
+					<span className="right"><i onClick={skip.bind(this, 'next')} className="iconfont icon-left" /></span>
+					<span className={`order-play ${isOrderPlay ? 'active' : ''}`}><i  onClick={() => this.setState({isOrderPlay: true})} className="iconfont icon-xunhuan" /></span>
 				</div>
-				<div className="music-control-options">
-					<div className={`iconfont ${!isMute ? 'icon-shengyin' : 'icon-jingyin'}`}>
-						<span className="placeholder" onClick={changeMute.bind(this)} />
-						<Slider onChange={changeVolume.bind(this)} vertical className="voice-container" value={volume} />
-					</div>
-				</div>
+			</div>
+			<div className="music-control-options">
+				<i onClick={changeMute.bind(this)} className={`iconfont ${!isMute ? 'icon-shengyin' : 'icon-jingyin'}`}/>
+				<Slider onChange={changeVolume.bind(this)} disabled={isMute} className="voice-container" value={volume} />
 			</div>
 			<div className="song-container">
 				<div>

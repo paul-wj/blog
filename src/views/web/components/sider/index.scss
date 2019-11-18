@@ -68,8 +68,14 @@
 .music{
   position: relative;
   margin-top: 10px;
+  .ant-card-body{
+    padding: 0;
+  }
   p{
     margin-bottom: 0;
+  }
+  .music-content{
+    padding: 15px 15px 0 15px;
   }
   .song-container{
     display: none;
@@ -194,57 +200,51 @@
   }
   .music-control{
     line-height: 1;
-    padding: 0 15px;
     font-size: 26px;
     text-align: center;
     color: #999;
-    i{
-      cursor: pointer;
-      font-style: normal;
-      font-size: 26px;
-      color: #999;
-      &.icon-left{
-        float: left;
+    overflow: hidden;
+    span{
+      float: left;
+      width: 12%;
+      text-align: center;
+      i{
+        cursor: pointer;
+        font-style: normal;
+        font-size: 26px;
+        color: #999;
+      }
+      &.active i {
+        color: #1890ff;
+      }
+      &.left{
+        width: 25%;
+      }
+      &.action{
+        width: 25%;
       }
       &.right{
-        float: right;
+        width: 25%;
         transform: rotate(180deg);
       }
     }
   }
   .music-control-options{
-    display: none;
-    margin-top: 12px;
+    margin-top: 15px;
     line-height: 30px;
     text-align: left;
+    border-top: 1px solid #e8e8e8;
+    padding: 5px 15px 5px 5px;
     .icon-shengyin, .icon-jingyin{
-      position: relative;
       float: left;
       cursor: pointer;
       font-style: normal;
       font-size: 26px;
       color: #999;
-      .placeholder {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-      }
-      .voice-container{
-        display: none;
-        position: absolute;
-        height: 65px;
-        left: 0;
-        top: -70px;
-        z-index: 11;
-        margin: 7px 6px;
-      }
-      &:hover {
-        .voice-container{
-          display: inline-block;
-        }
-      }
+    }
+    .voice-container{
+      position: relative;
+      margin: 8px 0 0 30px;
     }
   }
 }
