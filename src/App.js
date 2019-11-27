@@ -27,7 +27,7 @@ class App extends Component {
 	windowOnResizeFn = () => {
 		return throttle(() => {
 			this.props.getAppLayoutWidth();
-		}, 2000)
+		}, 200)
 	};
 
 	componentWillUnmount() {
