@@ -8,6 +8,7 @@ const CategoryDetail = lazy(() => import(/*webpackChunkName: 'CategoryDetail'*/'
 const TagDetail = lazy(() => import(/*webpackChunkName: 'TagDetail'*/'./common/list/index'));
 const Statistics = lazy(() => import(/*webpackChunkName: 'Statistics'*/'./pages/statistics'));
 // const Recipe = lazy(() => import(/*webpackChunkName: 'Recipe'*/'./pages/recipe'));
+const About = lazy(() => import(/*webpackChunkName: 'Index'*/'./pages/about'));
 export default [{
 	path: '/',
 	name: 'app',
@@ -19,6 +20,7 @@ export default [{
 		{ path: '/categories', component: Categories, type: 10, name: '目录', iconType: 10, iconClassName: 'folder'},
 		{ path: '/statistics', component: Statistics, type: 10, name: '统计', iconType: 10, iconClassName: 'fund'},
 		// { path: '/recipe', component: Recipe, type: 10, name: '菜谱'},
+		{path: '/about', component: About, type: 10, name: '关于', iconType: 10, iconClassName: 'user'},
 		{ path: 'article/:id', component: ArticleDetail, type: 20},
 		{ path: 'category/:id', component: CategoryDetail, type: 20},
 		{ path: 'tag/:id', component: TagDetail, type: 20}
