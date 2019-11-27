@@ -6,10 +6,11 @@ import {getArticleList} from '../../../../redux/article/actions'
 import Clock from '../../../../lib/plugins/clock'
 import Music from './music'
 // import Weather from './weather'
+import {iconFontUrl} from '../../../../conf'
 import './index.scss'
 
 const MyIcon = Icon.createFromIconfontCN({
-	scriptUrl: '//at.alicdn.com/t/font_1231743_04crk3acxsun.js',
+	scriptUrl: iconFontUrl,
 });
 
 @connect(state => ({
