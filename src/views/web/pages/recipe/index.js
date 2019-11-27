@@ -6,7 +6,7 @@ import {getRandomColor} from "../../../../lib/utils";
 import dayJs from 'dayjs';
 
 @withRouter
-class Home extends Component {
+class Recipe extends Component {
 	state = {
 		loading: false,
 		recipeList: []
@@ -47,4 +47,4 @@ class Home extends Component {
 		</div>
 	}
 }
-export default Home
+export default Recipe
