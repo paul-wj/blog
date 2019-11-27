@@ -22,7 +22,9 @@
     height: 100%;
     padding: 0 10px 10px;
     overflow: hidden;
-    overflow-y: auto;
+    &:hover{
+      overflow-y: auto;
+    }
   }
   .app-row, .app-col{
     height: 100%;
