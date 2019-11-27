@@ -1,5 +1,6 @@
 export const IS_PROD = process.env.NODE_ENV === 'production';
 export const VERSION = 0.12;
+export const iconFontUrl = '//at.alicdn.com/t/font_1231743_reoorxntai.js';
 
 export const noticeTypeList = {
 	10: '评论了你的文章',
