@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@antv/data-set": "^0.10.2",
+    "@antv/g2": "^3.5.11",
     "@babel/core": "7.2.2",
     "@svgr/webpack": "4.1.0",
     "antd": "^3.20.5",
