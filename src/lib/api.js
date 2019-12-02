@@ -110,6 +110,15 @@ import {httpRequest} from './plugins/http-request';
 	 },
 	 clearUnreadMessage(data) {
 		 return httpRequest(`/message-read-batch`, data, {method: 'post'}, {})
+	 },
+	 getAboutCommentList() {
+		 return httpRequest(`/about/comment`, {}, {method: 'get'});
+	 },
+	 createAboutComment(data) {
+		 return httpRequest(`/about/comment`, data, {method: 'post'}, {});
+	 },
+	 createAboutCommentReply(data) {
+		 return httpRequest(`/about/reply`, data, {method: 'post'}, {});
 	 }
  };
 export default webApi;

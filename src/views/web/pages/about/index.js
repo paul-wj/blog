@@ -4,9 +4,10 @@ import { Divider, Button, Icon, Radio } from 'antd';
 import {iconFontUrl} from '../../../../conf'
 import G2 from '@antv/g2';
 import DataSet from '@antv/data-set';
-import dayJs from 'dayjs';
+import AboutComment from './comment'
 import './index.scss'
 
+import dayJs from 'dayjs'
 
 const chartData = [
 	{ label: 'html,css', value: 80 },
@@ -48,7 +49,6 @@ class About extends Component {
 	componentDidMount() {
 		const {currentIndex} = this.state;
 		this.switchChartByType(currentIndex);
-		console.log(this.getWorkExperience())
 	}
 
 	componentWillUnmount() {
@@ -239,7 +239,7 @@ class About extends Component {
 		}
 		chart.guide().text({
 			position: [ '50%', '50%' ],
-			content: 'Music',
+			content: '前端',
 			style: {
 				textAlign: 'center',
 				fontSize: 24,
@@ -312,6 +312,7 @@ class About extends Component {
 				<li>旅游、NBA2K、英雄联盟</li>
 				<li>欢迎交流</li>
 			</ul>
+			<AboutComment/>
 		</div>
 	}
 }

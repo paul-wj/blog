@@ -185,12 +185,13 @@
   }
   .music-mobile-close{
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 8px;
     text-align: right;
     display: inline-block;
-    width: 80px;
+    width: 20px;
     background-color: #fff;
+    cursor: pointer;
     .icon-close{
       font-size: 16px;
     }
