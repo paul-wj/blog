@@ -66,7 +66,7 @@ class AppSider extends Component{
 					<span>前端汪小二</span>
 				</p>
 				<p className="warehouse">
-					<a className="github-link" href="https://github.com/wj5576081" rel="noreferrer noopener" target="_blank"><Icon type="github" />&nbsp;github</a>
+					<a className="github-link" href="https://github.com/paul-wj" rel="noreferrer noopener" target="_blank"><Icon type="github" />&nbsp;github</a>
 					<Divider type="vertical" />
 					<a className="juejin-link" href="https://juejin.im/user/58be7c26a22b9d005ef8ab3f" rel="noreferrer noopener" target="_blank"><MyIcon type="icon-juejin" />&nbsp;juejin</a>
 				</p>
