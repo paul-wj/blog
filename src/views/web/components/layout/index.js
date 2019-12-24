@@ -4,6 +4,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux'
 import AppHeader from '../header/index'
 import AppSider from '../sider/index'
+import AppFooter from '../footer/index'
 import {Layout, Row, Col, BackTop, notification, Alert} from 'antd'
 import {noticeTypeList} from "../../../../conf";
 import {getUnreadMessageList} from '../../../../redux/common/actions'
@@ -121,6 +122,7 @@ class WebLayout extends Component {
 				</Row>
 			</Layout>
 			<BackTop target={() => document.querySelector('.app-content-wrapper')} />
+			<AppFooter/>
 		</Layout>
 	}
 }
