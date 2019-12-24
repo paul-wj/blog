@@ -50,10 +50,13 @@
     text-align: center;
     & > p {
       font-size: 12px;
-      padding: 5px 20px;
+      padding: 5px 50px;
       background-color: #fff;
       margin: 0;
       line-height: 18px;
+      .footer__icp{
+        margin-left: 12px;
+      }
       a {
         color: rgba(0,0,0,.65);;
       }
