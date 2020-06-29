@@ -31,11 +31,11 @@
 ## 博客预览
 ### pc 端
 
-![](https://user-gold-cdn.xitu.io/2019/10/28/16e10fc272ad8640?imageView2/2/w/480/h/480/q/85/interlace/1)
+![](https://user-gold-cdn.xitu.io/2020/4/13/17172c164cc999d2?w=1920&h=937&f=png&s=209223)
 
 ### 移动端
 
-![](https://user-gold-cdn.xitu.io/2019/10/28/16e10fdcb979cf6c?imageView2/2/w/480/h/480/q/85/interlace/1)
+![](https://user-gold-cdn.xitu.io/2020/4/13/17172c242f4e3a4f?w=375&h=812&f=png&s=48387)
 
 ## 项目结构
 

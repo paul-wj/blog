@@ -10,7 +10,7 @@ import {httpRequest} from './plugins/http-request';
 		 return httpRequest(`/login`, data, {method: 'post'})
 	 },
 	 loginOut() {
-		 return httpRequest(`/login-out`, {}, {method: 'delete'})
+		 return httpRequest(`/logout`, {}, {method: 'delete'})
 	 },
 	 registerUser(data) {
 		 return httpRequest(`/user`, data, {method: 'post'})
@@ -22,7 +22,7 @@ import {httpRequest} from './plugins/http-request';
 		 return httpRequest(`/user/check-auth`, {}, {method: 'get'})
 	 },
 	 getTagAllList(context) {
-		 return httpRequest(`/tag`, {}, {method: 'get'}, {}, context)
+		 return httpRequest(`/tag/all`, {}, {method: 'get'}, {}, context)
 	 },
 	 createTag(data) {
 		 return httpRequest(`/tag`, data, {method: 'post'})
@@ -34,7 +34,7 @@ import {httpRequest} from './plugins/http-request';
 		 return httpRequest(`/tag/${id}`, {}, {method: 'delete'})
 	 },
 	 getCategoryAllList(context) {
-		 return httpRequest(`/category`, {}, {method: 'get'}, {}, context)
+		 return httpRequest(`/category/all`, {}, {method: 'get'}, {}, context)
 	 },
 	 createCategory(data) {
 		 return httpRequest(`/category`, data, {method: 'post'})
@@ -46,7 +46,7 @@ import {httpRequest} from './plugins/http-request';
 		 return httpRequest(`/category/${id}`, {}, {method: 'delete'})
 	 },
 	 getArticleAllList() {
-		 return httpRequest(`/article`, {}, {method: 'get'})
+		 return httpRequest(`/article/all`, {}, {method: 'get'})
 	 },
 	 getArticlePageList(params) {
 		 return httpRequest(`/article/page`, {}, {method: 'get'}, params)
@@ -88,13 +88,13 @@ import {httpRequest} from './plugins/http-request';
 		 return httpRequest(`/article/reply/${replyId}`, {}, {method: 'delete'})
 	 },
 	 getStatisticsForArticle() {
-		 return httpRequest(`/statistics/article`, {}, {method: 'get'})
+		 return httpRequest(`/extra/statistics/article`, {}, {method: 'get'})
 	 },
 	 getStatisticsForComment() {
-		 return httpRequest(`/statistics/comment`, {}, {method: 'get'})
+		 return httpRequest(`/extra/statistics/comment`, {}, {method: 'get'})
 	 },
 	 getStatisticsForReply() {
-		 return httpRequest(`/statistics/reply`, {}, {method: 'get'})
+		 return httpRequest(`/extra/statistics/reply`, {}, {method: 'get'})
 	 },
 	 getRecipeAllList() {
 		 return httpRequest(`/recipe`, {}, {method: 'get'}, {})
@@ -103,22 +103,22 @@ import {httpRequest} from './plugins/http-request';
 		 return httpRequest(`/recipe-week`, {}, {method: 'get'}, {})
 	 },
 	 getUnreadMessageList() {
-		 return httpRequest(`/message-un-read`, {}, {method: 'get'}, {})
+		 return httpRequest(`/extra/message-un-read`, {}, {method: 'get'}, {})
 	 },
 	 readMessage(data) {
-		 return httpRequest(`/message-read`, data, {method: 'post'}, {})
+		 return httpRequest(`/extra/message-read`, data, {method: 'post'}, {})
 	 },
 	 clearUnreadMessage(data) {
-		 return httpRequest(`/message-read-batch`, data, {method: 'post'}, {})
+		 return httpRequest(`/extra/message-read-batch`, data, {method: 'post'}, {})
 	 },
 	 getAboutCommentList() {
-		 return httpRequest(`/about/comment`, {}, {method: 'get'});
+		 return httpRequest(`/extra/about/comment`, {}, {method: 'get'});
 	 },
 	 createAboutComment(data) {
-		 return httpRequest(`/about/comment`, data, {method: 'post'}, {});
+		 return httpRequest(`/extra/about/comment`, data, {method: 'post'}, {});
 	 },
 	 createAboutCommentReply(data) {
-		 return httpRequest(`/about/reply`, data, {method: 'post'}, {});
+		 return httpRequest(`/extra/about/reply`, data, {method: 'post'}, {});
 	 }
  };
 export default webApi;

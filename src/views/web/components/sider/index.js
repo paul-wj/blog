@@ -73,7 +73,7 @@ class AppSider extends Component{
 				<p className="app-sider-desc">前端打杂，前端自娱自乐</p>
 			</Card>
 			{/*<Weather/>*/}
-			{appLayoutWidth < 992 || window.attachEvent ? null : <Music/>}
+			{/*{appLayoutWidth < 992 || window.attachEvent ? null : <Music/>}*/}
 			<Card className="app-sider-statistics">
 				<Row gutter={24}>
 					{statisticsList.map((statistics, index) => <Col

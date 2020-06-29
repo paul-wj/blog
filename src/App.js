@@ -4,11 +4,10 @@ import {BrowserRouter, Route, Switch, withRouter} from "react-router-dom";
 import {connect} from 'react-redux'
 import {getAppLayoutWidth} from './redux/app/actions'
 import {getTags, getCategories} from './redux/article/actions'
-import {checkUserAuth} from './redux/user/actions';
 import {clearGlobalLocalData} from './lib/utils'
 import {throttle} from "lodash";
 
-@connect(state => state,{getAppLayoutWidth, getTags, getCategories, checkUserAuth})
+@connect(state => state,{getAppLayoutWidth, getTags, getCategories})
 @withRouter
 class App extends Component {
 	componentDidMount() {
@@ -17,9 +16,7 @@ class App extends Component {
 		const token = localStorage.getItem('authorization');
 		this.props.getTags();
 		this.props.getCategories();
-		if (token) {
-			this.props.checkUserAuth();
-		} else {
+		if (!token) {
 			clearGlobalLocalData();
 		}
 	}
