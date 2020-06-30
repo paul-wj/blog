@@ -81,7 +81,7 @@ export const httpRequest = (url, data = {}, options = {method: 'post'}, params, 
 		baseURL: BASE_URL,
 		headers: {
 			authorization,
-			refresh_token: refreshToken,
+			'refresh-token': refreshToken,
 			cip
 		},
 		url,
