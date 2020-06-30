@@ -11,12 +11,13 @@ import dayJs from 'dayjs'
 
 const chartData = [
 	{ label: 'html,css', value: 80 },
-	{ label: 'js', value: 75 },
-	{ label: 'es6', value: 70 },
-	{ label: 'vue', value: 75 },
-	{ label: 'react', value: 55 },
+	{ label: 'js', value: 80 },
+	{ label: 'es6', value: 80 },
+	{ label: 'typescript', value: 65 },
+	{ label: 'vue', value: 80 },
+	{ label: 'react', value: 65 },
 	{ label: 'webpack', value: 65 },
-	{ label: 'node', value: 40 },
+	{ label: 'node', value: 50 },
 	{ label: 'mysql', value: 40 },
 	{ label: 'linux', value: 40 }
 ];
@@ -272,7 +273,7 @@ class About extends Component {
 		return <div className="about-content">
 			<Divider orientation="left">博客简述</Divider>
 			<ul className="desc-list">
-				<li>本博客使用的技术为 react + antd + koa2 + mysql + ioredis + socket.io</li>
+				<li>本博客使用的技术为 react + antd + koa2 + typescript + koa-swagger-decorator + mysql + ioredis + socket.io</li>
 				<li>源码地址为 <Button style={{padding: 0}} type="link"><a href="https://github.com/paul-wj/blog.git" rel="noopener noreferrer" target="_blank">github</a></Button>，仅供参考，不做商业用途！</li>
 			</ul>
 			<Divider orientation="left">个人信息</Divider>
@@ -295,7 +296,7 @@ class About extends Component {
 			<ul className="desc-list">
 				<li>html、css、js: 能熟练开发符合 W3C 标准的页面。</li>
 				<li>es6: es6常用方法熟练使用，掌握面向对象编程实现。</li>
-				<li>vue框架熟练掌握使用，当前博客为技术为react全家桶，react熟悉使用。</li>
+				<li>vue框架(工作使用)熟练掌握使用，当前博客为技术为react全家桶，react熟悉使用。</li>
 				<li>node: 掌握koa2全家桶，能完成接口的开发与设计。</li>
 				<li>linux: linux基本操作熟悉，云服务器安全防范，防火墙等配置，并完成简单个人网站全栈（前后端）上线流程（pm2、nginx、mysql、redis、Jenkins等为linux上常用程序）。</li>
 				<li>mysql: 针对需求可以做到简单的数据库设计。</li>
