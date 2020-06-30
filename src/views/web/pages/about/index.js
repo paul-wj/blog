@@ -274,7 +274,7 @@ class About extends Component {
 			<Divider orientation="left">博客简述</Divider>
 			<ul className="desc-list">
 				<li>本博客使用的技术为 react + antd + koa2 + typescript + koa-swagger-decorator + mysql + ioredis + socket.io</li>
-				<li>源码地址为 <Button style={{padding: 0}} type="link"><a href="https://github.com/paul-wj/blog.git" rel="noopener noreferrer" target="_blank">github</a></Button>，仅供参考，不做商业用途！</li>
+				<li>源码地址为 <Button style={{padding: 0}} type="link"><a href="https://github.com/paul-wj/blog.git" rel="noopener noreferrer" target="_blank">github</a></Button>，<Button style={{padding: 0}} type="link"><a href="https://github.com/paul-wj/blog-admin.git" rel="noopener noreferrer" target="_blank">后台地址</a></Button>，仅供参考，不做商业用途！</li>
 			</ul>
 			<Divider orientation="left">个人信息</Divider>
 			<ul className="desc-list">
