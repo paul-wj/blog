@@ -3,7 +3,7 @@
 
 > 一个及其简洁的个人博客系统、个人玩耍使用、想到好玩的就写！！
 
-- 前后台分离式开发（当前为前台仓库）。
+- 前后端分离式开发（当前为前台仓库）。
 - 博客样式基本为`antd`框架样式，少部分自定义样式。
 - 具备了代码高亮、文章评论功能的个人博客...
 
@@ -20,10 +20,10 @@
 - [x] 全局消息通知系统（socket.io）
 
 ### 技术栈
-- 前端 （基于 `create-react-app eject` 后的配置）
+- 前端 （webpack为自定义配置，没有使用create-react-app）
 
-  - react v16.8.5 + `redux` + `react-router4`
-  - `marked highlight.js howler`
+  - react v16.13.1 + `redux` + `react-router4`
+  - `marked highlight.js`
   - `webpack` 打包公共静态资源改为cdn（本人服务器带宽太小，解决首屏加载过慢问题）
   - `axios` 封装
   - `socket.io`
@@ -43,20 +43,22 @@
 ```js
 .
 │
-├─config                // 构建配置
+├─build                // 构建配置
 ├─public                // html 入口
-├─scripts               // 项目脚本
 └─src                   // 前端项目源码
    ├─conf               // 配置目录
-   ├─lib         	   // 工具目录
-   ├─static             // 静态文件目录
-   ├─redux              // redux 目录
+   ├─lib         	      // 工具目录
    ├─router             // 路由目录
+   ├─static             // 静态文件目录
+   ├─store              // redux 目录
+   ├─types              // 各模块ts接口
    ├─views              // 视图层
-   ├─  App.js           // 全局app入口文件
-   ├─  index.js         // 主入口文件
+   ├─  app.tsx          // 全局app入口文件
+   ├─  index.tsx        // 主入口文件
    └─...
-
+├─.babelrc.js          // babel配置文件
+├─.eslintrc.js         // EsLint配置文件
+├─.tsconfig.json       // typescript配置文件
 ```
 
 ## 使用这个项目
