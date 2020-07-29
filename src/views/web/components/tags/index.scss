@@ -1,0 +1,40 @@
+.tag-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &__title {
+    position: relative;
+    font-size: 22px;
+    top: -5px;
+    span {
+      margin-left: 10px;
+      color: #bbb;
+    }
+  }
+  &__content {
+    flex: 1;
+  }
+  &__footer {
+    margin: 10px 0;
+    text-align: right;
+  }
+  &__desc {
+    font-size: 14px;
+    color: #8590a6;
+  }
+  &__info {
+    display: flex;
+  }
+  &__time {
+    position: relative;
+    font-size: 14px;
+    color: #8590a6;
+    margin-right: 15px;
+  }
+  &__name {
+    flex: 1;
+    color: #1890ff;
+    outline: 0;
+    cursor: pointer;
+  }
+}

@@ -1,34 +1,44 @@
-.article-detail{
-  position: relative;
-  padding: 20px;
-  background: #fff;
-  min-height: 100%;
-  @include spanStyle(article-spin);
-  .article-header{
+.article-detail {
+  &__top {
     text-align: center;
-    h1{
-      font-size: 20px;
-      font-weight: 700;
-    }
-    .article-msg{
-      line-height: 26px;
-      margin-bottom: 10px;
-    }
   }
-  pre {
-    padding: 10px;
-    overflow: auto;
-    margin: 20px 0;
-    font-size: 13px;
-    color: #4d4d4c;
-    background: #f7f7f7;
-    line-height: 1.6;
+  &__title{
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 28px;
   }
-  .comments{
-    margin-top: 20px;
-    .comment-confirm{
-      text-align: right;
-      margin-bottom: 10px;
+  &__info {
+    line-height: 26px;
+    margin-bottom: 10px;
+    & > span {
+      font-size: 14px;
+      margin-left: 8px;
     }
   }
+  &__content {
+    font-size: 14px;
+  }
+}
+.article-comment{
+  margin-top: 20px;
+  &__btn {
+    cursor: pointer;
+    outline: 0;
+    margin-right: 10px;
+    span {
+      margin-right: 5px;
+    }
+  }
+  .comment__author {
+    span {
+      color: #666;
+    }
+    .comment__time {
+      color: #ccc;
+    }
+  }
+}
+.ant-comment-content-detail {
+  line-height: 24px;
 }

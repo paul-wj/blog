@@ -1,0 +1,26 @@
+.catalog-container {
+  text-align: center;
+  &__title {
+    margin-top: 40px;
+    font-size: 30px;
+    font-weight: 700;
+  }
+  &__total {
+    margin-top: 20px;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  &__content {
+    line-height: 40px;
+  }
+  &__tag {
+    cursor: pointer;
+    height: 24px;
+    font-size: 16px;
+    margin-right: 20px;
+  }
+  .ant-badge-count {
+    z-index: 1;
+    right: 18px;
+  }
+}

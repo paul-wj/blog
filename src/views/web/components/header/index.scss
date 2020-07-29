@@ -1,46 +1,63 @@
-.header-left{
-  position: relative;
-  font-size: 20px;
-  text-align: center;
-  .header-music{
-    display: none;
+.app-header {
+  overflow: hidden;
+  &-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    font-size: 20px;
+    text-align: center;
+    padding: 0 10px;
+    &__content {
+      flex: 1;
+    }
+    &__logo {
+      font-size: 24px;
+      color: #52c41a;
+    }
+    &__title {
+      margin-left: 10px;
+      font-size: 20px;
+    }
+    &__menu {
+      display: none;
+    }
   }
-  .header-title{
-    margin-left: 10px;
+  &__right {
+    display: flex;
+    padding-right: 40px;
+    align-items: center;
   }
-  .nav-phone-icon{
-    display: none;
-  }
-}
-.header-right{
-  .header-search{
-    border-left: 1px solid #ebedf0;
-    float: left;
+  &__search {
     height: 22px;
     line-height: 22px;
     padding-left: 16px;
-    margin: 22px auto 0;
-    .header-search-icon{
-      color: #ced4d9;
-      position: relative;
-      top: .5px;
-    }
-    .header-search-input{
-      font-size: 14px;
-      margin-top: -5px;
-      width: 200px;
-      border: 0;
+    border-left: 1px solid #ebedf0;
+  }
+  &__search-icon {
+    color: #ced4d9;
+  }
+  &__input {
+    font-size: 14px;
+    margin-top: -5px;
+    width: 200px;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+    outline: none;
+    &:focus {
       box-shadow: none;
-      background: transparent;
     }
   }
-  .header-menu{
-    float: right;
+  &__nav {
+    flex: 1;
     border: 0;
     font-size: 14px;
+    text-align: right;
     &.ant-menu-horizontal{
       border-bottom: 0;
       .ant-menu-item{
+        top: 0;
         height: 64px;
         line-height: 60px;
         min-width: 72px;
@@ -60,25 +77,29 @@
       }
     }
   }
-  .user-info{
-    float: right;
-    padding: 0 40px 0 16px;
-    .user-notice{
-      display: inline-block;
-      padding: 0 10px;
-      margin-right: 20px;
-      cursor: pointer;
-      &:hover{
-        color: #1890ff;
-      }
-    }
+  &__user {
+    display: flex;
+    flex-direction: row;
+    margin-left: 16px;
+  }
+  &__notice {
+    margin-right: 30px;
+    cursor: pointer;
   }
 }
-.notice-container{
+
+.app-header-left__drop {
+  right: 0 !important;
+}
+
+.app-header__notice-container{
   background-color: #fff;
   border: 1px solid #e8e8e8;
   border-radius: 3px;
   overflow: hidden;
+  .ant-tabs-nav-list {
+    margin: 0 20px;
+  }
   .ant-tabs-bar{
     margin-bottom: 0;
   }
@@ -110,109 +131,38 @@
   }
 }
 
-.edit-user-type{
-  text-align: right;
-  .text{
-    font-size: 12px;
-    color: #ccc;
-  }
-}
-@media screen and (max-width: 1000px) and (min-width: 576px) {
-  .header-left {
-    .header-title {
+@media only screen and (max-width: 1100px){
+  .app-header__nav {
+    &-name {
       display: none;
+    }
+    &-icon {
+      margin-right: 0 !important;
+    }
+    &.ant-menu-horizontal .ant-menu-item{
+      min-width: 50px;
     }
   }
 }
+
 @media only screen and (max-width: 920px){
-  .header-right .header-search{
+  .app-header__right .app-header__search{
     display: none;
   }
 }
-@media only screen and (max-width: 576px) {
-  .header-left .header-music{
-    position: absolute;
-    display: inline-block;
-    font-size: 22px;
-    line-height: 22px;
-    top: 21px;
-    left: 16px;
-    cursor: pointer;
-    z-index: 1;
+
+@media screen and (max-width: 1000px) and (min-width: 576px) {
+  .app-header__left .app-header__title {
+    display: none;
   }
-  .header-left .nav-phone-icon {
-    position: absolute;
-    display: inline-block;
-    font-size: 22px;
-    line-height: 22px;
-    right: 16px;
-    top: 19px;
-    cursor: pointer;
-    z-index: 1;
-  }
-}
-.header-dropdown {
-  right: 0 !important;
 }
 
-.music-container{
-  .ant-drawer-content-wrapper, .ant-drawer-content, .ant-drawer-wrapper-body {
-    height: 100%;
-  }
-  .ant-drawer-content-wrapper{
-    overflow: hidden;
-  }
-  .ant-drawer-body{
-    height: 100%;
-    background-color: #fff;
-    padding: 0;
-    .music{
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      border: 0;
-      .music-title{
-        text-align: right;
-        span{
-          float: left;
-        }
-      }
-      .ant-card-body{
-        height: 100%;
-        padding: 15px;
+@media only screen and (max-width: 576px){
+  .app-header{
+    &-left {
+      &__menu {
+        display: inline-block;
       }
     }
   }
-  .music-mobile-close{
-    position: absolute;
-    top: 10px;
-    right: 8px;
-    text-align: right;
-    display: inline-block;
-    width: 20px;
-    background-color: #fff;
-    cursor: pointer;
-    .icon-close{
-      font-size: 16px;
-    }
-  }
-
 }
-@media only screen and (max-height: 530px) {
-  .music{
-    .ant-card-body{
-      .music-content{
-        width: 85%;
-        margin: 0 auto;
-      }
-    }
-  }
-  .music-container{
-    .music-mobile-close{
-      right: 35px;
-    }
-  }
-}
-
-
-

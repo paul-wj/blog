@@ -1,326 +1,72 @@
-.mt-10{
-  margin-top: 10px;
-}
-.app-sider{
-  &> .ant-card.ant-card-bordered{
+.app-sider-user {
+  &__title {
+    line-height: 80px;
+    font-size: 0;
+    color: rgba(72, 81, 91, 1);
+    overflow: hidden;
     margin-bottom: 10px;
+    #clock {
+      float: left;
+    }
+    span {
+      float: left;
+      margin-left: 10px;
+      font-size: 16px;
+    }
   }
-  .ant-card-body{
-    padding: 15px;
-  }
-}
-.app-sider-title{
-  font-size: 0;
-  margin-bottom: 10px;
-  color: rgba(72, 81, 91, 1);
-  overflow: hidden;
-  line-height: 80px;
-  #clock{
-    float: left;
-  }
-  span{
-    float: left;
-    margin-left: 10px;
-    font-size: 16px;
-  }
-}
-.app-sider-desc{
-  color: rgba(72, 80, 91, 0.68);
-  font-size: 12px;
-  text-indent: 10px;
-}
-.warehouse{
-  text-align: center;
-  a{
-    color: rgba(0, 0, 0, 0.65);
-  }
-}
-.app-sider-statistics{
-  margin-top: 10px;
-  .app-sider-statistics__list{
+  &__warehouse {
     text-align: center;
-    .app-sider-statistics__num{
-      font-size: 18px;
-      line-height: 24px;
-      &.link{
-        color: #1890ff;
-        cursor: pointer;
-      }
-    }
-    .app-sider-statistics__name{
-      color: rgba(71, 80, 91, 0.7);
-      font-size: 13px;
-      font-weight: 700;
+    a {
+      color: rgba(0, 0, 0, 0.65);
     }
   }
-}
-.recent-list{
-  color: #8590a6;
-  cursor: pointer;
-  li:hover{
-    color: #2db7f5;
+  &__desc {
+    margin-top: 10px;
+    font-size: 12px;
+    text-indent: 10px;
+    color: rgba(72, 80, 91, 0.68);
   }
 }
-.app-sider-tag{
+.app-sider-statistics {
+  margin-top: 10px;
+  &__list {
+    text-align: center;
+  }
+  &__num {
+    font-size: 18px;
+    line-height: 24px;
+    outline: 0;
+    &.link{
+      color: #1890ff;
+      cursor: pointer;
+    }
+  }
+  &__name{
+    color: rgba(71, 80, 91, 0.7);
+    font-size: 13px;
+    font-weight: 700;
+  }
+}
+.app-sider-tag {
+  margin-top: 10px;
   line-height: 30px;
   text-align: center;
+  .ant-tag {
+    cursor: pointer;
+    outline: 0;
+  }
 }
-.music{
-  position: relative;
+.app-sider-article {
   margin-top: 10px;
-  .ant-card-body{
-    padding: 0;
-  }
-  p{
-    margin-bottom: 0;
-  }
-  .music-content{
-    padding: 15px 15px 0 15px;
-  }
-  .song-container{
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    z-index: 10;
-    transform: translateZ(0);
-    &>div{
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      overflow-y: auto;
-      ul{
-        margin-bottom: 0;
-        li{
-          position: relative;
-          height: 38px;
-          line-height: 38px;
-          padding: 0 8px;
-          border-top: 1px solid #e9e9e9;
-          overflow: hidden;
-          cursor: pointer;
-          &:first-child {
-            border-top: none;
-          }
-          &:hover{
-            background-color: #e6f7ff;
-          }
-          &.active{
-            background-color: #e6f7ff;
-            .song-sign{
-              position: absolute;
-              left: 0;
-              top: 15%;
-              width: 2px;
-              height: 70%;
-              background-color: #6bb2ff;
-            }
-          }
-          .song-order{
-            display: inline-block;
-            width: 24px;
-          }
-          .song-name{
-
-          }
-          .song-author{
-            float: right;
-            max-width: 110px;
-            text-align: right;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-        }
-      }
-    }
-    .song-container-close{
-      position: fixed;
-      display: none;
-      bottom: 5px;
-      left: 50%;
-      margin-left: -12px;
-      font-size: 24px;
-      cursor: pointer;
-      &.active{
-        display: inline-block;
-      }
-    }
+  &__item {
+    color: #8590a6;
+    cursor: pointer;
+    outline: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     &:hover{
-      .song-container-close{
-        display: inline-block;
-      }
+      color: #2db7f5;
     }
-  }
-  .song-mask{
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    z-index: 9;
-  }
-  .music-title{
-    color: #071124;
-    font-size: 15px;
-    line-height: 24px;
-    margin-bottom: 10px;
-    span{
-      float: right;
-      cursor: pointer;
-      color: rgba(0, 0, 0, .85);
-    }
-  }
-  .music-name{
-    font-size: 18px;
-    color: #051129;
-    font-weight: 700;
-    line-height: 30px;
-  }
-  .music-author{
-    font-size: 18px;
-    color: #979CA8;
-    line-height: 30px;
-    word-break:break-all;
-  }
-  .music-pic{
-    padding: 5px;
-  }
-  .music-time{
-    font-size: 12px;
-    margin: -10px 0 10px;
-    padding-right: 5px;
-    overflow: hidden;
-    text-align: right;
-  }
-  .music-control{
-    line-height: 1;
-    font-size: 26px;
-    text-align: center;
-    color: #999;
-    overflow: hidden;
-    span{
-      float: left;
-      width: 12%;
-      text-align: center;
-      i{
-        cursor: pointer;
-        font-style: normal;
-        font-size: 26px;
-        color: #999;
-      }
-      &.active i {
-        color: #1890ff;
-      }
-      &.left{
-        width: 25%;
-      }
-      &.action{
-        width: 25%;
-      }
-      &.right{
-        width: 25%;
-        transform: rotate(180deg);
-      }
-    }
-  }
-  .music-control-options{
-    margin-top: 15px;
-    line-height: 30px;
-    text-align: left;
-    border-top: 1px solid #e8e8e8;
-    padding: 5px 15px 5px 5px;
-    .icon-shengyin, .icon-jingyin{
-      float: left;
-      cursor: pointer;
-      font-style: normal;
-      font-size: 26px;
-      color: #999;
-    }
-    .voice-container{
-      position: relative;
-      margin: 8px 0 0 30px;
-    }
-  }
-}
-
-.weather{
-  position: relative;
-  margin-top: 10px;
-  overflow: hidden;
-  .ant-card-body{
-    padding: 0;
-  }
-  .weather-top{
-    position: relative;
-    width: 100%;
-    height: 120px;
-    background-color: #2f54eb;
-    background-size: cover;
-    .weather-top-container{
-      position: absolute;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      padding: 50px 8% 0;
-      background-color: rgba(255, 255, 255, .2);
-      .temperature{
-        color: #fff;
-        font-size: 40px;
-      }
-      .weather-icon{
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 36px;
-        height: 36px;
-        img {
-          width: 100%;
-        }
-      }
-    }
-  }
-  .weather-content{
-    display: flex;
-    height: 70px;
-    padding: 0 8%;
-    margin: 0;
-    li{
-      display: flex;
-      flex: 1;
-      color: #000;
-      align-items: center;
-      overflow: hidden;
-      .iconfont{
-        color: #3E70DC;
-        font-size: 20px;
-        margin-right: 5px;
-        float: left;
-      }
-      .weather-type-content{
-        display: inline-block;
-        text-align: left;
-        .weather-type{
-          font-size: 20px;
-          color: #666;
-        }
-        .weather-name{
-          font-size: 12px;
-          color: #e8e8e8;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 576px) {
-  .music .song-container .song-container-close{
-    display: inline-block;
   }
 }

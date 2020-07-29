@@ -1,22 +1,31 @@
-.archives{
-  width: 100%;
-  min-height: 100%;
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #e8e8e8;
-  @include spanStyle(archives--spin);
-  .archives__time{
-    margin-right: 15px;
+.archives-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &__content {
+    flex: 1;
+  }
+  &__footer {
+    margin: 10px 0;
+    text-align: right;
+  }
+  &__desc {
     font-size: 14px;
     color: #8590a6;
   }
-  .archives--pagination{
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    padding: 10px 20px;
-    text-align: right;
+  &__info {
+    display: flex;
+  }
+  &__time {
+    position: relative;
+    font-size: 14px;
+    color: #8590a6;
+    margin-right: 15px;
+  }
+  &__title {
+    flex: 1;
+    color: #1890ff;
+    outline: 0;
+    cursor: pointer;
   }
 }

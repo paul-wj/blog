@@ -1,0 +1,64 @@
+.app-container {
+  height: 100%;
+  overflow: hidden;
+  background-color: #fff;
+
+  .app-header{
+    position: relative;
+    z-index: 10;
+    padding: 0;
+    max-width: 100%;
+    border-bottom: 1px solid #e8e8e8;
+    box-shadow: 0 2px 8px #f0f1f2;
+    background: #fff;
+  }
+
+  .app-wrapper {
+    position: relative;
+    height: 100%;
+    padding-top: 15px;
+    background-color: #f3f6f7;
+  }
+
+  .app-sider{
+    height: 100%;
+    padding-bottom: 10px;
+    overflow: hidden;
+    &:hover{
+      overflow-y: auto;
+    }
+  }
+
+  .app-content {
+    height: 100%;
+    padding-left: 10px;
+  }
+
+  .app-main {
+    height: 100%;
+    padding: 0 10px;
+    &--border {
+      padding-bottom: 10px;
+      .app-main-content {
+        background-color: #fff;
+        border: 1px solid #e8e8e8;
+        padding: 20px;
+      }
+    }
+  }
+
+  .app-main-content{
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (max-width: 991px){
+  .app-container {
+    .app-content{
+      padding: 0;
+    }
+  }
+}

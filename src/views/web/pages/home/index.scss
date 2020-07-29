@@ -1,69 +1,66 @@
-.article-content{
-  width: 100%;
-  padding-bottom: 50px;
-  @include spanStyle(article-content-spin);
-  .article-content__wrapper{
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &__content {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    padding-right: 3px;
-    .article-content-list{
-      position: relative;
-      border: 1px solid #ebedf0;
-      padding: 16px 24px;
-      margin-bottom: 10px;
-      transition: all .2s linear;
-      background-color: #fff;
+    .ant-list-item-meta {
+      margin-bottom: 0;
+    }
+    .ant-list-item-meta-title {
+      color: #394d69;
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 40px;
+      margin-bottom: 0;
       &:hover {
-        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
-        transform: translate3d(0, -5px, 0);
-        cursor: pointer;
-      }
-      .title {
-        color: #394d69;
-        font-size: 1.4rem;
-        font-weight: 600;
-        line-height: 1.2;
-        cursor: pointer;
-        &:hover {
-          color: #48b2ff;
-        }
-      }
-      .description {
-        // padding: 15px 10px;
-        cursor: pointer;
-        max-height: 260px;
-        overflow: hidden;
-      }
-      .create-time {
-        font-size: 0.5em;
-        padding-left: 20px;
-      }
-      .list-item-action {
-        line-height: 26px;
-        vertical-align: middle;
-        margin-top: 10px;
-        color: rgba(0, 0, 0, 0.45);
-        a {
-          color: inherit;
-        }
+        color: #48b2ff;
       }
     }
+    .ant-spin-nested-loading {
+      flex: 1;
+      padding-right: 5px;
+      overflow: hidden;
+      overflow-y: auto;
+    }
+    .ant-list-item {
+      border: 1px solid #ebedf0;
+      background-color: #fff;
+      transition: all .2s linear;
+      margin-bottom: 10px;
+      &:hover {
+        box-shadow: 0 3px 3px 0 rgba(0,0,0,.1);
+        transform: translate3d(0,-5px,0);
+        cursor: pointer;
+      }
+      .ant-list-item-action > li {
+        padding: 0 12px;
+      }
+    }
+    .ant-list-pagination {
+      margin: 0;
+      padding: 10px 0;
+    }
   }
-  .article-content__pagination{
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    padding: 10px 15px;
-    text-align: right;
-    background-color: #f3f6f7;
+  &__info {
+    margin-top: 20px;
+    color: rgba(0,0,0,.45);
+    line-height: 22px;
+    font-size: 14px;
   }
-}
-@media screen and (max-width: 736px){
-  .ant-divider-inner-text {
-    max-width: calc(100vw - 77px);
+  &__name {
+    color: #1890ff;
+    margin: 0 5px;
+  }
+  &__time {
+    color: rgba(0,0,0,.25);
+    margin-left: 10px;
+  }
+  &__desc {
+    cursor: pointer;
+    max-height: 160px;
     overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
-

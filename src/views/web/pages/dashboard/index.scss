@@ -1,0 +1,74 @@
+.dashboard-container {
+  .ant-card-body{
+    padding: 0;
+  }
+  &__col {
+    padding: 0 8px;
+    margin-bottom: 10px;
+  }
+  &__card {
+    padding: 20px 24px 8px;
+  }
+}
+.dashboard-card {
+  &__title {
+    height: 22px;
+    color: rgba(0,0,0,.45);
+    font-size: 14px;
+    line-height: 22px;
+  }
+  &__total {
+    height: 38px;
+    margin: 4px 0 0 0;
+    overflow: hidden;
+    color: rgba(0,0,0,.85);
+    font-size: 30px;
+    line-height: 38px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+  }
+  &__content {
+    position: relative;
+    margin: 5px 0 12px 0;
+    height: 40px;
+    color: rgba(0,0,0,.65);
+  }
+  &__fixed {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    .dib {
+      font-size: 14px;
+      line-height: 22px;
+      &:first-child{
+        margin-right: 20px;
+      }
+      span{
+        margin-left: 5px;
+        font-style: normal;
+      }
+      .anticon-caret-up{
+        top: -1px;
+        color: #f5222d;
+        margin-left: 4px;
+      }
+      .anticon-caret-down{
+        top: -1px;
+        color: #52c41a;
+        margin-left: 4px;
+      }
+    }
+  }
+  &__footer {
+    padding-top: 9px;
+    border-top: 1px solid #e8e8e8;
+    color: rgba(0,0,0,.85);
+    line-height: 22px;
+    span{
+      color: rgba(0,0,0,.65);
+      margin-right: 10px;
+    }
+  }
+}
