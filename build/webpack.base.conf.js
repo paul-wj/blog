@@ -29,8 +29,10 @@ module.exports = {
 		'antd': 'antd',
 		'highlight.js': 'hljs',
 		'marked': 'marked',
+		'socket.io-client': 'io',
 		'@antv/g2': 'G2',
-		'@antv/data-set': 'DataSet'
+		'@antv/data-set': 'DataSet',
+		'aplayer': 'APlayer'
 	},
 	module: {
 		rules: [
