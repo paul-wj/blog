@@ -1,0 +1,18 @@
+.app-comment {
+  &__btn {
+    cursor: pointer;
+    outline: 0;
+    margin-right: 10px;
+    span {
+      margin-right: 5px;
+    }
+  }
+  &__author {
+    span {
+      color: #666;
+    }
+  }
+  &__time {
+    color: #ccc;
+  }
+}
