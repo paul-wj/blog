@@ -1,6 +1,7 @@
 import React from 'react';
 import {LoadableComponent} from 'react-loadable';
 import {HomeOutlined, EditOutlined, FolderOutlined, FundOutlined, UserOutlined} from '@ant-design/icons';
+import {RouteConfigComponentProps} from "react-router-config";
 import createLoadableBar from '../views/components/lazy';
 
 const Layout = createLoadableBar(() => import(/* webpackChunkName: 'Layout' */'../views/web/components/layout/index'));
@@ -12,9 +13,12 @@ const Dashboard = createLoadableBar(() => import(/* webpackChunkName: 'Dashboard
 const About = createLoadableBar(() => import(/* webpackChunkName: 'About' */'../views/web/pages/about'));
 const catalogDetail = createLoadableBar(() => import(/* webpackChunkName: 'catalogDetail' */'../views/web/pages/catalog/catalogDetail'));
 const TagDetail = createLoadableBar(() => import(/* webpackChunkName: 'TagDetail' */'../views/web/pages/tag/tagDetail'));
+const AdminLayout = createLoadableBar(() => import(/* webpackChunkName: 'AdminLayout' */'../views/admin/components/layout/index'));
+const AdminHome = createLoadableBar(() => import(/* webpackChunkName: 'AdminHome' */'../views/admin/pages/home'));
 
 export interface IRouterConfig {
-    component: LoadableComponent;
+    component?: LoadableComponent;
+    render?: (props: RouteConfigComponentProps<any>) => React.ReactNode;
     path?: string;
     exact?: boolean;
     name?: string;
@@ -25,20 +29,26 @@ export interface IRouterConfig {
 
 const routes: IRouterConfig[] = [
     {
-        path: "/",
+        path: '/',
         component: Layout,
         routes: [
-            {path: "/", exact: true, component: Home, name: '首页', icon: HomeOutlined, isMenu: true},
-            {path: '/archives', exact: true, component: Archives, name: '归档', icon: EditOutlined, isMenu: true},
-            {path: '/catalog', exact: true, component: Catalog, name: '目录', icon: FolderOutlined, isMenu: true},
-            {path: '/dashboard', exact: true, component: Dashboard, name: '统计', icon: FundOutlined, isMenu: true},
-            {path: '/about', exact: true, component: About, name: '关于', icon: UserOutlined, isMenu: true},
-            {path: '/article/:id', component: Article, isMenu: false},
+            {path: '/', exact: true, component: Home, name: '首页', icon: HomeOutlined, isMenu: true},
+            {path: '/archives', component: Archives, name: '归档', icon: EditOutlined, isMenu: true},
+            {path: '/catalog', component: Catalog, name: '目录', icon: FolderOutlined, isMenu: true},
+            {path: '/dashboard', component: Dashboard, name: '统计', icon: FundOutlined, isMenu: true},
+            {path: '/about', component: About, name: '关于', icon: UserOutlined, isMenu: true},
+            {path: '/article/:id',component: Article, isMenu: false},
             {path: '/tag/:id', component: TagDetail, isMenu: false},
             {path: '/catalog/:id', component: catalogDetail, isMenu: false},
         ]
     },
-    {component: Home, path: '/admin'},
+    {
+        path: '/',
+        component: AdminLayout,
+        routes: [
+            {path: '/admin', exact: true, component: AdminHome, name: '后台首页'},
+        ]
+    }
 ];
 
 export default routes;
