@@ -115,7 +115,7 @@ class HttpRequest {
         const {code, message, result} = data;
         if (successCodeList.includes(code)) {
             formatterResponse = {flags: "success", message, data: result};
-        } else if (expiredCodeList.includes(code)){
+        } else if (expiredCodeList.includes(code) || (code === 400 && message === '用户未登录')){
             // 登录信息已过期，清除缓存用户信息
             clearUserInfo();
             formatterResponse = {flags: "fail", message: '登录信息已过期,请重新登录'};
