@@ -67,7 +67,7 @@ const HeaderUserModalUploadForm: React.FC<UploadProps> = ({value, onChange}: Upl
 
     return (
         <Upload
-          accept="image/*"
+          accept="image/jpg,image/jpeg,image/png"
           listType="picture-card"
           className="avatar-uploader"
           showUploadList={false}

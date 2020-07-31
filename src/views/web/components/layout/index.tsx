@@ -4,6 +4,7 @@ import {useHistory} from "react-router";
 import {Layout, Row, Col, BackTop} from 'antd';
 import AppHeader from '../header';
 import AppSider from '../sider';
+import AppPlayer from '../player';
 import './index.scss';
 
 interface AppLayoutProps {
@@ -43,6 +44,7 @@ const AppLayout: FC<AppLayoutProps> = ({route}: AppLayoutProps): ReactElement =>
                     </Col>
                 </Row>
             </Layout>
+            <AppPlayer />
             <BackTop target={() => document.getElementById('app-main-content')} />
         </Layout>
     )

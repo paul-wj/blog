@@ -48,6 +48,8 @@ const Home = (): ReactElement => {
     }, [search]);
 
     useEffect(() => {
+        const container = document.querySelector('.ant-spin-nested-loading');
+        container.scrollTop = 0;
         getArticlePageList();
     }, [requestParams]);
 

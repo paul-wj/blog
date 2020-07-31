@@ -42,3 +42,52 @@ export interface NoticeInfo {
     profilePicture: string;
     sendName: string;
 }
+
+export interface SongInfo {
+    id: number;
+    author: string;
+    name: string;
+    picUrl: string;
+    url: string;
+    lyric: string;
+}
+
+export interface AboutCommentReplyInfo {
+    id: number;
+    replyType: number;
+    commentId: number;
+    replyId: number;
+    userId: number;
+    sendId: number;
+    content: string;
+    type: number;
+    createTime: string;
+    commentContent: string;
+    userName: string;
+    userPic: string;
+    toUserName: string;
+    toUserPic: string;
+}
+
+export interface AboutCommentInfo {
+    id: number;
+    userId: number;
+    content: string;
+    createTime: string;
+    userName: string;
+    userPic: string;
+    replyList: AboutCommentReplyInfo[];
+}
+
+export interface AboutCommentRequestBody {
+    content: string;
+}
+
+export interface AboutCommentReplyRequestBody {
+    sendId: number;
+    commentId: number;
+    content: string;
+    replyId?: number;
+    replyType?: 10 | 20;
+}
+

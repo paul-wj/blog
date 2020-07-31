@@ -3,7 +3,7 @@ import {useParams} from "react-router";
 import {Divider} from 'antd';
 import { MessageOutlined, EyeOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import AppTags from "../../components/tags";
-import ArticleCommentList from './articleCommentList';
+import ArticleComment from './articleComment';
 import {ArticleInfo} from "../../../../types/article";
 import {getArticleById} from "../../../../service/article";
 import {translateMarkdown} from "../../../../lib/utils";
@@ -60,7 +60,7 @@ const Article = (): ReactElement => {
             {/* eslint-disable-next-line */}
             <div className="article-detail__content description" dangerouslySetInnerHTML={{ __html: articleDetail.content }} />
             <div className="article-detail__bottom">
-                <ArticleCommentList id={params.id} />
+                <ArticleComment id={params.id} />
             </div>
         </div>
     )

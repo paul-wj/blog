@@ -1,5 +1,12 @@
 import Request, {FetchResponse} from '../lib/plugins/request';
-import {LoginRequestParams, UserInfo, RegisterUserRequestParams, UpdateUserRequestParams, NoticeInfo} from "../types/user";
+import {
+    LoginRequestParams,
+    UserInfo,
+    RegisterUserRequestParams,
+    UpdateUserRequestParams,
+    NoticeInfo,
+    SongInfo, AboutCommentInfo, AboutCommentRequestBody, AboutCommentReplyRequestBody
+} from "../types/user";
 
 export const login = (data: LoginRequestParams): FetchResponse<UserInfo> => {
     return Request.fetch<UserInfo, LoginRequestParams>('/login', data, {method: "post"});
@@ -23,5 +30,21 @@ export const readMessage = (data: {messageId: number}): FetchResponse<boolean> =
 
 export const clearAllUnreadMessage = (data: {messageIdList: number[]}): FetchResponse<boolean> => {
     return Request.fetch<boolean, {messageIdList: number[]}>(`/extra/message-read-batch`, data, {method: 'post'})
+};
+
+export const getSongList = (): FetchResponse<SongInfo[]> => {
+    return Request.fetch<SongInfo[]>(`/extra/song`)
+};
+
+export const getAboutCommentList = (): FetchResponse<AboutCommentInfo[]> => {
+    return Request.fetch<AboutCommentInfo[]>(`/extra/about/comment`);
+};
+
+export const createAboutComment = (data: AboutCommentRequestBody): FetchResponse<boolean> => {
+        return Request.fetch<boolean, AboutCommentRequestBody>(`/extra/about/comment`, data, {method: 'post'});
+};
+
+export const createAboutCommentReply = (data: AboutCommentReplyRequestBody): FetchResponse<boolean> => {
+    return Request.fetch<boolean, AboutCommentRequestBody>(`/extra/about/reply`, data, {method: 'post'});
 };
 

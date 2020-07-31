@@ -3,6 +3,7 @@ import {Divider} from 'antd';
 import {QqOutlined, MailOutlined} from '@ant-design/icons';
 import dayJs from 'dayjs';
 import AboutChart from './aboutChart';
+import AboutComment from './aboutComment';
 import './index.scss';
 
 const getWorkExperience = () => {
@@ -76,6 +77,7 @@ const About: FC = (): ReactElement => {
                 <li>旅游、NBA2K、英雄联盟</li>
                 <li>欢迎交流</li>
             </ul>
+            <AboutComment />
         </div>
     )
 };
