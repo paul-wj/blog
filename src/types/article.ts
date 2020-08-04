@@ -86,3 +86,19 @@ export interface CreateArticleCommentReplyRequestBody {
     toUserId: number;
     replyId?: number;
 }
+
+export interface CreateArticleRequestBody {
+    title: string;
+    content: string;
+    categories: string | number[];
+    tagIds: string | number[];
+}
+
+export interface CreateTagRequestBody {
+    name: string;
+    color: string;
+}
+
+export interface CreateCategoryRequestBody {
+    name: string;
+}
