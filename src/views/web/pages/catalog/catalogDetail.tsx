@@ -8,7 +8,7 @@ const CatalogDetail: FC = (): ReactElement => {
     const {id} = useParams<{id: string}>();
 
     return (
-        <TagArticlePageList id={id} type="category" />
+        <TagArticlePageList key="catalogDetail" id={id} type="category" />
     )
 };
 

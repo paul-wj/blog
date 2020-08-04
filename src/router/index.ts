@@ -19,7 +19,7 @@ const Archives = createLoadableBar(() => import(/* webpackChunkName: 'Archives' 
 const Catalog = createLoadableBar(() => import(/* webpackChunkName: 'Catalog' */'../views/web/pages/catalog'));
 const Dashboard = createLoadableBar(() => import(/* webpackChunkName: 'Dashboard' */'../views/web/pages/dashboard'));
 const About = createLoadableBar(() => import(/* webpackChunkName: 'About' */'../views/web/pages/about'));
-const catalogDetail = createLoadableBar(() => import(/* webpackChunkName: 'catalogDetail' */'../views/web/pages/catalog/catalogDetail'));
+const CatalogDetail = createLoadableBar(() => import(/* webpackChunkName: 'CatalogDetail' */'../views/web/pages/catalog/catalogDetail'));
 const TagDetail = createLoadableBar(() => import(/* webpackChunkName: 'TagDetail' */'../views/web/pages/tag/tagDetail'));
 const AdminLayout = createLoadableBar(() => import(/* webpackChunkName: 'AdminLayout' */'../views/admin/components/layout/index'));
 const AdminEmpty = createLoadableBar(() => import(/* webpackChunkName: 'AdminEmpty' */'../views/admin/components/empty/index'));
@@ -62,12 +62,12 @@ const routes: IRouterConfig[] = [
         routes: [
             {path: '/', exact: true, component: Home, name: '首页', icon: HomeOutlined, isMenu: true},
             {path: '/archives', component: Archives, name: '归档', icon: EditOutlined, isMenu: true},
-            {path: '/catalog', component: Catalog, name: '目录', icon: FolderOutlined, isMenu: true},
+            {path: '/catalog', exact: true, component: Catalog, name: '目录', icon: FolderOutlined, isMenu: true},
             {path: '/dashboard', component: Dashboard, name: '统计', icon: FundOutlined, isMenu: true},
             {path: '/about', component: About, name: '关于', icon: UserOutlined, isMenu: true},
-            {path: '/article/:id',component: Article, isMenu: false},
+            {path: '/article/:id', component: Article, isMenu: false},
             {path: '/tag/:id', component: TagDetail, isMenu: false},
-            {path: '/catalog/:id', component: catalogDetail, isMenu: false},
+            {path: '/catalog/:id', component: CatalogDetail, isMenu: false},
             {path: '*', component: NotFound, isMenu: false}
         ]
     }

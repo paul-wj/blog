@@ -16,7 +16,13 @@ const Catalog: FC = (): ReactElement => {
     return (
         <div className="catalog-container">
             <div className="catalog-container__title">Categories</div>
-            <p className="catalog-container__total">The total number of categories is 123</p>
+            <p className="catalog-container__total">
+                The total number of categories is
+                &nbsp;&nbsp;
+                <span>
+                    {categoryList.length}
+                </span>
+            </p>
             <div className="catalog-container__content">
                 {categoryList.map((category: CatalogInfo) => (
                     <Badge

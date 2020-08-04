@@ -8,7 +8,7 @@ const TagDetail: FC = (): ReactElement => {
     const {id} = useParams<{id: string}>();
 
     return (
-        <TagArticlePageList id={id} />
+        <TagArticlePageList key="tagDetail" id={id} />
     )
 };
 
