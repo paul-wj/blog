@@ -9,7 +9,7 @@ export default (loader: () => Promise<any>): LoadableComponent => {
     return Loadable({
         loader,
         loading() {
-            return <div className="app-component-loading"><Spin tip="Component Loading..." size="large" /></div>
+            return <div className="app-component-loading"><Spin size="large" /></div>
         }
     });
 };
