@@ -71,6 +71,7 @@
     "@types/react-router-config": "^5.0.1",
     "@types/react-router-dom": "^5.1.5",
     "@types/redux-logger": "^3.0.8",
+    "@types/simplemde": "^1.11.7",
     "@types/socket.io-client": "^1.4.33",
     "@yeutech-lab/react-loadable": "^5.5.5",
     "antd": "^4.4.3",
@@ -92,6 +93,7 @@
     "redux-logger": "^3.0.6",
     "redux-react-hook": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "simplemde": "^1.11.2",
     "socket.io-client": "^2.3.0",
     "vconsole": "^3.3.4",
     "xss": "^1.0.7"
