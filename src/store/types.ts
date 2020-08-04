@@ -1,6 +1,8 @@
 // app enum
 export enum AppTypeEnum {
-
+    APP_SET_COLLAPSED = 'APP_SET_COLLAPSED',
+    APP_SET_MENU_OPEN_KEYS = 'APP_SET_MENU_OPEN_KEYS',
+    APP_SET_MENU_SELECTED_KEYS = 'APP_SET_MENU_SELECTED_KEYS',
 }
 
 // article enum
