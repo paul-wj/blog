@@ -1,0 +1,18 @@
+.admin-sider {
+  &__desc{
+    line-height: 60px;
+    padding-left: 24px;
+    font-size: 16px;
+    color: #fff;
+    overflow: hidden;
+    &--center{
+      padding: 0;
+      text-align: center;
+    }
+  }
+  &__logo{
+    color: #52c41a;
+    font-size: 16px;
+    margin-right: 5px;
+  }
+}

@@ -1,6 +1,9 @@
 import React, {FC, ReactElement} from 'react';
-import { Layout } from 'antd';
 import {renderRoutes, RouteConfig} from "react-router-config";
+import { Layout } from 'antd';
+import AdminSider from '../sider';
+import AdminHeader from '../header';
+import './index.scss';
 
 const { Content } = Layout;
 
@@ -11,9 +14,10 @@ interface AdminLayoutProps {
 const AdminLayout: FC<AdminLayoutProps> = ({route}: AdminLayoutProps): ReactElement => {
     return (
         <Layout className="admin-container">
+            <AdminSider />
             <Layout>
-                <Content>
-                    123
+                <AdminHeader />
+                <Content className="admin-container__content">
                     {renderRoutes(route.routes)}
                 </Content>
             </Layout>

@@ -1,0 +1,10 @@
+.admin-container {
+  height: 100%;
+  &__content {
+    margin: 24px 16px;
+    padding: 24px;
+    background: #fff;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+}
