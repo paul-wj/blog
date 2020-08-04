@@ -3,7 +3,7 @@ import {useLocation, Link} from 'react-router-dom';
 import {Menu} from 'antd';
 import routes, {IRouterConfig} from '../../../../router';
 
-const [{routes: webRoutes}] = routes;
+const {routes: webRoutes} = routes.find(item => item.path === '/');
 
 const AppHeaderNav: FC = (): ReactElement => {
     const location = useLocation();
