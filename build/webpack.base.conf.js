@@ -32,7 +32,8 @@ module.exports = {
 		'socket.io-client': 'io',
 		'@antv/g2': 'G2',
 		'@antv/data-set': 'DataSet',
-		'aplayer': 'APlayer'
+		'aplayer': 'APlayer',
+		'simplemde': 'SimpleMDE',
 	},
 	module: {
 		rules: [
