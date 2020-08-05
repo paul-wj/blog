@@ -5,7 +5,7 @@ import {LikeOutlined, DislikeOutlined, DeleteOutlined} from '@ant-design/icons';
 import dayJs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime';
 import AppCommentEditor from './commentEditor';
-import UserAvatar from '../userAvatar';
+import UserAvatar from '../../../components/userAvatar';
 import './index';
 
 dayJs.extend(relativeTime);

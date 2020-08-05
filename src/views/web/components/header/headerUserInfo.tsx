@@ -2,7 +2,7 @@ import React, {FC, ReactElement} from "react";
 import {useHistory} from "react-router";
 import {useDispatch} from "redux-react-hook";
 import {Dropdown, Menu} from "antd";
-import UserAvatar from '../userAvatar';
+import UserAvatar from '../../../components/userAvatar';
 import {openUserModal, loginOut} from "../../../../store/user/actions";
 import {UserInfo} from "../../../../types/user";
 

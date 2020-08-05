@@ -2,7 +2,7 @@ import React, {ReactElement, useEffect, useState} from "react";
 import {useHistory, useLocation} from "react-router";
 import {List, Space} from "antd";
 import { MessageOutlined, EyeOutlined } from '@ant-design/icons';
-import UserAvatar from '../../components/userAvatar';
+import UserAvatar from '../../../components/userAvatar';
 import AppTags from '../../components/tags';
 import {ArticleInfo, ArticlePageListRequestBody} from "../../../../types/article";
 import {getArticlePageList as fetchGetArticlePageList} from "../../../../service/article";

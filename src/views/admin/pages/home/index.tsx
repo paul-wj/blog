@@ -1,6 +1,6 @@
 import React, {FC, ReactElement, useCallback} from 'react';
 import {useMappedState} from "redux-react-hook";
-import UserAvatar from '../../../web/components/userAvatar';
+import UserAvatar from '../../../components/userAvatar';
 import './index.scss';
 
 

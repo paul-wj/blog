@@ -4,7 +4,7 @@ import {Comment, message} from "antd";
 import {GithubOutlined} from '@ant-design/icons';
 import AppCommentEditor from '../../components/comment/commentEditor';
 import AboutReply from './aboutReply';
-import UserAvatar from '../../components/userAvatar';
+import UserAvatar from '../../../components/userAvatar';
 import {
     getAboutCommentList,
     createAboutComment,

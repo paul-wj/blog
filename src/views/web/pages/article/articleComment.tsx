@@ -3,7 +3,7 @@ import {useMappedState} from "redux-react-hook";
 import {Comment, message} from "antd";
 import {GithubOutlined} from '@ant-design/icons';
 import AppCommentEditor from '../../components/comment/commentEditor';
-import UserAvatar from '../../components/userAvatar';
+import UserAvatar from '../../../components/userAvatar';
 import ArticleReply from './articleReply';
 import {
     getArticleCommentList,
