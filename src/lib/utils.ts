@@ -11,9 +11,13 @@ import {loginOut} from "../store/user/actions";
  * 转化 md 语法为 html
  */
 export const translateMarkdown = (plainText: string): string => {
+    const renderer = new marked.Renderer();
+    renderer.link = (href, title, text) => {
+        return `<a href="${href}" title="${text}" rel="noopener noreferrer" target="_blank">${text}</a>`;
+    };
     // @ts-ignore
     return marked(plainText, {
-        renderer: new marked.Renderer(),
+        renderer,
         gfm: true,
         pedantic: false,
         sanitize: false,
