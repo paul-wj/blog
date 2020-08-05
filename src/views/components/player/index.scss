@@ -1,0 +1,9 @@
+#music-player {
+
+}
+.music-player--hidden {
+  display: none;
+}
+.aplayer.aplayer-fixed .aplayer-body {
+  width: calc(100% - 18px) !important;
+}
