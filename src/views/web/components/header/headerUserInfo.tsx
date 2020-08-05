@@ -1,4 +1,5 @@
 import React, {FC, ReactElement} from "react";
+import {useHistory} from "react-router";
 import {useDispatch} from "redux-react-hook";
 import {Dropdown, Menu} from "antd";
 import UserAvatar from '../userAvatar';
@@ -13,11 +14,28 @@ const HeaderUserInfo: FC<UserInfoProps> = (props: UserInfoProps): ReactElement =
 
     const {userInfo: {profilePicture, username, avatarColor}} = props;
 
+    const history = useHistory();
+
     const dispatch = useDispatch();
 
     const DropDownMenu = () => {
         return (
             <Menu>
+                <Menu.Item>
+                    <span
+                      className="menu-item-btn"
+                      onClick={() => {
+                          history.push(`/admin`)
+                      }}
+                      onKeyDown={() => {
+                          history.push(`/admin`)
+                      }}
+                      role="button"
+                      tabIndex={0}
+                    >
+                        后台系统
+                    </span>
+                </Menu.Item>
                 <Menu.Item>
                     <span
                       className="menu-item-btn"
