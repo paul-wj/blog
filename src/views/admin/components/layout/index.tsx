@@ -1,4 +1,5 @@
 import React, {FC, ReactElement} from 'react';
+import {useHistory} from "react-router";
 import {renderRoutes, RouteConfig} from "react-router-config";
 import { Layout } from 'antd';
 import AdminSider from '../sider';
@@ -12,12 +13,17 @@ interface AdminLayoutProps {
 }
 
 const AdminLayout: FC<AdminLayoutProps> = ({route}: AdminLayoutProps): ReactElement => {
+
+    const history = useHistory();
+
+    const path = history.location.pathname;
+
     return (
         <Layout className="admin-container">
             <AdminSider />
             <Layout>
                 <AdminHeader />
-                <Content className="admin-container__content">
+                <Content className={`admin-container__content ${path === '/admin' ? 'admin-container__content--no-padding' : ''}`}>
                     {renderRoutes(route.routes)}
                 </Content>
             </Layout>

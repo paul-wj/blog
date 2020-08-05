@@ -6,5 +6,9 @@
     background: #fff;
     overflow: hidden;
     overflow-y: auto;
+    border-radius: 3px;
+    &--no-padding {
+      padding: 0;
+    }
   }
 }
