@@ -24,7 +24,7 @@ const AdminArticleEditor: FC<AdminArticleEditorProps> = ({value, onChange}: Admi
             previewRender: translateMarkdown,
             placeholder: '请输入文章内容'
         });
-        simpleMDE.codemirror.on("change", () => {
+        simpleMDE.codemirror.on("blur", () => {
             onChange(simpleMDE.value());
         });
         setSimpleMde(simpleMDE);
