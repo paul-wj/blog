@@ -58,7 +58,9 @@ const HeaderUserModal: FC<HeaderUserModalProps> = (props: HeaderUserModalProps):
 
     const onCancelHandle = () => {
         dispatch(closeUserModal());
-        formRef.current.resetFields();
+        if (formRef.current) {
+            formRef.current.resetFields();
+        }
     };
 
     const onOkHandle = () => {
