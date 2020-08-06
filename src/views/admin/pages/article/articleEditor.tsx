@@ -14,6 +14,7 @@ const AdminArticleEditor: FC<AdminArticleEditorProps> = ({value, onChange}: Admi
     useEffect(() => {
         if (simpleMde) {
             simpleMde.value(value);
+            simpleMde.codemirror.extendSelection(simpleMde.codemirror.constructor.Pos(simpleMde.codemirror.lastLine()))
         }
     }, [value]);
 
