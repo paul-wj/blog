@@ -7,14 +7,21 @@ interface AdminArticleEditorProps {
     onChange: (value: string) => void;
 }
 
+interface ArticleEditorPos {
+    ch: number;
+    line: number;
+}
+
 const AdminArticleEditor: FC<AdminArticleEditorProps> = ({value, onChange}: AdminArticleEditorProps): ReactElement => {
 
     const [simpleMde, setSimpleMde] = useState<SimpleMDE>(null);
 
+    const [pos, setPos] = useState<ArticleEditorPos>(null);
+
     useEffect(() => {
         if (simpleMde) {
             simpleMde.value(value);
-            simpleMde.codemirror.extendSelection(simpleMde.codemirror.constructor.Pos(simpleMde.codemirror.lastLine()))
+            simpleMde.codemirror.extendSelection(pos || simpleMde.codemirror.constructor.Pos(simpleMde.codemirror.lastLine()))
         }
     }, [value]);
 
@@ -26,6 +33,7 @@ const AdminArticleEditor: FC<AdminArticleEditorProps> = ({value, onChange}: Admi
             placeholder: '请输入文章内容'
         });
         simpleMDE.codemirror.on("blur", () => {
+            setPos(simpleMDE.codemirror.doc.getCursor());
             onChange(simpleMDE.value());
         });
         setSimpleMde(simpleMDE);

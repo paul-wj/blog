@@ -2,3 +2,13 @@
   min-height: 350px;
   max-height: 350px;
 }
+.CodeMirror-fullscreen {
+  z-index: 100;
+  .CodeMirror-scroll {
+    min-height: 350px;
+    max-height: none;
+  }
+}
+.editor-preview-active-side strong {
+  font-weight: 700;
+}
