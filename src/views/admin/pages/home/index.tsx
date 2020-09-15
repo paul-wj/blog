@@ -23,6 +23,7 @@ const AdminHome: FC = (): ReactElement => {
                 />
                 <p className="admin-home__name">{userInfo.username}</p>
                 <p className="admin-home__saying">实践是检验真理的唯一标准</p>
+                <p className="admin-home__saying">人之患在好为人师</p>
             </div>
         </div>
     )
