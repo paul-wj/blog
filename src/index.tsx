@@ -4,6 +4,7 @@ import {StoreContext} from 'redux-react-hook';
 import store from './store';
 import App from './app';
 import './static/sass/index';
+import './lib/plugins/monitor';
 
 // if (!IS_PROD) {
 //     /* eslint-disable */
