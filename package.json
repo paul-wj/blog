@@ -48,7 +48,7 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.8",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "html-webpack-plugin": "^4.3.0",
+    "html-webpack-plugin": "^4.4.1",
     "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "portfinder": "^1.0.26",
@@ -95,6 +95,7 @@
     "redux-thunk": "^2.3.0",
     "simplemde": "^1.11.2",
     "socket.io-client": "^2.3.0",
+    "tracekit": "^0.4.5",
     "vconsole": "^3.3.4",
     "xss": "^1.0.7"
   },
