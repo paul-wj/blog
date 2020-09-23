@@ -14,7 +14,7 @@ interface MenuOptions {
     icon?: string | React.ForwardRefExoticComponent<any>;
 }
 
-const [{routes: webRoutes}] = routes;
+const {routes: webRoutes} = routes.find(item => item.path === '/');
 
 const MyIcon = createFromIconfontCN({
     scriptUrl: ICON_FONT_URL
@@ -44,6 +44,7 @@ const AppHeaderLeftMenu: FC = (): ReactElement => {
     useEffect(() => {
         setSelectedKeys([location.pathname]);
     }, [location.pathname]);
+
 
     const menuClickHandle = ({key} : {key: string}) => {
         const currentClickMenu = menuList.find(menu => menu.name === key || menu.path === key);
