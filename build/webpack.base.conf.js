@@ -1,9 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const AddAttrsToScript = require('./plugins/add-attrs-to-script');
 const webpack = require('webpack');
-const {appIndexJs, appBuild, appSrc, appHtml, appNodeModules} = require('../config/paths');
+const {appIndexJs, appSrc, appHtml, appNodeModules} = require('../config/paths');
 
 
 module.exports = {
+	target: "web",
 	stats: {
 		builtAt: false,
 		children: false,
@@ -79,6 +81,7 @@ module.exports = {
 			fileName: 'index.html',
 			template: appHtml,
 			inject: true
-		})
+		}),
+		new AddAttrsToScript({crossorigin: true})
 	]
 };
