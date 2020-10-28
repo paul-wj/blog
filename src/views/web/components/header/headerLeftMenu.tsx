@@ -38,7 +38,7 @@ const AppHeaderLeftMenu: FC = (): ReactElement => {
 
     useEffect(() => {
         const routerList: MenuOptions[] = webRoutes.filter((route: IRouterConfig) => route.isMenu).map((route: IRouterConfig) => ({name: route.name, type: 10, icon: route.icon, path: route.path}));
-        setMenuList(routerList.concat(isLogin ? [{name: '修改账户信息', type: 20},{name: '退出登录', type: 20}] : [{name: '登录', type: 20},{name: '注册', type: 20}]))
+        setMenuList(routerList.concat(isLogin ? [{name: '后台系统首页', type: 20}, {name: '修改账户信息', type: 20},{name: '退出登录', type: 20}] : [{name: '登录', type: 20},{name: '注册', type: 20}]))
     }, [isLogin]);
 
     useEffect(() => {
@@ -52,6 +52,9 @@ const AppHeaderLeftMenu: FC = (): ReactElement => {
             history.push(currentClickMenu.path);
         } else if (currentClickMenu?.type === 20) {
             switch (key) {
+                case '后台系统首页':
+                    history.push(`/admin`);
+                    break;
                 case '修改账户信息':
                     dispatch(openUserModal('edit'));
                     break;

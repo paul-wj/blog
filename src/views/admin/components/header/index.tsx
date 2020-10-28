@@ -78,7 +78,7 @@ const AdminHeader: FC = (): ReactElement => {
                               history.push('/');
                           }}
                         >
-                            回到首页
+                            前台首页
                         </Button>
                     </Col>
                 </Row>
