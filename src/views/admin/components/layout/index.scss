@@ -1,6 +1,6 @@
 .admin-container {
   height: 100%;
-  &__content {
+  &-content {
     margin: 24px 16px;
     padding: 24px;
     background: #fff;
@@ -10,5 +10,12 @@
     &--no-padding {
       padding: 0;
     }
+    &--simple {
+      padding: 0;
+      background-color: transparent;
+    }
+  }
+  .ant-layout-has-sider {
+    flex-direction: column;
   }
 }

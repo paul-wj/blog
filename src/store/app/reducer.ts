@@ -3,6 +3,7 @@ import {IReduxAction} from '../../types/global';
 
 interface AppState {
     collapsed: boolean;
+    menuMobileOpen: boolean;
     menuOpenKeys: string[];
     menuSelectedKeys: string[];
 }
@@ -12,6 +13,7 @@ interface AppState {
  */
 const defaultState: AppState = {
     collapsed: false,
+    menuMobileOpen: false,
     menuOpenKeys: [],
     menuSelectedKeys: []
 };

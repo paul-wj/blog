@@ -1,6 +1,4 @@
 .admin-header {
-  display: flex;
-  flex-direction: row;
   padding: 0 12px;
   background-color: #fff;
   height: 50px;
@@ -9,7 +7,15 @@
     cursor: pointer;
   }
   &__right {
-    flex: 1;
     text-align: right;
+  }
+  &__menu {
+    cursor: pointer;
+    font-size: 20px;
+  }
+}
+.admin-header__drawer {
+  .ant-drawer-body {
+    padding: 0;
   }
 }

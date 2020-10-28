@@ -7,6 +7,12 @@ export const toggleCollapsed = (collapsed: boolean) => {
     }
 };
 
+export const toggleMenuMobileOpen = (menuMobileOpen: boolean) => {
+    return (dispatch: Dispatch): void => {
+        dispatch({type: AppTypeEnum.APP_SET_MENU_MOBILE_OPEN, payload: {menuMobileOpen}});
+    }
+};
+
 export const setMenuOpenKeys = (menuOpenKeys: string[]) => {
     return (dispatch: Dispatch): void => {
         dispatch({type: AppTypeEnum.APP_SET_MENU_OPEN_KEYS, payload: {menuOpenKeys}});
