@@ -28,6 +28,7 @@ const AdminArticleList = createLoadableBar(() => import(/* webpackChunkName: 'Ad
 const AdminArticleEdit = createLoadableBar(() => import(/* webpackChunkName: 'AdminArticleEdit' */'../views/admin/pages/article/articleEdit'));
 const AdminTagList = createLoadableBar(() => import(/* webpackChunkName: 'AdminTagList' */'../views/admin/pages/tag/tagList'));
 const AdminCategoryList = createLoadableBar(() => import(/* webpackChunkName: 'AdminCategoryList' */'../views/admin/pages/tag/categoryList'));
+const AdminMonitorPerformance = createLoadableBar(() => import(/* webpackChunkName: 'AdminMonitorPerformance' */'../views/admin/pages/monitor/performance/index'));
 
 export interface IRouterConfig extends Omit<RouteConfig, 'component'> {
     component?: LoadableComponent;
@@ -51,6 +52,15 @@ const routes: IRouterConfig[] = [
                     {path: '/admin/article/list', name: '文章列表', component: AdminArticleList},
                     {path: '/admin/article/tag-list', name: '标签列表', component: AdminTagList},
                     {path: '/admin/article/category-list', name: '目录列表', component: AdminCategoryList},
+                ]
+            },
+            {
+                path: '/admin/monitor',
+                component: AdminEmpty,
+                name: '性能监控',
+                icon: ReadOutlined,
+                routes: [
+                    {path: '/admin/monitor/performance', name: '页面性能', component: AdminMonitorPerformance},
                 ]
             },
             {path: '*', component: NotFound}
