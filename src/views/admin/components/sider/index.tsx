@@ -22,7 +22,7 @@ const AdminSider: FC = (): ReactElement => {
         >
             <div className={`admin-sider__desc ${collapsed ? 'admin-sider__desc--center' : ''}`}>
                 <WechatOutlined className="admin-sider__logo" />
-                {collapsed ? '' : '博客管理系统1'}
+                {collapsed ? '' : '博客管理系统'}
             </div>
             <AdminMenu />
         </Sider>
