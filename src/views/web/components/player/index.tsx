@@ -19,12 +19,14 @@ export const AppPlayer: FC = (): ReactElement => {
     const fetchGetSongList = async () => {
         const {flags, data} = await getSongList();
         if (flags === 'success') {
-            setSongList(data.map(({name, picUrl, author, url}: SongInfo) => ({
-                name,
-                artist: author,
-                url,
-                cover: picUrl,
-            })));
+            if (data?.length) {
+                setSongList(data.map(({name, picUrl, author, url}: SongInfo) => ({
+                    name,
+                    artist: author,
+                    url,
+                    cover: picUrl,
+                })));
+            }
         }
     };
 
