@@ -44,6 +44,7 @@ const AppLayout: FC<AppLayoutProps> = ({route}: AppLayoutProps): ReactElement =>
                 </Row>
             </Layout>
             <BackTop target={() => document.getElementById('app-main-content')} />
+            <p className="app-footer"><a rel="noreferrer noopener" target="_blank" href="https://beian.miit.gov.cn/">赣ICP备19005439号-1</a></p>
         </Layout>
     )
 };
