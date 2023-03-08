@@ -2,6 +2,7 @@ import React, {ReactElement, useEffect, useState} from "react";
 import {UploadChangeParam} from "antd/lib/upload";
 import {LoadingOutlined, PlusOutlined} from '@ant-design/icons';
 import {message, Upload} from "antd";
+import { BASE_URL } from "../../../../conf";
 
 
 interface UploadProps {
@@ -32,6 +33,8 @@ const HeaderUserModalUploadForm: React.FC<UploadProps> = ({value, onChange}: Upl
     const [loading, setLoading] = useState<boolean>(false);
 
     const [imageUrl, setImageUrl] = useState<string>('');
+
+    const [uploadUrl] = useState<string>(`${BASE_URL}/upload`);
 
     useEffect(() => {
         setImageUrl(value);
@@ -71,7 +74,7 @@ const HeaderUserModalUploadForm: React.FC<UploadProps> = ({value, onChange}: Upl
           listType="picture-card"
           className="avatar-uploader"
           showUploadList={false}
-          action="http://localhost:9000/upload"
+          action={uploadUrl}
           beforeUpload={beforeUpload}
           onChange={handleChange}
         >
